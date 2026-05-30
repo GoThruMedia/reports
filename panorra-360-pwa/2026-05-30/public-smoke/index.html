@@ -1,0 +1,1246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Public Smoke</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f1f3f6;
+      --panel: #eaedf1;
+      --panel-strong: #e0e4ea;
+      --card: #ffffff;
+      --line: #d8dee7;
+      --line-strong: #c2ccda;
+      --text: #0f172a;
+      --muted: #5b6575;
+      --accent: #111827;
+      --accent-soft: #eef2ff;
+      --focus: #2563eb;
+      --highlight: #fef08a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 5% 5%, #f9fafb 0%, transparent 28%),
+        radial-gradient(circle at 100% 0%, #eceff4 0%, transparent 32%),
+        var(--bg);
+      font-family: "Space Grotesk", "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .app-shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      background: var(--panel);
+      border-right: 1px solid var(--line);
+      padding: 14px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #9ca3af;
+      border-radius: 999px;
+      border: 2px solid var(--panel);
+    }
+
+    .brand-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      background: #f6f7fa;
+      border-radius: 12px;
+    }
+
+    .brand-left {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--accent);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      flex: 0 0 auto;
+    }
+
+    .brand-mark svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-repo {
+      margin: 3px 0 0;
+      font-size: 0.75rem;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-badge {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      color: #334155;
+      background: #fff;
+      flex: 0 0 auto;
+    }
+
+    .search-wrap {
+      margin-top: 10px;
+    }
+
+    .search-field {
+      position: relative;
+    }
+
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      width: 14px;
+      height: 14px;
+      color: #6b7280;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    #report-search {
+      width: 100%;
+      border: 1px solid var(--line-strong);
+      background: #f5f6f8;
+      border-radius: 10px;
+      padding: 0.58rem 4.9rem 0.58rem 2rem;
+      font-size: 0.875rem;
+      color: var(--text);
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    #report-search::placeholder {
+      color: #64748b;
+    }
+
+    #report-search:focus {
+      outline: none;
+      background: #fff;
+      border-color: #7aa2ff;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+    }
+
+    #report-search-clear {
+      position: absolute;
+      top: 50%;
+      right: 6px;
+      transform: translateY(-50%);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.32rem 0.52rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      background: #fff;
+      color: #334155;
+      cursor: pointer;
+      transition: background 0.16s ease, border-color 0.16s ease;
+    }
+
+    #report-search-clear:hover {
+      background: #eef2f7;
+      border-color: #b4c0d0;
+    }
+
+    #report-search-status {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin: 6px 2px 0;
+    }
+
+    #report-search-empty {
+      font-size: 0.7rem;
+      color: #c2410c;
+      margin: 2px 2px 0;
+    }
+
+    .toc-group {
+      margin-top: 18px;
+    }
+
+    .toc-group-title {
+      margin: 0 0 8px;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+      color: #475569;
+      text-transform: uppercase;
+    }
+
+    .sidebar-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 2px;
+    }
+
+    [data-search-item] {
+      display: block;
+      border-radius: 10px;
+      padding: 7px 9px;
+      color: #1f2937;
+      text-decoration: none;
+      font-size: 0.94rem;
+      border: 1px solid transparent;
+      transition: background 0.17s ease, border-color 0.17s ease, color 0.17s ease;
+      overflow-wrap: anywhere;
+    }
+
+    [data-search-item]:hover {
+      background: #edf0f5;
+    }
+
+    [data-search-item].is-active {
+      background: #f7f9fc;
+      border-color: var(--line);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.75);
+      font-weight: 600;
+    }
+
+    .content-shell {
+      padding: 14px 18px 26px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 10px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(248, 250, 252, 0.88);
+      backdrop-filter: blur(6px);
+    }
+
+    .breadcrumbs {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #475569;
+      font-size: 0.88rem;
+      overflow: hidden;
+    }
+
+    .crumb-divider {
+      color: #94a3b8;
+    }
+
+    .crumb-current {
+      color: #0f172a;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .summary-grid {
+      margin: 16px 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .summary-card {
+      background: linear-gradient(180deg, #f7f9fc 0%, #eef2f7 100%);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      min-height: 88px;
+    }
+
+    .summary-label {
+      margin: 0;
+      color: #475569;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+
+    .summary-value {
+      margin: 8px 0 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .section-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .report-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 18px;
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+      border-radius: 999px;
+      padding: 0.22rem 0.62rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .card-path {
+      font-size: 0.76rem;
+      color: #64748b;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.2rem 0.5rem;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.35;
+      color: #0b1320;
+    }
+
+    .card-meta {
+      margin: 5px 0 0;
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    .markdown-body {
+      margin-top: 14px;
+      color: #1e293b;
+      font-size: 0.96rem;
+      overflow-wrap: anywhere;
+    }
+
+    .markdown-body > :first-child {
+      margin-top: 0;
+    }
+
+    .markdown-body > :last-child {
+      margin-bottom: 0;
+    }
+
+    .markdown-body h1,
+    .markdown-body h2,
+    .markdown-body h3,
+    .markdown-body h4 {
+      font-family: "Source Serif 4", Georgia, serif;
+      margin: 1.1em 0 0.45em;
+      color: #0f172a;
+      line-height: 1.3;
+    }
+
+    .markdown-body h1 {
+      font-size: 1.5rem;
+    }
+
+    .markdown-body h2 {
+      font-size: 1.28rem;
+    }
+
+    .markdown-body h3 {
+      font-size: 1.14rem;
+    }
+
+    .markdown-body p,
+    .markdown-body ul,
+    .markdown-body ol,
+    .markdown-body pre,
+    .markdown-body blockquote,
+    .markdown-body table {
+      margin: 0.75em 0;
+    }
+
+    .markdown-body ul,
+    .markdown-body ol {
+      padding-left: 1.35rem;
+    }
+
+    .markdown-body blockquote {
+      border-left: 3px solid #94a3b8;
+      padding: 0.25rem 0 0.25rem 0.75rem;
+      color: #334155;
+      background: #f8fafc;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .markdown-body code {
+      font-family: "Cascadia Code", "Consolas", monospace;
+      background: #eef2f7;
+      border: 1px solid #d7dde7;
+      border-radius: 6px;
+      padding: 0.12rem 0.35rem;
+      font-size: 0.87em;
+      color: #0f172a;
+    }
+
+    .markdown-body pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 10px;
+      padding: 0.9rem;
+      overflow: auto;
+      border: 1px solid #1f2937;
+    }
+
+    .markdown-body pre code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: inherit;
+    }
+
+    .markdown-body table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #dbe2eb;
+      border-radius: 8px;
+      overflow: hidden;
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    .markdown-body th,
+    .markdown-body td {
+      border: 1px solid #dbe2eb;
+      padding: 0.45rem 0.55rem;
+      text-align: left;
+      font-size: 0.9em;
+    }
+
+    .markdown-body th {
+      background: #f8fafc;
+    }
+
+    mark {
+      background: var(--highlight);
+      color: inherit;
+      padding: 0 0.1em;
+      border-radius: 0.15em;
+    }
+
+    body img {
+      max-width: 500px;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fff;
+      display: block;
+      margin: 0.9rem 0;
+    }
+
+    body video {
+      max-width: 700px;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #111827;
+      display: block;
+      margin: 0.9rem 0;
+    }
+
+    @media (max-width: 1080px) {
+      .app-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .content-shell {
+        padding-top: 12px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        position: static;
+      }
+
+      body img,
+      body video {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-card">
+        <div class="brand-left">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="5" y="4" width="14" height="16" rx="2.5" stroke="currentColor" stroke-width="1.7"></rect>
+              <path d="M8.5 9H15.5M8.5 13H15.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="brand-title">Public Smoke</p>
+            <p class="brand-repo">GoThruMedia&#x2F;panorra-pwa</p>
+          </div>
+        </div>
+        <span class="brand-badge">Report</span>
+      </div>
+
+      <div class="search-wrap">
+        <div class="search-field">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle>
+            <path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+          <input id="report-search" type="search" placeholder="Search this report..." aria-label="Search report" />
+          <button id="report-search-clear" type="button">Clear</button>
+        </div>
+        <p id="report-search-status">Showing all sections</p>
+        <p id="report-search-empty" hidden>No results</p>
+      </div>
+
+      <div class="toc-group" data-search-group>
+        <p class="toc-group-title">Issues</p>
+        <ul class="sidebar-list">
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2826" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2826">Issue #2826: Implement New Home Layout</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2827" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2827">Issue #2827: Implement New Place Detail</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2850" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2850">Issue #2850: Implement New Post Detail Layout</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2853" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2853">Issue #2853: Implement New Sign In Layout</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2854" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2854">Issue #2854: Implement New Sign Up Layout</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2875" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2875">Issue #2875: Integrate List Block Post</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2874" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2874">Issue #2874: Integrate Unblock Post</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2861" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2861">Issue #2861: Integrate Sign In</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2862" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2862">Issue #2862: Integrate Sign Up</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2867" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2867">Issue #2867: Slicing Dropdown Menu My Post Detail Layout</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2843" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2843">Issue #2843: Implement New Profile Layout</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2868" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2868">Issue #2868: Slicing Menu Other Post Detail Layout</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2863" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2863">Issue #2863: Integrate Detail Profile</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2851" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2851">Issue #2851: Implement New Create Post Layout</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2878" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2878">Issue #2878: [Profile] Integrate Follow User</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2879" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2879">Issue #2879: [Profile] Integrate List Post</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2880" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2880">Issue #2880: [Profile] Integrate Tagged Post</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2882" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2882">Issue #2882: Merge New Layout to Dev</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2884" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2884">Issue #2884: Integrate Detail Post</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2883" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2883">Issue #2883: [Detail Place ] Integration Nearest Post Using Default Location Toronto</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2869" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2869">Issue #2869: Slicing Expanded Sidebar Layout</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2898" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2898">Issue #2898: Integrate List Followings Profile User</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-pwa-2897" data-search-item data-target-id="issue-gothrumedia-panorra-pwa-2897">Issue #2897: Integrate List Followers Profile User</a></li>
+        
+        </ul>
+      </div>
+
+      <div class="toc-group" data-search-group>
+        <p class="toc-group-title">Documentation</p>
+        <ul class="sidebar-list">
+        
+        </ul>
+      </div>
+    </aside>
+
+    <main class="content-shell">
+      <header class="topbar">
+        <div class="breadcrumbs">
+          <span>GoThruMedia&#x2F;panorra-pwa</span>
+          <span class="crumb-divider">/</span>
+          <span id="breadcrumb-kind">Overview</span>
+          <span class="crumb-divider">/</span>
+          <span id="breadcrumb-current" class="crumb-current">Public Smoke</span>
+        </div>
+      </header>
+
+      <section class="summary-grid" aria-label="Report summary">
+        <article class="summary-card">
+          <p class="summary-label">Issues</p>
+          <p class="summary-value">23</p>
+        </article>
+        <article class="summary-card">
+          <p class="summary-label">Documentation</p>
+          <p class="summary-value">0</p>
+        </article>
+        <article class="summary-card">
+          <p class="summary-label">Generated At</p>
+          <p class="summary-value">2026-05-30T03:20:16.578175500+00:00</p>
+        </article>
+      </section>
+
+      <div class="section-stack">
+      
+        <section id="issue-gothrumedia-panorra-pwa-2826" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2826" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2826</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2826: Implement New Home Layout</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-29T11:24:19Z</p>
+          <div data-search-body class="markdown-body"><p>https://docs.google.com/presentation/d/11v3y6aIHld2e6yZWzskrTOi1o8NKLBfRpjF6SdGuQOg/edit?usp=sharing</p>
+<hr>
+<ul>
+<li><input disabled="" type="checkbox"/>
+List Place ( https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=328-19016&amp;t=Os1peHKSQ4phUghy-0 )</li>
+</ul>
+<p>( https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=328-18874&amp;t=Os1peHKSQ4phUghy-0 )</p>
+<ul>
+<li>
+<p><input disabled="" type="checkbox"/>
+List User &amp; Photographer List ( https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=328-18775&amp;t=Os1peHKSQ4phUghy-0 )</p>
+</li>
+<li>
+<p><input disabled="" type="checkbox"/>
+Collapse ( https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=419-21074&amp;t=Os1peHKSQ4phUghy-0 )</p>
+</li>
+</ul>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2827" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2827" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2827</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2827: Implement New Place Detail</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-29T11:29:24Z</p>
+          <div data-search-body class="markdown-body"><p>https://docs.google.com/presentation/d/11v3y6aIHld2e6yZWzskrTOi1o8NKLBfRpjF6SdGuQOg/edit?usp=sharing</p>
+<hr>
+<ul>
+<li><input disabled="" type="checkbox"/>
+List Post ( https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=328-20167&amp;t=Os1peHKSQ4phUghy-0 )</li>
+<li><input disabled="" type="checkbox"/>
+List Contributor ( https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=328-20413&amp;t=Os1peHKSQ4phUghy-0 )</li>
+<li><input disabled="" type="checkbox"/>
+List Bookmark ( https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=328-20290&amp;t=Os1peHKSQ4phUghy-0 )</li>
+</ul>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2850" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2850" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2850</span>
+            <span class="card-path">dwinissa05</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2850: Implement New Post Detail Layout</h2>
+          <p data-search-meta class="card-meta">Author: dwinissa05 | Updated: 2026-05-29T11:33:16Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2853" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2853" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2853</span>
+            <span class="card-path">dwinissa05</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2853: Implement New Sign In Layout</h2>
+          <p data-search-meta class="card-meta">Author: dwinissa05 | Updated: 2026-05-21T02:31:30Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2854" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2854" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2854</span>
+            <span class="card-path">dwinissa05</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2854: Implement New Sign Up Layout</h2>
+          <p data-search-meta class="card-meta">Author: dwinissa05 | Updated: 2026-05-21T02:31:40Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2875" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2875" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2875</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2875: Integrate List Block Post</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-22T04:30:22Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2874" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2874" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2874</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2874: Integrate Unblock Post</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-22T04:23:38Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2861" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2861" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2861</span>
+            <span class="card-path">dwinissa05</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2861: Integrate Sign In</h2>
+          <p data-search-meta class="card-meta">Author: dwinissa05 | Updated: 2026-05-21T04:03:08Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2862" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2862" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2862</span>
+            <span class="card-path">dwinissa05</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2862: Integrate Sign Up</h2>
+          <p data-search-meta class="card-meta">Author: dwinissa05 | Updated: 2026-05-21T04:03:23Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2867" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2867" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2867</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2867: Slicing Dropdown Menu My Post Detail Layout</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-21T07:35:18Z</p>
+          <div data-search-body class="markdown-body"><p>design ( https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=328-25241&amp;t=WKOeIM13l6NVLoJ7-0 )</p>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2843" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2843" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2843</span>
+            <span class="card-path">dwinissa05</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2843: Implement New Profile Layout</h2>
+          <p data-search-meta class="card-meta">Author: dwinissa05 | Updated: 2026-05-29T11:52:03Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2868" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2868" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2868</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2868: Slicing Menu Other Post Detail Layout</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-21T07:35:42Z</p>
+          <div data-search-body class="markdown-body"><p>design ( https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=648-28932&amp;t=WKOeIM13l6NVLoJ7-0 )</p>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2863" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2863" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2863</span>
+            <span class="card-path">dwinissa05</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2863: Integrate Detail Profile</h2>
+          <p data-search-meta class="card-meta">Author: dwinissa05 | Updated: 2026-05-21T04:03:41Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2851" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2851" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2851</span>
+            <span class="card-path">dwinissa05</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2851: Implement New Create Post Layout</h2>
+          <p data-search-meta class="card-meta">Author: dwinissa05 | Updated: 2026-05-20T08:46:29Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2878" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2878" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2878</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2878: [Profile] Integrate Follow User</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-25T03:33:46Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2879" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2879" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2879</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2879: [Profile] Integrate List Post</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-25T03:34:10Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2880" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2880" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2880</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2880: [Profile] Integrate Tagged Post</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-25T03:34:28Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2882" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2882" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2882</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2882: Merge New Layout to Dev</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-25T04:30:14Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2884" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2884" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2884</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2884: Integrate Detail Post</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-26T02:54:33Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2883" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2883" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2883</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2883: [Detail Place ] Integration Nearest Post Using Default Location Toronto</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-26T02:54:21Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2869" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2869" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2869</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2869: Slicing Expanded Sidebar Layout</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-21T07:36:07Z</p>
+          <div data-search-body class="markdown-body"><p>design ( https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=419-21074&amp;t=wQL46FkNECxNQdlp-0 )</p>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2898" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2898" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2898</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2898: Integrate List Followings Profile User</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-28T07:14:15Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-pwa-2897" data-search-section data-search-id="issue-gothrumedia-panorra-pwa-2897" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2897</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2897: Integrate List Followers Profile User</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-28T07:14:26Z</p>
+          <div data-search-body class="markdown-body"></div>
+        </section>
+      
+
+      
+      </div>
+    </main>
+  </div>
+  <script>
+    let runSearchHandler = null;
+
+    function applySearch() {
+      if (typeof runSearchHandler === "function") {
+        runSearchHandler();
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const input = document.getElementById("report-search");
+      const clearButton = document.getElementById("report-search-clear");
+      const status = document.getElementById("report-search-status");
+      const empty = document.getElementById("report-search-empty");
+      const breadcrumbKind = document.getElementById("breadcrumb-kind");
+      const breadcrumbCurrent = document.getElementById("breadcrumb-current");
+      if (!input || !status || !empty) {
+        return;
+      }
+
+      const sectionNodes = Array.from(document.querySelectorAll("[data-search-section]"));
+      const sidebarLinks = Array.from(document.querySelectorAll("[data-search-item]"));
+      const groupNodes = Array.from(document.querySelectorAll("[data-search-group]"));
+      const sidebarById = new Map(sidebarLinks.map((link) => [link.dataset.targetId, link]));
+      const originalHtml = new WeakMap();
+      const highlightedNodes = new Set();
+      let firstVisibleId = null;
+
+      const entries = sectionNodes.map((section) => {
+        const id = section.dataset.searchId || section.id;
+        const sidebarLink = sidebarById.get(id) || null;
+        const titleNode = section.querySelector("[data-search-title]");
+        const metaNode = section.querySelector("[data-search-meta]");
+        const bodyNode = section.querySelector("[data-search-body]");
+        const highlightTargets = [sidebarLink, titleNode, metaNode, bodyNode].filter(Boolean);
+        const displayTitle = titleNode ? (titleNode.textContent || "").trim() : id;
+        const sectionKind = section.dataset.sectionKind || "section";
+
+        for (const node of highlightTargets) {
+          if (!originalHtml.has(node)) {
+            originalHtml.set(node, node.innerHTML);
+          }
+        }
+
+        const searchableText = [
+          sidebarLink ? sidebarLink.textContent : "",
+          titleNode ? titleNode.textContent : "",
+          metaNode ? metaNode.textContent : "",
+          bodyNode ? bodyNode.textContent : ""
+        ]
+          .join(" ")
+          .toLowerCase();
+
+        return {
+          id,
+          section,
+          sidebarLink,
+          highlightTargets,
+          displayTitle,
+          sectionKind,
+          searchableText
+        };
+      });
+      const entryById = new Map(entries.map((entry) => [entry.id, entry]));
+
+      function restoreHighlights() {
+        for (const node of highlightedNodes) {
+          const original = originalHtml.get(node);
+          if (typeof original === "string") {
+            node.innerHTML = original;
+          }
+        }
+        highlightedNodes.clear();
+      }
+
+      function setEntryVisibility(entry, visible) {
+        entry.section.hidden = !visible;
+        if (entry.sidebarLink) {
+          const listItem = entry.sidebarLink.closest("li");
+          if (listItem) {
+            listItem.hidden = !visible;
+          }
+        }
+      }
+
+      function updateGroupVisibility(queryLower) {
+        for (const group of groupNodes) {
+          if (!queryLower) {
+            group.hidden = false;
+            continue;
+          }
+          const items = Array.from(group.querySelectorAll("li"));
+          const hasVisibleItem = items.some((item) => !item.hidden);
+          group.hidden = !hasVisibleItem;
+        }
+      }
+
+      function setActiveSection(sectionId) {
+        let activeEntry = sectionId ? entryById.get(sectionId) : null;
+        if (!activeEntry || activeEntry.section.hidden) {
+          activeEntry = entries.find((entry) => !entry.section.hidden) || null;
+        }
+
+        for (const entry of entries) {
+          if (!entry.sidebarLink) {
+            continue;
+          }
+          if (activeEntry && entry.id === activeEntry.id) {
+            entry.sidebarLink.classList.add("is-active");
+          } else {
+            entry.sidebarLink.classList.remove("is-active");
+          }
+        }
+
+        if (!breadcrumbKind || !breadcrumbCurrent) {
+          return;
+        }
+        if (!activeEntry) {
+          breadcrumbKind.textContent = "Overview";
+          breadcrumbCurrent.textContent = "Public Smoke";
+          return;
+        }
+        breadcrumbKind.textContent = activeEntry.sectionKind === "issue" ? "Issues" : "Documentation";
+        breadcrumbCurrent.textContent = activeEntry.displayTitle;
+      }
+
+      function highlightTextNode(textNode, queryLower) {
+        const text = textNode.nodeValue || "";
+        const lower = text.toLowerCase();
+        let cursor = 0;
+        let index = lower.indexOf(queryLower, cursor);
+        if (index === -1) {
+          return;
+        }
+
+        const fragment = document.createDocumentFragment();
+        while (index !== -1) {
+          if (index > cursor) {
+            fragment.appendChild(document.createTextNode(text.slice(cursor, index)));
+          }
+          const mark = document.createElement("mark");
+          mark.textContent = text.slice(index, index + queryLower.length);
+          fragment.appendChild(mark);
+          cursor = index + queryLower.length;
+          index = lower.indexOf(queryLower, cursor);
+        }
+        if (cursor < text.length) {
+          fragment.appendChild(document.createTextNode(text.slice(cursor)));
+        }
+        textNode.parentNode.replaceChild(fragment, textNode);
+      }
+
+      function highlightNode(root, queryLower) {
+        if (!root || !queryLower) {
+          return;
+        }
+        highlightedNodes.add(root);
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+          acceptNode(node) {
+            const parent = node.parentElement;
+            if (!parent) {
+              return NodeFilter.FILTER_REJECT;
+            }
+            const tag = parent.tagName;
+            if (tag === "SCRIPT" || tag === "STYLE" || tag === "MARK") {
+              return NodeFilter.FILTER_REJECT;
+            }
+            const value = node.nodeValue || "";
+            if (!value.trim()) {
+              return NodeFilter.FILTER_REJECT;
+            }
+            return value.toLowerCase().includes(queryLower)
+              ? NodeFilter.FILTER_ACCEPT
+              : NodeFilter.FILTER_REJECT;
+          }
+        });
+
+        const nodesToReplace = [];
+        let currentNode = walker.nextNode();
+        while (currentNode) {
+          nodesToReplace.push(currentNode);
+          currentNode = walker.nextNode();
+        }
+
+        for (const textNode of nodesToReplace) {
+          highlightTextNode(textNode, queryLower);
+        }
+      }
+
+      function setStatus(count) {
+        if (count === null) {
+          status.textContent = "Showing all sections";
+          empty.hidden = true;
+          return;
+        }
+        status.textContent = count === 1 ? "1 result" : count + " results";
+        empty.hidden = count !== 0;
+      }
+
+      function runSearch() {
+        const query = (input.value || "").trim();
+        const queryLower = query.toLowerCase();
+
+        restoreHighlights();
+
+        if (!queryLower) {
+          for (const entry of entries) {
+            setEntryVisibility(entry, true);
+          }
+          updateGroupVisibility(queryLower);
+          firstVisibleId = null;
+          setStatus(null);
+          const hashValue = window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : "";
+          setActiveSection(hashValue || null);
+          return;
+        }
+
+        let matchCount = 0;
+        firstVisibleId = null;
+        for (const entry of entries) {
+          const isMatch = entry.searchableText.includes(queryLower);
+          setEntryVisibility(entry, isMatch);
+          if (isMatch) {
+            if (!firstVisibleId) {
+              firstVisibleId = entry.id;
+            }
+            matchCount += 1;
+            for (const node of entry.highlightTargets) {
+              highlightNode(node, queryLower);
+            }
+          }
+        }
+        updateGroupVisibility(queryLower);
+        setStatus(matchCount);
+
+        const hashValue = window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : "";
+        if (hashValue) {
+          setActiveSection(hashValue);
+        } else {
+          setActiveSection(firstVisibleId);
+        }
+      }
+
+      let debounceTimer = null;
+      input.addEventListener("input", function () {
+        if (debounceTimer) {
+          clearTimeout(debounceTimer);
+        }
+        debounceTimer = setTimeout(runSearch, 150);
+      });
+
+      input.addEventListener("keydown", function (event) {
+        if (event.key !== "Enter") {
+          return;
+        }
+        event.preventDefault();
+        runSearch();
+        if (!firstVisibleId) {
+          return;
+        }
+        const targetSection = document.querySelector(
+          '[data-search-section][data-search-id="' + firstVisibleId + '"]'
+        );
+        if (!targetSection) {
+          return;
+        }
+        setActiveSection(firstVisibleId);
+        targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (targetSection.id) {
+          window.history.replaceState(null, "", "#" + targetSection.id);
+        }
+      });
+
+      if (clearButton) {
+        clearButton.addEventListener("click", function () {
+          input.value = "";
+          runSearch();
+          input.focus();
+        });
+      }
+
+      sidebarLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          const targetId = link.dataset.targetId;
+          if (targetId) {
+            setActiveSection(targetId);
+          }
+        });
+      });
+
+      window.addEventListener("hashchange", function () {
+        const hashValue = window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : "";
+        setActiveSection(hashValue || null);
+      });
+
+      runSearchHandler = runSearch;
+      runSearch();
+    });
+  </script>
+</body>
+</html>
