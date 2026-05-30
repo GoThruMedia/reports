@@ -1,0 +1,1622 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Public Smoke</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f1f3f6;
+      --panel: #eaedf1;
+      --panel-strong: #e0e4ea;
+      --card: #ffffff;
+      --line: #d8dee7;
+      --line-strong: #c2ccda;
+      --text: #0f172a;
+      --muted: #5b6575;
+      --accent: #111827;
+      --accent-soft: #eef2ff;
+      --focus: #2563eb;
+      --highlight: #fef08a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 5% 5%, #f9fafb 0%, transparent 28%),
+        radial-gradient(circle at 100% 0%, #eceff4 0%, transparent 32%),
+        var(--bg);
+      font-family: "Space Grotesk", "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .app-shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      background: var(--panel);
+      border-right: 1px solid var(--line);
+      padding: 14px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #9ca3af;
+      border-radius: 999px;
+      border: 2px solid var(--panel);
+    }
+
+    .brand-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      background: #f6f7fa;
+      border-radius: 12px;
+    }
+
+    .brand-left {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--accent);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      flex: 0 0 auto;
+    }
+
+    .brand-mark svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-repo {
+      margin: 3px 0 0;
+      font-size: 0.75rem;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-badge {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      color: #334155;
+      background: #fff;
+      flex: 0 0 auto;
+    }
+
+    .search-wrap {
+      margin-top: 10px;
+    }
+
+    .search-field {
+      position: relative;
+    }
+
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      width: 14px;
+      height: 14px;
+      color: #6b7280;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    #report-search {
+      width: 100%;
+      border: 1px solid var(--line-strong);
+      background: #f5f6f8;
+      border-radius: 10px;
+      padding: 0.58rem 4.9rem 0.58rem 2rem;
+      font-size: 0.875rem;
+      color: var(--text);
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    #report-search::placeholder {
+      color: #64748b;
+    }
+
+    #report-search:focus {
+      outline: none;
+      background: #fff;
+      border-color: #7aa2ff;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+    }
+
+    #report-search-clear {
+      position: absolute;
+      top: 50%;
+      right: 6px;
+      transform: translateY(-50%);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.32rem 0.52rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      background: #fff;
+      color: #334155;
+      cursor: pointer;
+      transition: background 0.16s ease, border-color 0.16s ease;
+    }
+
+    #report-search-clear:hover {
+      background: #eef2f7;
+      border-color: #b4c0d0;
+    }
+
+    #report-search-status {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin: 6px 2px 0;
+    }
+
+    #report-search-empty {
+      font-size: 0.7rem;
+      color: #c2410c;
+      margin: 2px 2px 0;
+    }
+
+    .toc-group {
+      margin-top: 18px;
+    }
+
+    .toc-group-title {
+      margin: 0 0 8px;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+      color: #475569;
+      text-transform: uppercase;
+    }
+
+    .sidebar-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 2px;
+    }
+
+    [data-search-item] {
+      display: block;
+      border-radius: 10px;
+      padding: 7px 9px;
+      color: #1f2937;
+      text-decoration: none;
+      font-size: 0.94rem;
+      border: 1px solid transparent;
+      transition: background 0.17s ease, border-color 0.17s ease, color 0.17s ease;
+      overflow-wrap: anywhere;
+    }
+
+    [data-search-item]:hover {
+      background: #edf0f5;
+    }
+
+    [data-search-item].is-active {
+      background: #f7f9fc;
+      border-color: var(--line);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.75);
+      font-weight: 600;
+    }
+
+    .content-shell {
+      padding: 14px 18px 26px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 10px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(248, 250, 252, 0.88);
+      backdrop-filter: blur(6px);
+    }
+
+    .breadcrumbs {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #475569;
+      font-size: 0.88rem;
+      overflow: hidden;
+    }
+
+    .crumb-divider {
+      color: #94a3b8;
+    }
+
+    .crumb-current {
+      color: #0f172a;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .summary-grid {
+      margin: 16px 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .summary-card {
+      background: linear-gradient(180deg, #f7f9fc 0%, #eef2f7 100%);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      min-height: 88px;
+    }
+
+    .summary-label {
+      margin: 0;
+      color: #475569;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+
+    .summary-value {
+      margin: 8px 0 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .section-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .report-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 18px;
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+      border-radius: 999px;
+      padding: 0.22rem 0.62rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .card-path {
+      font-size: 0.76rem;
+      color: #64748b;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.2rem 0.5rem;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.35;
+      color: #0b1320;
+    }
+
+    .card-meta {
+      margin: 5px 0 0;
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    .markdown-body {
+      margin-top: 14px;
+      color: #1e293b;
+      font-size: 0.96rem;
+      overflow-wrap: anywhere;
+    }
+
+    .markdown-body > :first-child {
+      margin-top: 0;
+    }
+
+    .markdown-body > :last-child {
+      margin-bottom: 0;
+    }
+
+    .markdown-body h1,
+    .markdown-body h2,
+    .markdown-body h3,
+    .markdown-body h4 {
+      font-family: "Source Serif 4", Georgia, serif;
+      margin: 1.1em 0 0.45em;
+      color: #0f172a;
+      line-height: 1.3;
+    }
+
+    .markdown-body h1 {
+      font-size: 1.5rem;
+    }
+
+    .markdown-body h2 {
+      font-size: 1.28rem;
+    }
+
+    .markdown-body h3 {
+      font-size: 1.14rem;
+    }
+
+    .markdown-body p,
+    .markdown-body ul,
+    .markdown-body ol,
+    .markdown-body pre,
+    .markdown-body blockquote,
+    .markdown-body table {
+      margin: 0.75em 0;
+    }
+
+    .markdown-body ul,
+    .markdown-body ol {
+      padding-left: 1.35rem;
+    }
+
+    .markdown-body blockquote {
+      border-left: 3px solid #94a3b8;
+      padding: 0.25rem 0 0.25rem 0.75rem;
+      color: #334155;
+      background: #f8fafc;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .markdown-body code {
+      font-family: "Cascadia Code", "Consolas", monospace;
+      background: #eef2f7;
+      border: 1px solid #d7dde7;
+      border-radius: 6px;
+      padding: 0.12rem 0.35rem;
+      font-size: 0.87em;
+      color: #0f172a;
+    }
+
+    .markdown-body pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 10px;
+      padding: 0.9rem;
+      overflow: auto;
+      border: 1px solid #1f2937;
+    }
+
+    .markdown-body pre code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: inherit;
+    }
+
+    .markdown-body table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #dbe2eb;
+      border-radius: 8px;
+      overflow: hidden;
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    .markdown-body th,
+    .markdown-body td {
+      border: 1px solid #dbe2eb;
+      padding: 0.45rem 0.55rem;
+      text-align: left;
+      font-size: 0.9em;
+    }
+
+    .markdown-body th {
+      background: #f8fafc;
+    }
+
+    mark {
+      background: var(--highlight);
+      color: inherit;
+      padding: 0 0.1em;
+      border-radius: 0.15em;
+    }
+
+    body img {
+      max-width: 500px;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fff;
+      display: block;
+      margin: 0.9rem 0;
+    }
+
+    body video {
+      max-width: 700px;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #111827;
+      display: block;
+      margin: 0.9rem 0;
+    }
+
+    @media (max-width: 1080px) {
+      .app-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .content-shell {
+        padding-top: 12px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        position: static;
+      }
+
+      body img,
+      body video {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-card">
+        <div class="brand-left">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="5" y="4" width="14" height="16" rx="2.5" stroke="currentColor" stroke-width="1.7"></rect>
+              <path d="M8.5 9H15.5M8.5 13H15.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="brand-title">Public Smoke</p>
+            <p class="brand-repo">GoThruMedia&#x2F;panorra</p>
+          </div>
+        </div>
+        <span class="brand-badge">Report</span>
+      </div>
+
+      <div class="search-wrap">
+        <div class="search-field">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle>
+            <path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+          <input id="report-search" type="search" placeholder="Search this report..." aria-label="Search report" />
+          <button id="report-search-clear" type="button">Clear</button>
+        </div>
+        <p id="report-search-status">Showing all sections</p>
+        <p id="report-search-empty" hidden>No results</p>
+      </div>
+
+      <div class="toc-group" data-search-group>
+        <p class="toc-group-title">Issues</p>
+        <ul class="sidebar-list">
+        
+          <li><a href="#issue-gothrumedia-panorra-2615" data-search-item data-target-id="issue-gothrumedia-panorra-2615">Issue #2615: Set Up Project Folder Structure (pages-based architecture)</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-2588" data-search-item data-target-id="issue-gothrumedia-panorra-2588">Issue #2588: Set Up Global Design Token System</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-2591" data-search-item data-target-id="issue-gothrumedia-panorra-2591">Issue #2591: Set Up Zustand Store Architecture</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-2590" data-search-item data-target-id="issue-gothrumedia-panorra-2590">Issue #2590: Build Shared UserAvatar Component</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-2592" data-search-item data-target-id="issue-gothrumedia-panorra-2592">Issue #2592: Set Up API Service Layer and Base HTTP Client</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-2589" data-search-item data-target-id="issue-gothrumedia-panorra-2589">Issue #2589: Build Shared PanoramaCard Component</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-2593" data-search-item data-target-id="issue-gothrumedia-panorra-2593">Issue #2593: Implement MapLibre Map Base Screen</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-2594" data-search-item data-target-id="issue-gothrumedia-panorra-2594">Issue #2594: Implement Home Header Component</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-2596" data-search-item data-target-id="issue-gothrumedia-panorra-2596">Issue #2596: Implement Search Overlay Screen</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-2597" data-search-item data-target-id="issue-gothrumedia-panorra-2597">Issue #2597: Implement Timeline &#x2F; Feed View</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-2610" data-search-item data-target-id="issue-gothrumedia-panorra-2610">Issue #2610: Implement Comments Section in Post Detail</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-2609" data-search-item data-target-id="issue-gothrumedia-panorra-2609">Issue #2609: Implement Post Detail Screen Layout — Variant 2</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-2608" data-search-item data-target-id="issue-gothrumedia-panorra-2608">Issue #2608: Implement Post Detail Screen Layout — Variant 1</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-2601" data-search-item data-target-id="issue-gothrumedia-panorra-2601">Issue #2601: Implement Place Detail Screen Shell and Tab Navigator</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-2602" data-search-item data-target-id="issue-gothrumedia-panorra-2602">Issue #2602: Implement Place Detail — Posts Tab</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-2603" data-search-item data-target-id="issue-gothrumedia-panorra-2603">Issue #2603: Implement Place Detail — Contributors Tab</a></li>
+        
+          <li><a href="#issue-gothrumedia-panorra-2604" data-search-item data-target-id="issue-gothrumedia-panorra-2604">Issue #2604: Implement Place Detail — Bookmark Tab</a></li>
+        
+        </ul>
+      </div>
+
+      <div class="toc-group" data-search-group>
+        <p class="toc-group-title">Documentation</p>
+        <ul class="sidebar-list">
+        
+        </ul>
+      </div>
+    </aside>
+
+    <main class="content-shell">
+      <header class="topbar">
+        <div class="breadcrumbs">
+          <span>GoThruMedia&#x2F;panorra</span>
+          <span class="crumb-divider">/</span>
+          <span id="breadcrumb-kind">Overview</span>
+          <span class="crumb-divider">/</span>
+          <span id="breadcrumb-current" class="crumb-current">Public Smoke</span>
+        </div>
+      </header>
+
+      <section class="summary-grid" aria-label="Report summary">
+        <article class="summary-card">
+          <p class="summary-label">Issues</p>
+          <p class="summary-value">17</p>
+        </article>
+        <article class="summary-card">
+          <p class="summary-label">Documentation</p>
+          <p class="summary-value">0</p>
+        </article>
+        <article class="summary-card">
+          <p class="summary-label">Generated At</p>
+          <p class="summary-value">2026-05-30T03:06:48.388910500+00:00</p>
+        </article>
+      </section>
+
+      <div class="section-stack">
+      
+        <section id="issue-gothrumedia-panorra-2615" data-search-section data-search-id="issue-gothrumedia-panorra-2615" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2615</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2615: Set Up Project Folder Structure (pages-based architecture)</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-26T08:03:48Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Slicing</p>
+<h2>Overview</h2>
+<p>Establish the base folder structure for the Panorra redesign using a pages-based architecture. Each page is self-contained with its own components, hooks, store, and types. Shared/reusable code lives in the <code>shared/</code> directory.</p>
+<h2>Target Folder Structure</h2>
+<pre><code>src/
+├── pages/
+│   ├── home/
+│   │   ├── components/
+│   │   │   ├── Header.tsx
+│   │   │   ├── MapView.tsx
+│   │   │   ├── SearchOverlay.tsx
+│   │   │   └── feed/
+│   │   │       ├── FeedList.tsx
+│   │   │       └── FeedItem.tsx
+│   │   ├── hooks/
+│   │   │   ├── useMapPosts.ts
+│   │   │   └── useFeed.ts
+│   │   ├── store/
+│   │   │   └── homeStore.ts
+│   │   ├── types/
+│   │   │   └── index.ts
+│   │   └── index.tsx
+│   │
+│   ├── place-detail/
+│   │   ├── components/
+│   │   │   ├── PlaceHeader.tsx
+│   │   │   └── tabs/
+│   │   │       ├── PostsTab.tsx
+│   │   │       ├── ContributorsTab.tsx
+│   │   │       └── BookmarkTab.tsx
+│   │   ├── hooks/
+│   │   ├── store/
+│   │   │   └── placeStore.ts
+│   │   ├── types/
+│   │   └── index.tsx
+│   │
+│   └── post-detail/
+│       ├── components/
+│       │   ├── PanoramaViewer.tsx
+│       │   ├── EngagementBar.tsx
+│       │   ├── CommentSection.tsx
+│       │   └── variants/
+│       │       ├── VariantOne.tsx
+│       │       └── VariantTwo.tsx
+│       ├── hooks/
+│       ├── store/
+│       │   └── postStore.ts
+│       ├── types/
+│       └── index.tsx
+│
+├── shared/
+│   ├── components/
+│   │   ├── PanoramaCard.tsx
+│   │   ├── UserAvatar.tsx
+│   │   ├── SkeletonLoader.tsx
+│   │   └── EmptyState.tsx
+│   ├── hooks/
+│   │   └── useOptimisticUpdate.ts
+│   └── utils/
+│       └── deepLink.ts
+│
+├── api/
+│   ├── client.ts
+│   ├── posts.ts
+│   ├── places.ts
+│   ├── users.ts
+│   └── types/
+│       └── index.ts
+│
+├── theme/
+│   └── tokens.ts
+│
+└── navigation/
+    └── index.tsx
+</code></pre>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+All folders and placeholder <code>index.ts</code> / <code>index.tsx</code> files are created per the structure above</li>
+<li><input disabled="" type="checkbox"/>
+Each page folder (<code>home</code>, <code>place-detail</code>, <code>post-detail</code>) has <code>components/</code>, <code>hooks/</code>, <code>store/</code>, <code>types/</code>, and <code>index.tsx</code></li>
+<li><input disabled="" type="checkbox"/>
+<code>shared/components/</code>, <code>shared/hooks/</code>, <code>shared/utils/</code> are created</li>
+<li><input disabled="" type="checkbox"/>
+<code>api/</code> folder has <code>client.ts</code> scaffold and <code>types/index.ts</code></li>
+<li><input disabled="" type="checkbox"/>
+<code>theme/</code> folder is created (tokens populated in #2588)</li>
+<li><input disabled="" type="checkbox"/>
+<code>navigation/index.tsx</code> scaffold is created</li>
+<li><input disabled="" type="checkbox"/>
+TypeScript path aliases are configured (e.g., <code>@pages/</code>, <code>@shared/</code>, <code>@api/</code>, <code>@theme/</code>) in <code>tsconfig.json</code> and bundler config</li>
+<li><input disabled="" type="checkbox"/>
+Existing code is migrated or removed to match the new structure without breaking the build</li>
+</ul>
+<h2>Dependencies</h2>
+<p>None — this should be the <strong>first task executed</strong> before any other slicing or integration work.</p>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-2588" data-search-section data-search-id="issue-gothrumedia-panorra-2588" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2588</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2588: Set Up Global Design Token System</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-26T08:03:45Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Slicing</p>
+<h2>Overview</h2>
+<p>Define and implement a centralized design token file (colors, typography, spacing, border radius, shadows) derived from the Figma design system. This ensures all modules consume consistent visual constants rather than hardcoded values.</p>
+<h2>Folder Location</h2>
+<pre><code>src/
+└── theme/
+    └── tokens.ts
+</code></pre>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+<code>src/theme/tokens.ts</code> exports colors, font sizes, spacing scale, and border radii</li>
+<li><input disabled="" type="checkbox"/>
+No raw hex codes or pixel values appear directly in component StyleSheets</li>
+<li><input disabled="" type="checkbox"/>
+Tokens match Figma design system values exactly</li>
+<li><input disabled="" type="checkbox"/>
+Dark/light mode variants are defined if the Figma design specifies them</li>
+<li><input disabled="" type="checkbox"/>
+All existing components can import from this file without breakage</li>
+</ul>
+<h2>Figma Reference</h2>
+<p>https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=357-24576</p>
+<h2>Dependencies</h2>
+<p>None — this is a prerequisite for all other tasks.</p>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-2591" data-search-section data-search-id="issue-gothrumedia-panorra-2591" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2591</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2591: Set Up Zustand Store Architecture</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-26T08:34:17Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Integration</p>
+<h2>Overview</h2>
+<p>Define the global Zustand store slices needed across all modules: <code>homeStore</code> (map state, feed state, search state), <code>placeStore</code> (active place, tabs), and <code>postStore</code> (active post, viewer state). Use Zustand's <code>create</code> with TypeScript-typed state and actions, separated into slice files combined into a root store.</p>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Three store slices exist: <code>homeStore</code>, <code>placeStore</code>, <code>postStore</code></li>
+<li><input disabled="" type="checkbox"/>
+Each slice has clearly typed <code>State</code> and <code>Actions</code> interfaces</li>
+<li><input disabled="" type="checkbox"/>
+Stores are initialized with sensible default values</li>
+<li><input disabled="" type="checkbox"/>
+No circular dependencies between slices</li>
+<li><input disabled="" type="checkbox"/>
+Stores are accessible via custom hooks (e.g., <code>useHomeStore</code>, <code>usePlaceStore</code>, <code>usePostStore</code>)</li>
+</ul>
+<h2>Dependencies</h2>
+<p>None — this is a prerequisite for all Integration tasks.</p>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-2590" data-search-section data-search-id="issue-gothrumedia-panorra-2590" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2590</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2590: Build Shared UserAvatar Component</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-26T08:07:24Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Slicing</p>
+<h2>Overview</h2>
+<p>Create a reusable <code>UserAvatar</code> component with size variants (small, medium, large) that handles image loading, error fallback to initials, and an optional online/verified badge overlay. Used in Timeline, Contributors tab, and Post Detail.</p>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Renders in three size variants: sm (24px), md (40px), lg (64px)</li>
+<li><input disabled="" type="checkbox"/>
+Shows initials with background color derived from username when image is unavailable</li>
+<li><input disabled="" type="checkbox"/>
+Supports an optional <code>badge</code> prop for verified or online indicator</li>
+<li><input disabled="" type="checkbox"/>
+Image transitions smoothly from skeleton to loaded state</li>
+<li><input disabled="" type="checkbox"/>
+Fully typed with TypeScript</li>
+</ul>
+<h2>Figma Reference</h2>
+<p>https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=357-25656</p>
+<h2>Dependencies</h2>
+<ul>
+<li>#2588 (Design Token System)</li>
+</ul>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-2592" data-search-section data-search-id="issue-gothrumedia-panorra-2592" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2592</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2592: Set Up API Service Layer and Base HTTP Client</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-26T08:34:23Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Integration</p>
+<h2>Overview</h2>
+<p>Create a base API client with interceptors for auth token injection, error normalization, and request/response typing. Define TypeScript interfaces for all API response models: <code>Post</code>, <code>Place</code>, <code>User</code>, <code>Contributor</code>. This service layer is consumed by all Integration tasks.</p>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Base client handles 401 (token refresh or logout), 500 (error toast), and network failure gracefully</li>
+<li><input disabled="" type="checkbox"/>
+Response types <code>Post</code>, <code>Place</code>, <code>User</code>, <code>Contributor</code> are defined and exported</li>
+<li><input disabled="" type="checkbox"/>
+All API functions return typed promises</li>
+<li><input disabled="" type="checkbox"/>
+Environment-based base URL configuration works for dev and production</li>
+<li><input disabled="" type="checkbox"/>
+Unit-testable — API functions are pure and injectable</li>
+</ul>
+<h2>Dependencies</h2>
+<p>None — this is a prerequisite for all Integration tasks.</p>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-2589" data-search-section data-search-id="issue-gothrumedia-panorra-2589" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2589</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2589: Build Shared PanoramaCard Component</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-26T08:34:29Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Slicing</p>
+<h2>Overview</h2>
+<p>Create a reusable <code>PanoramaCard</code> component used in both the Timeline/Feed and Place Detail Posts tab. It should display thumbnail, title, author avatar, location label, and engagement counts (likes, views). Accept props for layout variants (full-width feed card vs. grid card).</p>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Component renders correctly in full-width and grid layout modes via a <code>variant</code> prop</li>
+<li><input disabled="" type="checkbox"/>
+Thumbnail supports a loading skeleton state</li>
+<li><input disabled="" type="checkbox"/>
+Author avatar falls back gracefully to initials if image fails to load</li>
+<li><input disabled="" type="checkbox"/>
+Text truncates correctly at defined max lengths without overflow</li>
+<li><input disabled="" type="checkbox"/>
+Component is fully typed with TypeScript props interface</li>
+</ul>
+<h2>Figma Reference</h2>
+<p>https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=332-30199</p>
+<h2>Dependencies</h2>
+<ul>
+<li>#2588 (Design Token System)</li>
+</ul>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-2593" data-search-section data-search-id="issue-gothrumedia-panorra-2593" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2593</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2593: Implement MapLibre Map Base Screen</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-29T10:15:04Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Slicing</p>
+<h2>Overview</h2>
+<p>Render the MapLibre map as the full-screen base layer of the Home screen. Configure initial camera position, map style, and zoom constraints. The map should fill the screen behind the Header and any overlaying UI components.</p>
+<h2>Map Embed URL</h2>
+<p>Use WebView embed instead of native MapLibre SDK.</p>
+<ul>
+<li><strong>Live:</strong> <code>https://maps.panorra.com/embed/panorra?d=43.6532,-79.3832,9.791463986843617&amp;showLocation=true&amp;forceMobile=true&amp;allow-overlap-at=12</code></li>
+<li><strong>Dev:</strong> <code>https://maps.panorra.com/development/embed/panorra?d=43.6532,-79.3832,9.791463986843617&amp;showLocation=true&amp;forceMobile=true&amp;allow-overlap-at=12</code></li>
+</ul>
+<p>Select URL based on <code>env.baseURLType</code> (<code>'live'</code> vs <code>'development'</code>).</p>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+MapLibre map renders full-screen on both Android and iOS</li>
+<li><input disabled="" type="checkbox"/>
+Initial map region matches the design (city-level zoom)</li>
+<li><input disabled="" type="checkbox"/>
+Map embed URL switches between live/dev via environment variable</li>
+<li><input disabled="" type="checkbox"/>
+Map gestures (pan, pinch-to-zoom) work correctly</li>
+<li><input disabled="" type="checkbox"/>
+Header component sits above the map without clipping</li>
+</ul>
+<h2>Figma Reference</h2>
+<p>https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=357-24576</p>
+<h2>Dependencies</h2>
+<ul>
+<li>#2588 (Design Token System)</li>
+</ul>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-2594" data-search-section data-search-id="issue-gothrumedia-panorra-2594" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2594</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2594: Implement Home Header Component</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-29T10:17:48Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Slicing</p>
+<h2>Overview</h2>
+<p>Build the <code>Header</code> component for the Home screen (<code>home/components/Header.tsx</code>) including the Panorra logo/wordmark, search bar trigger button, and view toggle (Map/Timeline switch). The header should sit above the map with appropriate shadow or blur background.</p>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Logo/wordmark renders at correct size and position per Figma</li>
+<li><input disabled="" type="checkbox"/>
+Search bar trigger button is tappable and visually matches Figma</li>
+<li><input disabled="" type="checkbox"/>
+Map/Timeline toggle switches between views correctly</li>
+<li><input disabled="" type="checkbox"/>
+Header background applies blur or semi-opacity over the map content beneath</li>
+<li><input disabled="" type="checkbox"/>
+Safe area insets are respected on notched devices (iPhone, Android cutout)</li>
+</ul>
+<h2>Figma Reference</h2>
+<p>https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=357-24576</p>
+<h2>Dependencies</h2>
+<ul>
+<li>#2588 (Design Token System)</li>
+</ul>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-2596" data-search-section data-search-id="issue-gothrumedia-panorra-2596" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2596</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2596: Implement Search Overlay Screen</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-29T10:17:42Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Slicing</p>
+<h2>Overview</h2>
+<p>Build the search overlay that appears when the user taps the search trigger in the Header. The overlay covers the map with an input field, recent searches list, and search result rows (places and users). It should animate in/out smoothly.</p>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Overlay animates in from top with the keyboard appearing simultaneously</li>
+<li><input disabled="" type="checkbox"/>
+Input field is auto-focused when overlay opens</li>
+<li><input disabled="" type="checkbox"/>
+Recent searches are shown as a list below the input when the field is empty</li>
+<li><input disabled="" type="checkbox"/>
+Search results display place rows (thumbnail + location) and user rows (avatar + handle)</li>
+<li><input disabled="" type="checkbox"/>
+Back/dismiss action closes the overlay and returns to the map</li>
+</ul>
+<h2>Figma Reference</h2>
+<p>https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=357-24521</p>
+<h2>Dependencies</h2>
+<ul>
+<li>#2594 (Home Header Component)</li>
+</ul>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-2597" data-search-section data-search-id="issue-gothrumedia-panorra-2597" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2597</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2597: Implement Timeline &#x2F; Feed View</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-29T10:08:42Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Slicing</p>
+<h2>Overview</h2>
+<p>Build the Timeline feed view inside <code>home/components/content/index.tsx</code> that shows a vertically scrolling list of <code>PanoramaCard</code> components. This view is shown when the user toggles from Map to Timeline in the Header. Include pull-to-refresh and infinite scroll pagination indicators.</p>
+<h2>Component</h2>
+<p>Use <strong>FlashList</strong> from Shopify for the infinite scroll list — it is significantly more performant than <code>FlatList</code> for large feeds.
+https://github.com/shopify/flash-list</p>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Feed renders a <code>FlashList</code> of <code>PanoramaCard</code> components</li>
+<li><input disabled="" type="checkbox"/>
+Pull-to-refresh triggers a visual refresh indicator</li>
+<li><input disabled="" type="checkbox"/>
+A loading skeleton is shown during the initial load</li>
+<li><input disabled="" type="checkbox"/>
+An end-of-feed indicator appears when all posts are loaded</li>
+<li><input disabled="" type="checkbox"/>
+Switching from Map to Timeline view preserves scroll position</li>
+</ul>
+<h2>Figma Reference</h2>
+<p>https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=332-30199</p>
+<h2>Dependencies</h2>
+<ul>
+<li>#2589 (PanoramaCard Component)</li>
+<li>#2594 (Home Header Component)</li>
+</ul>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-2610" data-search-section data-search-id="issue-gothrumedia-panorra-2610" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2610</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2610: Implement Comments Section in Post Detail</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-29T10:00:32Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Slicing</p>
+<h2>Overview</h2>
+<p>Build the comments section at the bottom of the Post Detail screen. Display a scrollable list of comment rows (avatar, username, comment text, timestamp, like-count). Include a sticky compose bar at the bottom for adding a new comment.</p>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Comment rows display avatar, username, text, and relative timestamp</li>
+<li><input disabled="" type="checkbox"/>
+Compose bar sticks to the bottom and lifts when the keyboard appears</li>
+<li><input disabled="" type="checkbox"/>
+Tapping Reply on a comment shows an inline reply input prefilled with the username</li>
+<li><input disabled="" type="checkbox"/>
+Comments load with a skeleton placeholder while fetching</li>
+<li><input disabled="" type="checkbox"/>
+Empty state message is shown when no comments exist yet</li>
+</ul>
+<h2>Figma Reference</h2>
+<p>https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=357-27367</p>
+<h2>Dependencies</h2>
+<ul>
+<li>#2590 (UserAvatar Component)</li>
+<li>#2608 (Post Detail Variant 1)</li>
+</ul>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-2609" data-search-section data-search-id="issue-gothrumedia-panorra-2609" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2609</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2609: Implement Post Detail Screen Layout — Variant 2</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-29T09:57:56Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Slicing</p>
+<h2>Overview</h2>
+<p>Build the alternative Post Detail layout (Variant 2) where the panorama viewer takes full screen and metadata (author, title, description) is accessible via an overlay or bottom sheet without leaving the viewer. Implement as a separate screen or conditional render based on a route param.</p>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Variant 2 renders a distinctly different layout from Variant 1 (as per Figma)</li>
+<li><input disabled="" type="checkbox"/>
+Navigation can route to either variant (e.g., via route param or feature flag)</li>
+<li><input disabled="" type="checkbox"/>
+Panorama viewer area fills full screen in Variant 2</li>
+<li><input disabled="" type="checkbox"/>
+Metadata (author, title, description) is accessible without leaving the viewer (overlay or sheet)</li>
+<li><input disabled="" type="checkbox"/>
+All interactive elements (like, bookmark, share) are reachable in this layout</li>
+</ul>
+<h2>Figma Reference</h2>
+<p>https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=357-27473</p>
+<h2>Dependencies</h2>
+<ul>
+<li>#2588 (Design Token System)</li>
+<li>#2590 (UserAvatar Component)</li>
+<li>#2608 (Post Detail Variant 1)</li>
+</ul>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-2608" data-search-section data-search-id="issue-gothrumedia-panorra-2608" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2608</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2608: Implement Post Detail Screen Layout — Variant 1</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-29T09:57:04Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Slicing</p>
+<h2>Overview</h2>
+<p>Build the primary Post Detail screen layout including the full-screen 360° panorama viewer placeholder, the author info row (avatar, name, follow button), post title, description text, location tag, and the engagement action bar (like, comment, bookmark, share).</p>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Panorama viewer occupies the top portion of the screen (shell/placeholder for viewer integration)</li>
+<li><input disabled="" type="checkbox"/>
+Author row shows avatar, display name, handle, and follow button</li>
+<li><input disabled="" type="checkbox"/>
+Post title and description are displayed below the viewer with correct typography</li>
+<li><input disabled="" type="checkbox"/>
+Location tag is tappable and navigates to Place Detail</li>
+<li><input disabled="" type="checkbox"/>
+Engagement action bar shows like count, comment count, bookmark, and share icons</li>
+</ul>
+<h2>Figma Reference</h2>
+<p>https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=357-27367</p>
+<h2>Dependencies</h2>
+<ul>
+<li>#2588 (Design Token System)</li>
+<li>#2590 (UserAvatar Component)</li>
+</ul>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-2601" data-search-section data-search-id="issue-gothrumedia-panorra-2601" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2601</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2601: Implement Place Detail Screen Shell and Tab Navigator</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-29T09:54:28Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Slicing</p>
+<h2>Overview</h2>
+<p>Build the Place Detail screen container with a sticky header (place cover image, name, category, and stats row) and a tab navigator with three tabs: Posts, Contributors, Bookmark. Use a custom tab bar component matching the Figma design.</p>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Place cover image renders full-width with title and category below</li>
+<li><input disabled="" type="checkbox"/>
+Stats row shows post count, contributor count, and bookmark count</li>
+<li><input disabled="" type="checkbox"/>
+Custom tab bar has three tabs with active indicator matching Figma</li>
+<li><input disabled="" type="checkbox"/>
+Switching tabs is animated and does not reset scroll position unnecessarily</li>
+<li><input disabled="" type="checkbox"/>
+Header collapses (parallax scroll) as user scrolls down into tab content</li>
+</ul>
+<h2>Figma Reference</h2>
+<p>https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=357-25594</p>
+<h2>Dependencies</h2>
+<ul>
+<li>#2588 (Design Token System)</li>
+</ul>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-2602" data-search-section data-search-id="issue-gothrumedia-panorra-2602" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2602</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2602: Implement Place Detail — Posts Tab</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-29T09:49:12Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Slicing</p>
+<h2>Overview</h2>
+<p>Build the Posts tab content showing a 2-column grid of <code>PanoramaCard</code> components for all posts at this place. Include a sort/filter control row at the top. Tapping a card navigates to Post Detail.</p>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Posts render in a 2-column grid layout matching Figma</li>
+<li><input disabled="" type="checkbox"/>
+Sort/filter row has at least two options and updates the list visually</li>
+<li><input disabled="" type="checkbox"/>
+Loading skeleton shows a 2-column grid placeholder</li>
+<li><input disabled="" type="checkbox"/>
+Empty state shows an illustration and a Be the first to post CTA</li>
+<li><input disabled="" type="checkbox"/>
+Tapping a post card navigates to Post Detail with the correct post ID</li>
+</ul>
+<h2>Figma Reference</h2>
+<p>https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=357-25594</p>
+<h2>Dependencies</h2>
+<ul>
+<li>#2589 (PanoramaCard Component)</li>
+<li>#2601 (Place Detail Screen Shell)</li>
+</ul>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-2603" data-search-section data-search-id="issue-gothrumedia-panorra-2603" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2603</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2603: Implement Place Detail — Contributors Tab</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-29T09:48:00Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Slicing</p>
+<h2>Overview</h2>
+<p>Build the Contributors tab showing a ranked list of users who have posted at this place. Each row displays the user's avatar, username, post count at this location, and a follow button. Style the top 3 contributors with a highlighted rank indicator.</p>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Contributors render in a ranked list (1st, 2nd, 3rd highlighted differently)</li>
+<li><input disabled="" type="checkbox"/>
+Each row shows avatar, username, post count, and follow/following button</li>
+<li><input disabled="" type="checkbox"/>
+Follow button toggles state optimistically on tap</li>
+<li><input disabled="" type="checkbox"/>
+Loading skeleton shows placeholder rows</li>
+<li><input disabled="" type="checkbox"/>
+Empty state is handled if no contributors exist</li>
+</ul>
+<h2>Figma Reference</h2>
+<p>https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=357-25656</p>
+<h2>Dependencies</h2>
+<ul>
+<li>#2590 (UserAvatar Component)</li>
+<li>#2601 (Place Detail Screen Shell)</li>
+</ul>
+</div>
+        </section>
+      
+        <section id="issue-gothrumedia-panorra-2604" data-search-section data-search-id="issue-gothrumedia-panorra-2604" data-section-kind="issue" class="report-card">
+          <div class="card-head">
+            <span class="pill">Issue #2604</span>
+            <span class="card-path">anurdin01</span>
+          </div>
+          <h2 data-search-title class="card-title">Issue #2604: Implement Place Detail — Bookmark Tab</h2>
+          <p data-search-meta class="card-meta">Author: anurdin01 | Updated: 2026-05-29T09:46:22Z</p>
+          <div data-search-body class="markdown-body"><h2>Type</h2>
+<p>Slicing</p>
+<h2>Overview</h2>
+<p>Build the Bookmark tab showing the current user's bookmarked posts at this place. Layout matches the Posts grid tab. Include a global bookmark toggle button in the place header that saves/unsaves the entire place.</p>
+<h2>Acceptance Criteria</h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Bookmarked posts render in the same 2-column grid as the Posts tab</li>
+<li><input disabled="" type="checkbox"/>
+The place-level bookmark button in the header reflects current saved state</li>
+<li><input disabled="" type="checkbox"/>
+Tapping the bookmark button toggles its filled/outline state immediately (optimistic)</li>
+<li><input disabled="" type="checkbox"/>
+Empty state shows No bookmarks yet with a prompt to bookmark posts</li>
+<li><input disabled="" type="checkbox"/>
+Bookmarked state persists correctly across tab switches</li>
+</ul>
+<h2>Figma Reference</h2>
+<p>https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=357-25722</p>
+<h2>Dependencies</h2>
+<ul>
+<li>#2589 (PanoramaCard Component)</li>
+<li>#2601 (Place Detail Screen Shell)</li>
+</ul>
+</div>
+        </section>
+      
+
+      
+      </div>
+    </main>
+  </div>
+  <script>
+    let runSearchHandler = null;
+
+    function applySearch() {
+      if (typeof runSearchHandler === "function") {
+        runSearchHandler();
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const input = document.getElementById("report-search");
+      const clearButton = document.getElementById("report-search-clear");
+      const status = document.getElementById("report-search-status");
+      const empty = document.getElementById("report-search-empty");
+      const breadcrumbKind = document.getElementById("breadcrumb-kind");
+      const breadcrumbCurrent = document.getElementById("breadcrumb-current");
+      if (!input || !status || !empty) {
+        return;
+      }
+
+      const sectionNodes = Array.from(document.querySelectorAll("[data-search-section]"));
+      const sidebarLinks = Array.from(document.querySelectorAll("[data-search-item]"));
+      const groupNodes = Array.from(document.querySelectorAll("[data-search-group]"));
+      const sidebarById = new Map(sidebarLinks.map((link) => [link.dataset.targetId, link]));
+      const originalHtml = new WeakMap();
+      const highlightedNodes = new Set();
+      let firstVisibleId = null;
+
+      const entries = sectionNodes.map((section) => {
+        const id = section.dataset.searchId || section.id;
+        const sidebarLink = sidebarById.get(id) || null;
+        const titleNode = section.querySelector("[data-search-title]");
+        const metaNode = section.querySelector("[data-search-meta]");
+        const bodyNode = section.querySelector("[data-search-body]");
+        const highlightTargets = [sidebarLink, titleNode, metaNode, bodyNode].filter(Boolean);
+        const displayTitle = titleNode ? (titleNode.textContent || "").trim() : id;
+        const sectionKind = section.dataset.sectionKind || "section";
+
+        for (const node of highlightTargets) {
+          if (!originalHtml.has(node)) {
+            originalHtml.set(node, node.innerHTML);
+          }
+        }
+
+        const searchableText = [
+          sidebarLink ? sidebarLink.textContent : "",
+          titleNode ? titleNode.textContent : "",
+          metaNode ? metaNode.textContent : "",
+          bodyNode ? bodyNode.textContent : ""
+        ]
+          .join(" ")
+          .toLowerCase();
+
+        return {
+          id,
+          section,
+          sidebarLink,
+          highlightTargets,
+          displayTitle,
+          sectionKind,
+          searchableText
+        };
+      });
+      const entryById = new Map(entries.map((entry) => [entry.id, entry]));
+
+      function restoreHighlights() {
+        for (const node of highlightedNodes) {
+          const original = originalHtml.get(node);
+          if (typeof original === "string") {
+            node.innerHTML = original;
+          }
+        }
+        highlightedNodes.clear();
+      }
+
+      function setEntryVisibility(entry, visible) {
+        entry.section.hidden = !visible;
+        if (entry.sidebarLink) {
+          const listItem = entry.sidebarLink.closest("li");
+          if (listItem) {
+            listItem.hidden = !visible;
+          }
+        }
+      }
+
+      function updateGroupVisibility(queryLower) {
+        for (const group of groupNodes) {
+          if (!queryLower) {
+            group.hidden = false;
+            continue;
+          }
+          const items = Array.from(group.querySelectorAll("li"));
+          const hasVisibleItem = items.some((item) => !item.hidden);
+          group.hidden = !hasVisibleItem;
+        }
+      }
+
+      function setActiveSection(sectionId) {
+        let activeEntry = sectionId ? entryById.get(sectionId) : null;
+        if (!activeEntry || activeEntry.section.hidden) {
+          activeEntry = entries.find((entry) => !entry.section.hidden) || null;
+        }
+
+        for (const entry of entries) {
+          if (!entry.sidebarLink) {
+            continue;
+          }
+          if (activeEntry && entry.id === activeEntry.id) {
+            entry.sidebarLink.classList.add("is-active");
+          } else {
+            entry.sidebarLink.classList.remove("is-active");
+          }
+        }
+
+        if (!breadcrumbKind || !breadcrumbCurrent) {
+          return;
+        }
+        if (!activeEntry) {
+          breadcrumbKind.textContent = "Overview";
+          breadcrumbCurrent.textContent = "Public Smoke";
+          return;
+        }
+        breadcrumbKind.textContent = activeEntry.sectionKind === "issue" ? "Issues" : "Documentation";
+        breadcrumbCurrent.textContent = activeEntry.displayTitle;
+      }
+
+      function highlightTextNode(textNode, queryLower) {
+        const text = textNode.nodeValue || "";
+        const lower = text.toLowerCase();
+        let cursor = 0;
+        let index = lower.indexOf(queryLower, cursor);
+        if (index === -1) {
+          return;
+        }
+
+        const fragment = document.createDocumentFragment();
+        while (index !== -1) {
+          if (index > cursor) {
+            fragment.appendChild(document.createTextNode(text.slice(cursor, index)));
+          }
+          const mark = document.createElement("mark");
+          mark.textContent = text.slice(index, index + queryLower.length);
+          fragment.appendChild(mark);
+          cursor = index + queryLower.length;
+          index = lower.indexOf(queryLower, cursor);
+        }
+        if (cursor < text.length) {
+          fragment.appendChild(document.createTextNode(text.slice(cursor)));
+        }
+        textNode.parentNode.replaceChild(fragment, textNode);
+      }
+
+      function highlightNode(root, queryLower) {
+        if (!root || !queryLower) {
+          return;
+        }
+        highlightedNodes.add(root);
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+          acceptNode(node) {
+            const parent = node.parentElement;
+            if (!parent) {
+              return NodeFilter.FILTER_REJECT;
+            }
+            const tag = parent.tagName;
+            if (tag === "SCRIPT" || tag === "STYLE" || tag === "MARK") {
+              return NodeFilter.FILTER_REJECT;
+            }
+            const value = node.nodeValue || "";
+            if (!value.trim()) {
+              return NodeFilter.FILTER_REJECT;
+            }
+            return value.toLowerCase().includes(queryLower)
+              ? NodeFilter.FILTER_ACCEPT
+              : NodeFilter.FILTER_REJECT;
+          }
+        });
+
+        const nodesToReplace = [];
+        let currentNode = walker.nextNode();
+        while (currentNode) {
+          nodesToReplace.push(currentNode);
+          currentNode = walker.nextNode();
+        }
+
+        for (const textNode of nodesToReplace) {
+          highlightTextNode(textNode, queryLower);
+        }
+      }
+
+      function setStatus(count) {
+        if (count === null) {
+          status.textContent = "Showing all sections";
+          empty.hidden = true;
+          return;
+        }
+        status.textContent = count === 1 ? "1 result" : count + " results";
+        empty.hidden = count !== 0;
+      }
+
+      function runSearch() {
+        const query = (input.value || "").trim();
+        const queryLower = query.toLowerCase();
+
+        restoreHighlights();
+
+        if (!queryLower) {
+          for (const entry of entries) {
+            setEntryVisibility(entry, true);
+          }
+          updateGroupVisibility(queryLower);
+          firstVisibleId = null;
+          setStatus(null);
+          const hashValue = window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : "";
+          setActiveSection(hashValue || null);
+          return;
+        }
+
+        let matchCount = 0;
+        firstVisibleId = null;
+        for (const entry of entries) {
+          const isMatch = entry.searchableText.includes(queryLower);
+          setEntryVisibility(entry, isMatch);
+          if (isMatch) {
+            if (!firstVisibleId) {
+              firstVisibleId = entry.id;
+            }
+            matchCount += 1;
+            for (const node of entry.highlightTargets) {
+              highlightNode(node, queryLower);
+            }
+          }
+        }
+        updateGroupVisibility(queryLower);
+        setStatus(matchCount);
+
+        const hashValue = window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : "";
+        if (hashValue) {
+          setActiveSection(hashValue);
+        } else {
+          setActiveSection(firstVisibleId);
+        }
+      }
+
+      let debounceTimer = null;
+      input.addEventListener("input", function () {
+        if (debounceTimer) {
+          clearTimeout(debounceTimer);
+        }
+        debounceTimer = setTimeout(runSearch, 150);
+      });
+
+      input.addEventListener("keydown", function (event) {
+        if (event.key !== "Enter") {
+          return;
+        }
+        event.preventDefault();
+        runSearch();
+        if (!firstVisibleId) {
+          return;
+        }
+        const targetSection = document.querySelector(
+          '[data-search-section][data-search-id="' + firstVisibleId + '"]'
+        );
+        if (!targetSection) {
+          return;
+        }
+        setActiveSection(firstVisibleId);
+        targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (targetSection.id) {
+          window.history.replaceState(null, "", "#" + targetSection.id);
+        }
+      });
+
+      if (clearButton) {
+        clearButton.addEventListener("click", function () {
+          input.value = "";
+          runSearch();
+          input.focus();
+        });
+      }
+
+      sidebarLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          const targetId = link.dataset.targetId;
+          if (targetId) {
+            setActiveSection(targetId);
+          }
+        });
+      });
+
+      window.addEventListener("hashchange", function () {
+        const hashValue = window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : "";
+        setActiveSection(hashValue || null);
+      });
+
+      runSearchHandler = runSearch;
+      runSearch();
+    });
+  </script>
+</body>
+</html>
