@@ -1,0 +1,28 @@
+{
+  "title": "Weekly Engineering Update - GoThru Dashboard (Part 5 of 5)",
+  "repository": "GoThruMedia/gothru-dashboard",
+  "generated_at": "2026-06-01T06:35:28.975689600+00:00",
+  "issues": [
+    {
+      "anchor_id": "issue-gothrumedia-gothru-dashboard-4051",
+      "display_title": "Issue #4051: Integrate Review Button at Support Page",
+      "main_description_html": "<h1>Task Description</h1>\n<h2>Overview</h2>\n<p>Integrate the <strong>Review</strong> button on the Support Photographer page (Featured Photographers) so that clicking it opens a modal dialog for reviewing a photographer's request.</p>\n<h2>Context</h2>\n<p>This task follows the layout update in #4050 (Slicing Update Layout Support Photographer). The table on the Featured Photographers page has a <strong>Review</strong> button in the Action column for each photographer entry. Currently the button is not wired to any action.</p>\n<h2>Tasks</h2>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\nShow modal review photographer when Review button is clicked</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nDisplay photographer details inside the modal (name, subscription, userID, request date, current status)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nProvide Approve and Deny action buttons inside the modal</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nOn Approve → update status to <code>Approved</code> and close modal</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nOn Deny → update status to <code>Denied</code> and close modal</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nShow loading state while the action is being processed</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nShow success/error feedback after action is completed</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nClose modal on backdrop click or close button</li>\n</ul>\n<h2>Expected Behavior</h2>\n<ol>\n<li>User clicks <strong>Review</strong> button on a photographer row in the Featured Photographers table</li>\n<li>A modal appears with the photographer's detail information</li>\n<li>User can choose to <strong>Approve</strong> or <strong>Deny</strong> the request</li>\n<li>The status in the table updates accordingly after confirmation</li>\n<li>Modal closes after action is taken</li>\n</ol>\n<h2>Design Reference</h2>\n<p>Refer to the Featured Photographers design in Figma for layout and styling:\nhttps://www.figma.com/design/jDH5icFzVdkfYrA2VfQoPe/FInal-GoThru--Dashboard?node-id=5924-95786</p>\n<h1>Demo by Developer</h1>\n<video controls src=\"assets/video-1a375aab-89a0-49e3-8fca-5c546e03da95.mp4\"></video>\n",
+      "metadata": {
+        "number": 4051,
+        "author": "anurdin01",
+        "updated_at": "2026-05-29T10:24:30Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-dashboard-4049",
+      "display_title": "Issue #4049: Implement Ocean Coordinate Warning & Disable Publish Action",
+      "main_description_html": "<h2>Task Description</h2>\n<img width=\"896\" height=\"992\" alt=\"Image\" src=\"assets/image-dc3f4b7c-f23e-45f6-a417-0ae16b833aaf.png\" />\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\nPre-check (Client-side): Check the panorama's lat/lng data when loading publish. If the average coordinates are at 0,0, immediately show danger toast the “Publish to Google” button clicked.</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nError Handling (Server-side response): Catch the error response from the backend if the user attempts to force a publish, and display a warning.</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nDisplay a red warning element with the following text: “The image is in the ocean and Google does not accept images there.”</li>\n</ul>\n<h2>Demo by Developer</h2>\n<video controls src=\"assets/video-947f9545-e9dd-426c-8aa7-91bdb9747ab3.mp4\"></video>\n",
+      "metadata": {
+        "number": 4049,
+        "author": "anurdin01",
+        "updated_at": "2026-05-29T09:43:26Z"
+      }
+    }
+  ],
+  "docs": []
+}
