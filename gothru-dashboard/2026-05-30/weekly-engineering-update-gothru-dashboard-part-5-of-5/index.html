@@ -4,10 +4,120 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Report Viewer</title>
-    <link rel="stylesheet" href="/reports/_app/assets/index-B0uJq0-N.css" />
+    <script>
+      window.__REPORTGEN__ = window.__REPORTGEN__ || {};
+      window.__REPORTGEN__.reportJsonUrl = "./report.json";
+      (function() {
+        const styleAssets = ["assets/index-B0uJq0-N.css"];
+        const scriptAssets = ["assets/index-CWSN1gSK.js"];
+
+        const candidates = [];
+        const pathname = window.location.pathname || "/";
+        const reportsMarker = "/reports/";
+        const reportsIndex = pathname.indexOf(reportsMarker);
+        if (reportsIndex >= 0) {
+          const reportsRoot = pathname.slice(0, reportsIndex + reportsMarker.length - 1);
+          candidates.push(reportsRoot + "/_app");
+        }
+
+        candidates.push("/reports/_app");
+        candidates.push("/_app");
+
+        const trimmed = pathname.replace(/\/+$/, "");
+        const pathParts = trimmed.split("/").filter(Boolean);
+        candidates.push("./_app");
+        let relative = "../";
+        for (let i = 0; i < pathParts.length; i += 1) {
+          candidates.push(relative + "_app");
+          relative += "../";
+        }
+
+        const uniqueBases = [];
+        const seen = new Set();
+        for (const raw of candidates) {
+          if (!raw) continue;
+          const base = raw.replace(/\/+$/, "");
+          if (!seen.has(base)) {
+            seen.add(base);
+            uniqueBases.push(base);
+          }
+        }
+
+        function resolveAssetUrl(base, assetPath) {
+          const normalizedBase = base.replace(/\/+$/, "");
+          const normalizedAsset = assetPath.replace(/^\/+/, "");
+          return new URL(`${normalizedBase}/${normalizedAsset}`, window.location.href).toString();
+        }
+
+        function loadStyle(assetPath) {
+          let index = 0;
+          const attempt = () => {
+            if (index >= uniqueBases.length) {
+              console.error("reportgen: failed to load stylesheet", assetPath);
+              return;
+            }
+
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = resolveAssetUrl(uniqueBases[index], assetPath);
+            link.crossOrigin = "anonymous";
+            link.onload = () => {};
+            link.onerror = () => {
+              link.remove();
+              index += 1;
+              attempt();
+            };
+            document.head.appendChild(link);
+          };
+
+          attempt();
+        }
+
+        function loadModuleScript(assetPath) {
+          return new Promise((resolve, reject) => {
+            let index = 0;
+            const attempt = () => {
+              if (index >= uniqueBases.length) {
+                reject(new Error(`reportgen: failed to load script ${assetPath}`));
+                return;
+              }
+
+              const script = document.createElement("script");
+              script.type = "module";
+              script.crossOrigin = "anonymous";
+              script.src = resolveAssetUrl(uniqueBases[index], assetPath);
+              script.onload = () => resolve();
+              script.onerror = () => {
+                script.remove();
+                index += 1;
+                attempt();
+              };
+              document.head.appendChild(script);
+            };
+
+            attempt();
+          });
+        }
+
+        (async () => {
+          styleAssets.forEach(loadStyle);
+          for (const scriptAsset of scriptAssets) {
+            await loadModuleScript(scriptAsset);
+          }
+        })().catch((error) => {
+          console.error(error);
+          const errorBanner = document.createElement("pre");
+          errorBanner.textContent = String(error);
+          errorBanner.style.padding = "12px";
+          errorBanner.style.margin = "12px";
+          errorBanner.style.background = "#fee2e2";
+          errorBanner.style.color = "#991b1b";
+          document.body.prepend(errorBanner);
+        });
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" crossorigin src="/reports/_app/assets/index-CWSN1gSK.js"></script>
   </body>
 </html>
