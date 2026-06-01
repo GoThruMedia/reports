@@ -1,0 +1,75 @@
+{
+  "title": "Weekly Engineering Update - GoThru Dashboard (Part 3 of 5)",
+  "repository": "Multiple repositories (2)",
+  "generated_at": "2026-06-01T06:32:30.520212100+00:00",
+  "issues": [
+    {
+      "anchor_id": "issue-gothrumedia-gothru-api-new-1286",
+      "display_title": "[GoThruMedia/GoThru-API-New] Issue #1286: Migrate API Get Account Statistic to ADR Architecture",
+      "main_description_html": "<h2>Task Description</h2>\n<p>Empty</p>\n<h2>Demo</h2>\n<p>This API has been migrated to the ADR architecture. For more details, please refer to the following document: https://github.com/GoThruMedia/GoThru-API-New/blob/main/docs/v2/user/get-account-statistic.md</p>\n",
+      "metadata": {
+        "number": 1286,
+        "author": "anurdin01",
+        "updated_at": "2026-05-29T11:21:35Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-api-new-1284",
+      "display_title": "[GoThruMedia/GoThru-API-New] Issue #1284: Migrate API Manual Login to ADR Architecture",
+      "main_description_html": "<h2>Task Description</h2>\n<p>Empty</p>\n<h2>Demo by Developer</h2>\n<p>This API has been migrated to the ADR architecture. For more details, please refer to the following document: https://github.com/GoThruMedia/GoThru-API-New/blob/main/docs/v2/auth/login.md</p>\n",
+      "metadata": {
+        "number": 1284,
+        "author": "anurdin01",
+        "updated_at": "2026-05-29T10:53:31Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-api-new-1288",
+      "display_title": "[GoThruMedia/GoThru-API-New] Issue #1288: Prevent Publishing Tours at Lat/Lng 0,0",
+      "main_description_html": "<h2>Task Description</h2>\n<img width=\"896\" height=\"992\" alt=\"Image\" src=\"assets/image-0e615390-158d-4b30-a4b7-6568c095801c.png\" />\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\nAdd Validation for 0,0 Coordinates on Publish</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nShow alert danger \"The image is in the ocean and Google does not accept images there.\" at API Alert Info</li>\n</ul>\n<h2>Demo by Developer</h2>\n<p>I've added new danger message on alert info API, so if there has al least one panorama that has geolocation at ocean or null island the message will appear.</p>\n<img width=\"1920\" height=\"996\" alt=\"Image\" src=\"assets/image-c710288b-37a0-4100-9565-ede9eaf9cb6e.png\" />\n<p>I have also addressed this issue in the publication process also</p>\n<img width=\"830\" height=\"241\" alt=\"Image\" src=\"assets/image-33d5eb19-0264-4d21-9dc1-ce93f28cb89c.png\" />",
+      "metadata": {
+        "number": 1288,
+        "author": "anurdin01",
+        "updated_at": "2026-05-29T10:50:44Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-dashboard-4050",
+      "display_title": "[GoThruMedia/gothru-dashboard] Issue #4050: Slicing Update Layout Support Photographer",
+      "main_description_html": "<h2>Task Description</h2>\n<p>design ( https://www.figma.com/design/jDH5icFzVdkfYrA2VfQoPe/FInal-GoThru--Dashboard?node-id=5924-95786&amp;t=Uzfl94sjEElwjRiA-0 )</p>\n<h2>Demo by Developer</h2>\n<img width=\"1920\" height=\"1080\" alt=\"Image\" src=\"assets/image-9a730c82-5e1e-4aab-8c25-e2e9cea89605.png\" />",
+      "metadata": {
+        "number": 4050,
+        "author": "anurdin01",
+        "updated_at": "2026-05-29T10:10:06Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-dashboard-4056",
+      "display_title": "[GoThruMedia/gothru-dashboard] Issue #4056: Integrate Map Marker Main & Sub Main Location Photographer",
+      "main_description_html": "<h2>Task Description</h2>\n<p>Empty</p>\n<h2>Demo by Developer</h2>\n<video controls src=\"assets/video-27840a3b-8182-4e57-8829-ad2328eefb3f.mp4\"></video>\n",
+      "metadata": {
+        "number": 4056,
+        "author": "anurdin01",
+        "updated_at": "2026-05-29T10:14:58Z"
+      }
+    }
+  ],
+  "docs": [
+    {
+      "anchor_id": "doc-gothrumedia-gothru-api-new-docs-v2-user-get-account-statistic-md",
+      "display_title": "[GoThruMedia/GoThru-API-New] get-account-statistic.md",
+      "rendered_html": "<h1>User — Get Account Statistic</h1>\n<h2><code>GET /users/account-statistic</code></h2>\n<p><strong>Auth:</strong> <code>middleware('auth')</code> — <code>user_id</code> injected into request context by middleware</p>\n<p><strong>Flow:</strong></p>\n<ol>\n<li>Request enters → <code>GetAccountStatisticController@handle</code> builds <code>GetAccountStatisticDto</code> from <code>$request-&gt;all()</code>.</li>\n<li>Controller delegates to <code>GetAccountStatisticAction::execute(GetAccountStatisticDto)</code>.</li>\n<li>Action runs business logic:\n<ul>\n<li>If <code>$dto-&gt;userId === 0</code>, throws <code>UserAccountStatisticNotFoundException</code> (<code>USER_ACCOUNT.STATISTIC_NOT_FOUND</code>).</li>\n<li>Checks Redis cache key <code>app_account_stats_{userId}</code> (TTL 3600s). On hit, returns decoded JSON directly.</li>\n<li>On cache miss, calls <code>buildStats($userId)</code>:\n<ul>\n<li>Calls <code>AccountStatisticRepository::isAgencyAdmin($userId)</code> — checks <code>gothru_mod.agency</code>.</li>\n<li><strong>If agency admin:</strong> calls <code>getSubAgentIds($userId)</code> → appends self → calls <code>getPublishedToursInfoForAgency(array $ids)</code> aggregating <code>moderation.audit</code> across all sub-agents + admin.</li>\n<li><strong>If regular user:</strong> calls <code>getPublishedToursInfo($userId)</code> aggregating <code>moderation.audit</code> for the user alone.</li>\n<li>Calls <code>getGothruPosition($userId)</code> — subquery rank from <code>moderation.audit</code> (users with higher count + 1).</li>\n<li>Calls <code>getOverlayStatistics($userId)</code> — conditional aggregate from <code>hosted_tours.tours</code>.</li>\n</ul>\n</li>\n<li>Stores result in Redis (<code>setex</code>, TTL 3600s).</li>\n<li>Returns plain <code>array</code> of stats.</li>\n</ul>\n</li>\n<li>Controller receives result → wraps into encrypted JSON response:\n<ul>\n<li>Success → <code>ResponseEnvelopeHelper::encryptResult(['account_stats' =&gt; $accountStats], messages, 200)</code></li>\n<li><code>UserAccountDomainException</code> → <code>UserAccountExceptionHttpMapper::toStatusCode($e)</code> → <code>responseMessages()</code></li>\n<li><code>\\Throwable</code> → <code>ResponseEnvelopeHelper::statusCodeFromThrowable($e)</code> → <code>responseMessages()</code></li>\n</ul>\n</li>\n</ol>\n<hr />\n<p><strong>DTO</strong> (<code>app/DTOs/User/Account/GetAccountStatisticDto.php</code>):</p>\n<table><thead><tr><th>Field</th><th>Type</th><th>Source</th><th>Notes</th></tr></thead><tbody>\n<tr><td><code>userId</code></td><td>int</td><td><code>request.client_user_id</code> ?? <code>request.user_id</code></td><td><code>client_user_id</code> takes priority (agency impersonation flow); injected by <code>auth</code> middleware; cast to <code>int</code>, defaults to <code>0</code> if absent</td></tr>\n</tbody></table>\n<hr />\n<p><strong>Response (200) — encrypted:</strong></p>\n<pre><code class=\"language-json\">{\n  \"statusCode\": 200,\n  \"data\": {\n    \"messages\": \"Data retrieved\",\n    \"cry\": {\n      \"c1p\": \"&lt;base64 AES-256-CBC ciphertext&gt;\",\n      \"f0ur\": \"&lt;hex IV&gt;\",\n      \"su1fur\": \"&lt;hex salt&gt;\"\n    },\n    \"ls\": \"2026-05-29T11:17:30.620453+00:00\",\n    \"e4\": \"en3xk9ab...\"\n  }\n}\n</code></pre>\n<blockquote>\n<p>Decrypted payload shape:</p>\n<pre><code class=\"language-json\">{\n  \"account_stats\": {\n    \"tours_published\": 12,\n    \"panos_published\": 340,\n    \"rank\": 5,\n    \"hosted_overlays\": 3,\n    \"google_overlays\": 1\n  },\n  \"messages\": \"Data retrieved\"\n}\n</code></pre>\n</blockquote>\n<hr />\n<p><strong>Errors:</strong></p>\n<table><thead><tr><th>domainCode</th><th>HTTP</th><th>Condition</th></tr></thead><tbody>\n<tr><td><code>USER_ACCOUNT.STATISTIC_NOT_FOUND</code></td><td>404</td><td><code>userId</code> resolves to <code>0</code> (missing/unauthenticated)</td></tr>\n<tr><td><em>(fallback <code>\\Throwable</code>)</em></td><td>dynamic</td><td><code>ResponseEnvelopeHelper::statusCodeFromThrowable()</code></td></tr>\n</tbody></table>\n<hr />\n<p><strong>Usage:</strong></p>\n<pre><code class=\"language-bash\">curl -X GET https://api.gothru.co/users/account-statistic \\\n  -H \"Authorization: {token}\"\n</code></pre>\n<hr />\n<p><strong>Notes:</strong></p>\n<ul>\n<li>Redis cache key <code>app_account_stats_{userId}</code> — TTL 3600s. Cache is <strong>not</strong> invalidated on publish; consumers should account for up to 1-hour staleness.</li>\n<li>Agency admins (<code>rel_type = 'agency'</code> in <code>agency</code> table) receive aggregated stats across all sub-agents with <code>subscribtion = 4</code>.</li>\n<li><code>rank</code> is <code>0</code> when the user has zero published tours in <code>audit</code> table.</li>\n<li>Response is always encrypted (<code>encryptResult</code>) regardless of any request header.</li>\n<li>Compliance: ~85% ADR. Legacy <code>HelperClass::connectRedis()</code> remains in Action — tracked for future extraction to <code>CacheService</code>.</li>\n</ul>\n",
+      "metadata": {
+        "path": "docs/v2/user/get-account-statistic.md"
+      }
+    },
+    {
+      "anchor_id": "doc-gothrumedia-gothru-api-new-docs-v2-auth-login-md",
+      "display_title": "[GoThruMedia/GoThru-API-New] login.md",
+      "rendered_html": "<h1>Auth — Login</h1>\n<h2><code>POST /auth/login</code></h2>\n<p><strong>Auth:</strong> public (no middleware)</p>\n<p><strong>Flow:</strong></p>\n<ol>\n<li>Request enters → <code>LoginController@handle</code> builds <code>LoginDto</code> from <code>$request-&gt;all()</code>.</li>\n<li>Controller delegates to <code>LoginAction::execute(LoginDto)</code>.</li>\n<li>Action runs business logic:\n<ul>\n<li>If <code>email</code> or <code>password</code> is empty string, throws <code>InvalidCredentialsException</code> (<code>AUTH.INVALID_CREDENTIALS</code>).</li>\n<li>Encodes password via <code>AuthTokenHelper::encodePassword($dto-&gt;password)</code>.</li>\n<li>Calls <code>AuthSessionRepository::findUserByCredentials($dto-&gt;email, $encodedPassword)</code> — matches <code>users</code> by <code>user_name + password</code>; if null, throws <code>InvalidCredentialsException</code>.</li>\n<li>If <code>verified_email === 0</code> or <code>is_active === 0</code>, throws <code>AccountNotActiveException</code> (<code>AUTH.ACCOUNT_NOT_ACTIVE</code>).</li>\n<li>Resolves JWT TTL from hardcoded map (test accounts: 300s / 60s; all others: 2592000s / 30 days).</li>\n<li>Calls <code>AuthTokenHelper::createJwtToken(['email' =&gt; $dto-&gt;email], $ttl)</code> to produce JWT.</li>\n<li>Calls <code>AuthSessionRepository::upsertGtToken($userId, $userName, $email)</code> — inserts or updates <code>auth.token_id</code> on <code>gothru_mod</code>.</li>\n<li>Returns <code>['token' =&gt; string, 'user_id' =&gt; int, 'email' =&gt; string, 'user_name' =&gt; string]</code>.</li>\n</ul>\n</li>\n<li>Controller receives result → starts session via <code>SessionClass</code>: <code>start()</code>, <code>register('auth', ['expiry' =&gt; time()+86400, 'user_id' =&gt; ..., 'session_id' =&gt; ...])</code>.</li>\n<li>Controller wraps response:\n<ul>\n<li>Success → <code>ResponseEnvelopeHelper::responseMessages(['token' =&gt; ..., 'cookie' =&gt; $session-&gt;getCookie()], 'auth.login_success', 200)</code></li>\n<li><code>AuthDomainException</code> → <code>AuthExceptionHttpMapper::toStatusCode($e)</code> → <code>responseMessages()</code></li>\n<li><code>\\Throwable</code> → <code>ResponseEnvelopeHelper::statusCodeFromThrowable($e)</code> → <code>responseMessages()</code></li>\n</ul>\n</li>\n</ol>\n<hr />\n<p><strong>DTO</strong> (<code>app/DTOs/Auth/LoginDto.php</code>):</p>\n<table><thead><tr><th>Field</th><th>Type</th><th>Source</th><th>Notes</th></tr></thead><tbody>\n<tr><td><code>email</code></td><td>string</td><td>body <code>email</code></td><td>defaults to <code>''</code>; empty → <code>AUTH.INVALID_CREDENTIALS</code></td></tr>\n<tr><td><code>password</code></td><td>string</td><td>body <code>password</code></td><td>defaults to <code>''</code>; empty → <code>AUTH.INVALID_CREDENTIALS</code></td></tr>\n</tbody></table>\n<blockquote>\n<p>Note: repository matches by <code>users.user_name</code>, so <code>email</code> field is actually the username/login identifier.</p>\n</blockquote>\n<hr />\n<p><strong>Response (200):</strong></p>\n<pre><code class=\"language-json\">{\n  \"statusCode\": 200,\n  \"data\": {\n    \"messages\": \"Login successful\",\n    \"token\": \"&lt;jwt&gt;\",\n    \"cookie\": \"&lt;session_cookie_value&gt;\"\n  }\n}\n</code></pre>\n<blockquote>\n<p><code>Set-Cookie: sid=&lt;value&gt;; ...</code> is set by <code>SessionClass::register()</code> at the transport edge.</p>\n</blockquote>\n<hr />\n<p><strong>Errors:</strong></p>\n<table><thead><tr><th>domainCode</th><th>HTTP</th><th>Condition</th></tr></thead><tbody>\n<tr><td><code>AUTH.INVALID_CREDENTIALS</code></td><td>409</td><td>email/password empty, or no matching user row</td></tr>\n<tr><td><code>AUTH.ACCOUNT_NOT_ACTIVE</code></td><td>422</td><td>user <code>verified_email === 0</code> or <code>is_active === 0</code></td></tr>\n<tr><td><em>(fallback <code>\\Throwable</code>)</em></td><td>dynamic</td><td><code>ResponseEnvelopeHelper::statusCodeFromThrowable()</code></td></tr>\n</tbody></table>\n<hr />\n<p><strong>Usage:</strong></p>\n<pre><code class=\"language-bash\">curl -X POST https://api.gothru.co/auth/login \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"email\": \"your_username\", \"password\": \"your_password\"}'\n</code></pre>\n<hr />\n<p><strong>Notes:</strong></p>\n<ul>\n<li><code>email</code> field maps to <code>users.user_name</code> column — not the user's email address.</li>\n<li>Session lifetime hardcoded to 86400s (24h) in <code>LoginController::SESSION_LIFETIME</code>.</li>\n<li><code>SessionClass::start()/register()/getCookie()</code> intentionally retained at Controller (transport-edge HTTP concern), same pattern as <code>LogoutController</code>.</li>\n<li>GT token (<code>auth.token_id</code>) is upserted on every successful login — previous token is invalidated.</li>\n<li>Compliance: ~95% ADR. <code>SessionClass</code> retained at transport edge (acceptable); <code>AuthTokenHelper</code> is a pure static helper with zero legacy dependency.</li>\n</ul>\n",
+      "metadata": {
+        "path": "docs/v2/auth/login.md"
+      }
+    }
+  ]
+}
