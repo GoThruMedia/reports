@@ -1,0 +1,18 @@
+{
+  "title": "Daily Report June 4, 2026 - GoThru API",
+  "repository": "GoThruMedia/GoThru-API-New",
+  "generated_at": "2026-06-04T13:47:48.316385700+00:00",
+  "issues": [
+    {
+      "anchor_id": "issue-gothrumedia-gothru-api-new-1294",
+      "display_title": "Issue #1294: Bug Fix: API Error Responses Expose SQL Queries",
+      "main_description_html": "<img width=\"1080\" height=\"2400\" alt=\"Image\" src=\"assets/image-f384702f-f1a3-4833-bb21-8ebf2f4aebb1.png\" />\n<p>Brainstorming File:\n<a href=\"https://github.com/user-attachments/files/28589892/2026-06-04-api-error-sanitization-design.md\" target=\"_blank\" rel=\"noopener noreferrer\">2026-06-04-api-error-sanitization-design.md</a></p>\n<hr />\n<h2>Acceptance Criteria</h2>\n<h3>AC-1 — Database errors show a friendly message, not SQL</h3>\n<p><strong>Given</strong> the database is unreachable when a user performs any action (e.g. uploading a tour)\n<strong>When</strong> the app receives the error response\n<strong>Then</strong> the user sees \"Service is temporarily unavailable. Please try again later.\" — no SQL query, no database details, no error codes</p>\n<h3>AC-2 — Any other unexpected error also shows a friendly message</h3>\n<p><strong>Given</strong> an unhandled server error occurs on any endpoint\n<strong>When</strong> the app receives the error response\n<strong>Then</strong> the user sees \"Oops! Something went wrong. Please try again later.\" — no stack traces, no file paths, no internal details</p>\n<h3>AC-3 — Errors are still visible to the engineering team</h3>\n<p><strong>Given</strong> a database or unexpected error occurs\n<strong>When</strong> the server handles it\n<strong>Then</strong> the full error details (including SQL, stack trace, file path) are written to the server logs — nothing is lost for debugging</p>\n<h3>AC-4 — Normal API responses are unchanged</h3>\n<p><strong>Given</strong> a request that succeeds, or fails with a known business error (e.g. \"not owner\", \"invalid token\")\n<strong>When</strong> the app receives the response\n<strong>Then</strong> the response is identical to before this fix — no change to any existing message or status code</p>\n<hr />\n",
+      "metadata": {
+        "number": 1294,
+        "author": "anurdin01",
+        "updated_at": "2026-06-04T09:32:31Z"
+      }
+    }
+  ],
+  "docs": []
+}
