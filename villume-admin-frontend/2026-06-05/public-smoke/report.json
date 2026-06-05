@@ -1,0 +1,328 @@
+{
+  "title": "Public Smoke",
+  "repository": "GoThruMedia/villume-admin",
+  "generated_at": "2026-06-05T22:35:40.216360900+00:00",
+  "issues": [
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1556",
+      "display_title": "Issue #1556: [Foundation][Integration] ThemeService + dark/light theme toggle",
+      "main_description_html": "<h2>Epic: Foundation (integration)</h2>\n<p>Implement dark/light theme switching driven by a <code>ThemeService</code>.</p>\n<h3>Scope</h3>\n<ul>\n<li><code>ThemeService</code> sets <code>data-theme</code> on <code>&lt;html&gt;</code>, persists choice (storage), SSR-safe default.</li>\n<li>Theme toggle UI in the shared header (always visible).</li>\n<li>Theme colors the shared shell (everywhere) + marketing bodies. Product page bodies stay light.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Toggling switches theme instantly; choice persists across reloads and navigation.</li>\n<li>No <code>window</code>/<code>document</code> access at module load (SSR-safe); correct default rendered on server.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Click the theme toggle → header/footer + marketing page switch to dark; reload → still dark (persisted).</li>\n<li>Navigate to a product page (editor/settings) → header/footer dark, page body stays light.</li>\n<li>Hard-refresh in dark mode → no flash of light theme before hydration.</li>\n<li>Open in a fresh/incognito session → loads with the correct default theme.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-fb5318d6-4c54-4822-9686-e8f30d23c1fe.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1556,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T03:18:35Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1554",
+      "display_title": "Issue #1554: [Foundation] Scoped design tokens & theme variables (SCSS)",
+      "main_description_html": "<h2>Epic: Foundation (design system)</h2>\n<p>Introduce the new design-system styling as <strong>additive</strong> global SCSS, scoped so it does not affect product pages.</p>\n<h3>Scope</h3>\n<ul>\n<li>Define design tokens as CSS custom properties.</li>\n<li><code>:root</code> / <code>[data-theme]</code> → <strong>shell tokens</strong> (header/footer/theme colors) — apply app-wide.</li>\n<li><code>.vm-marketing</code> wrapper class → <strong>marketing body tokens</strong> (Geist typography, spacing, hero/card/grid styles) — marketing pages only.</li>\n<li>Provide light + dark value sets for both scopes.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Tokens available globally; marketing tokens only take effect inside <code>.vm-marketing</code>.</li>\n<li>No visual change to editor/settings/profile/billing pages.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Open any product page (editor, settings) before/after the change — confirm <strong>no visual difference</strong> (pixel/visual diff).</li>\n<li>Add a temporary element with <code>.vm-marketing</code> and confirm new typography/spacing tokens apply only inside it.</li>\n<li>Toggle <code>data-theme=\"dark\"</code> on <code>&lt;html&gt;</code> and confirm shell token colors change while product page bodies stay unchanged.</li>\n</ol>\n",
+      "metadata": {
+        "number": 1554,
+        "author": "anurdin01",
+        "updated_at": "2026-06-03T07:59:58Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1555",
+      "display_title": "Issue #1555: [Foundation] Self-host Geist / Geist Mono fonts",
+      "main_description_html": "<h2>Epic: Foundation (design system)</h2>\n<p>Self-host the <strong>Geist</strong> and <strong>Geist Mono</strong> fonts used by the new design.</p>\n<h3>Scope</h3>\n<ul>\n<li>Add self-hosted Geist / Geist Mono web fonts (woff2) with <code>font-display: swap</code>.</li>\n<li>Wire into the marketing typography tokens.</li>\n<li>Google Fonts only as fallback.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Fonts load on marketing pages without layout shift (CLS) issues.</li>\n<li>SSR build serves fonts correctly (no FOUT/blocking).</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Load <code>/about</code> on a throttled (Slow 3G) connection — text renders with fallback then swaps to Geist; no blank text.</li>\n<li>Verify in DevTools &gt; Network that fonts are served from our domain (self-hosted), not blocked.</li>\n<li>Check CLS in Lighthouse is within budget on marketing pages.</li>\n</ol>\n",
+      "metadata": {
+        "number": 1555,
+        "author": "anurdin01",
+        "updated_at": "2026-06-03T08:00:04Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1557",
+      "display_title": "Issue #1557: [Foundation][Integration] revealOnScroll directive (SSR-safe)",
+      "main_description_html": "<h2>Epic: Foundation (integration)</h2>\n<p>Reimplement the static site's scroll-reveal animation as an Angular directive.</p>\n<h3>Scope</h3>\n<ul>\n<li><code>revealOnScroll</code> directive using <code>IntersectionObserver</code>.</li>\n<li>SSR no-op (guard with <code>isPlatformBrowser</code>); elements visible by default if JS/observer unavailable.</li>\n<li>Replaces the <code>.reveal</code> behavior from <code>assets/app.js</code>.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Elements animate in on scroll in the browser.</li>\n<li>Server-rendered HTML shows content (no hidden content if JS disabled).</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Scroll down a marketing page → sections fade/slide in as they enter the viewport.</li>\n<li>Disable JavaScript → all content is still visible (not stuck hidden).</li>\n<li>View page source (SSR) → content present in HTML.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-6aec1f5e-796f-430e-a3b2-81277d56a583.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1557,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T07:50:04Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1558",
+      "display_title": "Issue #1558: [Foundation][QA] SSR build verification for design-system foundation",
+      "main_description_html": "<h2>Epic: Foundation (QA)</h2>\n<p>Verify the SSR build still renders correctly after the design-system foundation lands.</p>\n<h3>Scope</h3>\n<ul>\n<li>Run <code>npm run build:ssr</code> and serve; confirm marketing + product routes render server-side.</li>\n<li>Catch any browser-API-at-load regressions introduced by foundation work.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li><code>build:ssr</code> succeeds; <code>/</code>, <code>/about</code>, <code>/catalogue</code>, <code>/contact</code> and key product routes render via SSR.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Run the SSR production build — completes without errors.</li>\n<li><code>curl</code> / view-source each marketing route — meaningful HTML returned (not just an empty app shell).</li>\n<li>Load each route in the browser — hydrates without console errors.</li>\n</ol>\n",
+      "metadata": {
+        "number": 1558,
+        "author": "anurdin01",
+        "updated_at": "2026-06-03T08:00:19Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1559",
+      "display_title": "Issue #1559: [Slicing] Shared header — markup & styles",
+      "main_description_html": "<h2>Epic: Shared shell — Header (slicing)</h2>\n<p>Redesign the markup &amp; styles of the shared header (<code>layouts/header</code>) to the new design.</p>\n<h3>Scope</h3>\n<ul>\n<li>Slice the new nav: brand mark, primary links, theme-toggle button, Log in / Get started buttons.</li>\n<li>Responsive layout (desktop + mobile/hamburger).</li>\n<li>Light + dark styling using shell tokens.</li>\n<li>Markup only — feature wiring is a separate task.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Header visually matches the new design in both themes, all breakpoints.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Compare header against the new design (<code>Villume.html</code> nav) on desktop and mobile.</li>\n<li>Toggle dark mode → header colors/contrast correct.</li>\n<li>Resize to mobile → nav collapses correctly; no overflow.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-6b65f1e1-4743-4b47-bf2c-fce33257401d.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1559,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T07:47:25Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1560",
+      "display_title": "Issue #1560: [Integration] Shared header — wire features (lang, notifications, user menu, theme, auth)",
+      "main_description_html": "<h2>Epic: Shared shell — Header (integration)</h2>\n<p>Wire the redesigned header to existing app features.</p>\n<h3>Scope</h3>\n<ul>\n<li>Keep/wire: language selector, notifications, user menu (logged-in state).</li>\n<li>Wire Log in / Get started to existing login / sign-up modals.</li>\n<li>Wire theme-toggle button to <code>ThemeService</code>.</li>\n<li>Correct logged-in vs logged-out states.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>All product features work as before; auth modals open; theme toggle works.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Logged out → \"Log in\" and \"Get started\" open the correct modals.</li>\n<li>Log in → user menu, notifications, language selector appear and function.</li>\n<li>Switch language → UI updates (i18n).</li>\n<li>Click theme toggle → theme switches and persists.</li>\n<li>Open notifications → list loads as before.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-bf88e62e-d57b-472a-8832-908b109d1622.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1560,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T07:46:33Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1561",
+      "display_title": "Issue #1561: [Slicing] Shared footer — markup & styles",
+      "main_description_html": "<h2>Epic: Shared shell — Footer (slicing)</h2>\n<p>Redesign the markup &amp; styles of the shared footer (<code>layouts/footer</code>) to the new design.</p>\n<h3>Scope</h3>\n<ul>\n<li>Slice footer: brand/blurb, Product / Company / Legal link columns, social icons, copyright row.</li>\n<li>Light + dark styling; responsive.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Footer matches the new design in both themes and all breakpoints.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Compare footer against the new design on desktop and mobile.</li>\n<li>Toggle dark mode → footer styling correct.</li>\n<li>Resize → columns stack correctly on mobile.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-f4c26be1-8bbe-44d1-a8de-254efec92340.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1561,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T07:44:02Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1562",
+      "display_title": "Issue #1562: [Integration] Shared footer — map links to real routes + dynamic year",
+      "main_description_html": "<h2>Epic: Shared shell — Footer (integration)</h2>\n<p>Wire footer links and dynamic content.</p>\n<h3>Scope</h3>\n<ul>\n<li>Map placeholder <code>#</code> links to real routes: <code>/pricing</code>, <code>/careers</code>, <code>/tutorials</code>, <code>/term-of-service</code>, <code>/privacy-cookie-policy</code>, <code>/catalogue</code>, <code>/about</code>, <code>/contact</code>.</li>\n<li>Dynamic copyright year (already present — verify).</li>\n<li>Social links to real profiles.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Every footer link navigates to a real, correct destination. No dead <code>#</code> links.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Click every footer link → lands on the correct page (no 404, no <code>#</code>).</li>\n<li>Confirm copyright shows the current year.</li>\n<li>Click each social icon → opens the correct external profile in a new tab.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-3b7e3f60-deda-4c4c-a361-7b153daae9de.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1562,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T07:43:22Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1563",
+      "display_title": "Issue #1563: [Slicing] About page (/about) — markup & styles",
+      "main_description_html": "<h2>Epic: About page <code>/about</code> (slicing)</h2>\n<p>Redesign <code>AboutComponent</code> markup &amp; styles to match <code>About.html</code>, inside the <code>.vm-marketing</code> wrapper.</p>\n<h3>Scope</h3>\n<ul>\n<li>Sections: mission hero + breadcrumb, intro (\"We are villume\"), stats row, grouped team sections (Leadership / Design / Engineering), closing CTA.</li>\n<li>Light + dark; responsive.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li><code>/about</code> visually matches the new design in both themes, all breakpoints.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Compare <code>/about</code> against <code>About.html</code> section by section on desktop and mobile.</li>\n<li>Toggle dark mode → all sections styled correctly.</li>\n<li>Resize → team grid + stats reflow correctly.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-1d447fef-14eb-4ea0-8bc6-3ecf613a1dcd.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1563,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T07:41:29Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1564",
+      "display_title": "Issue #1564: [Integration] About page (/about) — data-driven team/stats + reveal + CTAs",
+      "main_description_html": "<h2>Epic: About page <code>/about</code> (integration)</h2>\n<p>Make About content data-driven and wire interactions.</p>\n<h3>Scope</h3>\n<ul>\n<li>Team roster + stats from config/i18n (not hard-coded in template).</li>\n<li>Apply <code>revealOnScroll</code>.</li>\n<li>Wire CTAs (\"Start building free\" → signup/getstarted; \"Get in touch\" → <code>/contact</code>).</li>\n<li>Route copy through <code>ngx-translate</code>.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Team/stats render from data source; CTAs navigate correctly; copy translatable.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Update a team member / stat in the data source → page reflects it without template edits.</li>\n<li>Scroll → sections reveal via animation.</li>\n<li>Click each CTA → correct destination.</li>\n<li>Switch language → About copy translates.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-e6bb0297-466d-40a8-bc66-3a743bc7393d.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1564,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T07:40:56Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1565",
+      "display_title": "Issue #1565: [Slicing] Templates/Catalogue page (/catalogue) — markup & styles",
+      "main_description_html": "<h2>Epic: Templates page <code>/catalogue</code> (slicing)</h2>\n<p>Redesign <code>CatalogueComponent</code> markup &amp; styles to match <code>Templates.html</code> (maps to <code>/catalogue</code>), inside <code>.vm-marketing</code>.</p>\n<h3>Scope</h3>\n<ul>\n<li>Sections: page hero + breadcrumb, filter bar (chips + result count), template card grid, custom-gallery CTA.</li>\n<li>Template card: thumb, badge (Modifiable/Fixed), favorite button, name/region, description, spec, \"Use template\".</li>\n<li>Light + dark; responsive.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li><code>/catalogue</code> matches the new design in both themes, all breakpoints (with placeholder/sample cards).</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Compare <code>/catalogue</code> against <code>Templates.html</code> on desktop and mobile.</li>\n<li>Toggle dark mode → grid, chips, cards styled correctly.</li>\n<li>Resize → grid columns reflow correctly.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-da7082ff-cf2b-44dd-916c-0837b547bdf5.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1565,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T07:29:10Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1566",
+      "display_title": "Issue #1566: [Integration] Templates/Catalogue (/catalogue) — real data, filters, CTAs",
+      "main_description_html": "<h2>Epic: Templates page <code>/catalogue</code> (integration)</h2>\n<p>Wire the catalogue to real data and interactions.</p>\n<h3>Scope</h3>\n<ul>\n<li>Bind the grid to <strong>real catalogue/template data</strong> (replace hard-coded 8 cards).</li>\n<li>Implement filter chips (All / Modifiable / Fixed) with <strong>live result count</strong> against real data.</li>\n<li>Wire \"Use template →\" to the create-exhibition flow (<code>/create-exhibition</code> / <code>/:username/create</code>).</li>\n<li>Favorite button → real behavior or hidden until supported.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Real templates render; filters work and counts are accurate; CTA starts exhibition creation.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Load <code>/catalogue</code> → real templates appear (count matches backend).</li>\n<li>Click \"Modifiable\" → only modifiable templates show; count updates; \"All\" restores.</li>\n<li>Click \"Use template\" on a card → enters create-exhibition flow with that template.</li>\n<li>Favorite a template (if enabled) → state persists; otherwise control is hidden.</li>\n<li>Empty/error state → graceful message (no broken grid).</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-ada3f20a-ac24-49e8-9f2b-0dbba8bb71da.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1566,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T07:28:13Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1567",
+      "display_title": "Issue #1567: [Slicing] Contact page (/contact) — markup & styles (3-form accordion)",
+      "main_description_html": "<h2>Epic: Contact page <code>/contact</code> (slicing)</h2>\n<p>Redesign <code>ContactComponent</code> markup &amp; styles to match <code>Contact.html</code>, inside <code>.vm-marketing</code>.</p>\n<h3>Scope</h3>\n<ul>\n<li>Page hero + breadcrumb; info aside (email, response time, help center, social).</li>\n<li>3-form accordion: 01 General Inquiries, 02 Help Center, 03 Custom Exhibition request.</li>\n<li>Field layouts, dropzones (visual), captcha placeholder, success-state markup.</li>\n<li>Light + dark; responsive.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li><code>/contact</code> matches the new design in both themes, all breakpoints; accordion expands/collapses.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Compare <code>/contact</code> against <code>Contact.html</code> on desktop and mobile.</li>\n<li>Expand/collapse each of the 3 forms — only one open behaves per design.</li>\n<li>Toggle dark mode → forms, dropzones, captcha, success state styled correctly.</li>\n<li>Resize → field rows stack correctly on mobile.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-41ae0848-7403-4045-9c82-9c4eb6bf95ab.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1567,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T07:25:48Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1568",
+      "display_title": "Issue #1568: [Integration] Contact page (/contact) — real submission, reCAPTCHA, file upload",
+      "main_description_html": "<h2>Epic: Contact page <code>/contact</code> (integration)</h2>\n<p>Wire the 3 contact forms to real backend behavior (do NOT ship the static mockups).</p>\n<h3>Scope</h3>\n<ul>\n<li>Real submission via existing GraphQL services for all 3 forms.</li>\n<li>Real <strong>reCAPTCHA</strong> (replace mock checkbox).</li>\n<li>Real <strong>file upload</strong>: Help Center screenshot (JPG/JPEG/PNG ≤10MB); Custom multi-file (JPG/PNG/DOC/DOCX/PDF) with type/size validation.</li>\n<li>Validation, success and error states (via real flow + <code>alert-message</code>).</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Each form validates, passes reCAPTCHA, uploads files, submits to backend, and shows real success/error.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Submit <strong>General Inquiries</strong> with valid data → backend receives it; success state shows.</li>\n<li>Submit with empty required fields → inline validation blocks submit.</li>\n<li>Fail/skip reCAPTCHA → submit blocked with message.</li>\n<li><strong>Help Center</strong>: upload an oversized (&gt;10MB) or wrong-type file → rejected with message; valid PNG → accepted and submitted.</li>\n<li><strong>Custom request</strong>: upload multiple mixed valid files (PDF/DOCX/PNG) → accepted; submit → backend receives files + fields.</li>\n<li>Simulate backend error → error state shown; user can retry.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-c177e98d-6020-4045-8bdc-dc6df6e3a067.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1568,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T07:22:48Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1569",
+      "display_title": "Issue #1569: [Slicing] Home page (/) — markup & styles (all sections)",
+      "main_description_html": "<h2>Epic: Home page <code>/</code> (slicing)</h2>\n<p>Redesign <code>MainComponent</code> (<code>layouts/main</code>) markup &amp; styles to match <code>Villume.html</code>, inside <code>.vm-marketing</code>.</p>\n<h3>Scope</h3>\n<ul>\n<li>Sections: hero (+ mock frame/floating cards), trust row, templates split, editor/features, marketplace/sell, exhibitions carousel, learn-more, CTA, FAQ.</li>\n<li>Light + dark; responsive.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li><code>/</code> matches the new design in both themes, all breakpoints (with placeholder data).</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Compare <code>/</code> against <code>Villume.html</code> section by section on desktop and mobile.</li>\n<li>Toggle dark mode → every section styled correctly.</li>\n<li>Resize → splits/grids/carousel reflow correctly.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-493710e4-7769-44d8-acef-7a5a735c2ccf.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1569,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T03:45:24Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1570",
+      "display_title": "Issue #1570: [Integration] Home page (/) — carousel data, FAQ, CTAs",
+      "main_description_html": "<h2>Epic: Home page <code>/</code> (integration)</h2>\n<p>Wire Home interactions and real data.</p>\n<h3>Scope</h3>\n<ul>\n<li>Exhibitions carousel bound to <strong>real featured-exhibition data</strong>; prev/next controls.</li>\n<li>Reuse existing <code>faq</code> component for the FAQ accordion.</li>\n<li>Wire all CTAs (Start building free → signup; Watch the demo → video/learn; Browse exhibitions → carousel/list).</li>\n<li>Replace mock hero stats with real/config values; copy via <code>ngx-translate</code>.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Carousel shows real exhibitions and scrolls; FAQ works; all CTAs route correctly.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Load <code>/</code> → carousel shows real featured exhibitions; prev/next cycles items.</li>\n<li>Click an exhibition \"Enter\" → opens the correct exhibition/viewer.</li>\n<li>Expand/collapse FAQ items.</li>\n<li>Click each CTA → correct destination/modal.</li>\n<li>Switch language → home copy translates.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-d001fd3e-0000-489c-9102-a4dfc61c6744.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1570,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T03:42:52Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1571",
+      "display_title": "Issue #1571: [QA] Responsive QA — all marketing pages",
+      "main_description_html": "<h2>Epic: QA &amp; rollout</h2>\n<p>Responsive QA across all redesigned marketing pages.</p>\n<h3>Scope</h3>\n<ul>\n<li>Verify <code>/</code>, <code>/about</code>, <code>/catalogue</code>, <code>/contact</code> + shared header/footer at mobile / tablet / desktop.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Test each page at 360px, 768px, 1024px, 1440px widths.</li>\n<li>Check: no horizontal scroll, no overlap, images scale, nav collapses, grids reflow.</li>\n<li>Test landscape mobile and a large 4K viewport.</li>\n<li>Log any breakpoint issues with screenshots.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-74295d67-6b0b-4701-a1ba-2e8f3d71d611.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1571,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T03:37:15Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1572",
+      "display_title": "Issue #1572: [QA] Light/dark theme QA — incl. product page chrome",
+      "main_description_html": "<h2>Epic: QA &amp; rollout</h2>\n<p>Light/dark theme QA, including chrome on product pages.</p>\n<h3>Scope</h3>\n<ul>\n<li>Verify both themes on all marketing pages.</li>\n<li>Verify shared header/footer look correct in both themes ON product pages (editor/settings/profile/billing), where bodies stay light.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Toggle dark/light on each marketing page → colors, contrast, borders, shadows correct.</li>\n<li>With dark theme active, open editor/settings/profile/billing → header/footer dark, body light, no clashing/unreadable areas.</li>\n<li>Check focus/hover states in both themes.</li>\n<li>Verify theme persists across navigation and reload.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-1438be32-1c1c-4295-9396-7778fc2e099c.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1572,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T03:21:09Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1574",
+      "display_title": "Issue #1574: [QA] SEO/meta per page (Title/Meta services, SSR)",
+      "main_description_html": "<h2>Epic: QA &amp; rollout</h2>\n<p>SEO / meta per page (SSR).</p>\n<h3>Scope</h3>\n<ul>\n<li>Per-page <code>&lt;title&gt;</code> and <code>&lt;meta description&gt;</code> via Angular Title/Meta services, rendered server-side.</li>\n<li>Port titles/descriptions from the new static pages.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>View-source each marketing route → correct <code>&lt;title&gt;</code> and meta description present in SSR HTML.</li>\n<li>Use a social/SEO preview tool → correct title/description shown.</li>\n<li>Confirm no duplicate/empty titles across pages.</li>\n</ol>\n",
+      "metadata": {
+        "number": 1574,
+        "author": "anurdin01",
+        "updated_at": "2026-06-03T08:01:46Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1577",
+      "display_title": "Issue #1577: [QA] Visual regression check on product pages",
+      "main_description_html": "<h2>Epic: QA &amp; rollout</h2>\n<p>Visual regression check on product pages (no regressions).</p>\n<h3>Scope</h3>\n<ul>\n<li>Confirm the global SCSS/foundation work did NOT alter editor/settings/profile/billing/admin.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Capture before/after screenshots of key product pages (editor, settings tabs, profile, billing, admin).</li>\n<li>Diff → no unintended visual changes.</li>\n<li>Smoke-test core product flows (open editor, edit settings, view billing) → unchanged behavior.</li>\n</ol>\n",
+      "metadata": {
+        "number": 1577,
+        "author": "anurdin01",
+        "updated_at": "2026-06-03T08:02:02Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1575",
+      "display_title": "Issue #1575: [QA] Accessibility pass — nav, accordion, carousel, captcha, theme toggle",
+      "main_description_html": "<h2>Epic: QA &amp; rollout</h2>\n<p>Accessibility pass on new components.</p>\n<h3>Scope</h3>\n<ul>\n<li>Nav, accordion (FAQ + contact), carousel, captcha, theme toggle, dropzones.</li>\n<li>ARIA roles/labels, keyboard operability, focus management, contrast.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Keyboard-only: tab through each page → all interactive elements reachable and operable; visible focus.</li>\n<li>Screen reader: nav, accordions, carousel, theme toggle announce correctly.</li>\n<li>Run axe/Lighthouse a11y audit → no critical violations.</li>\n<li>Check color contrast in both themes meets WCAG AA.</li>\n</ol>\n",
+      "metadata": {
+        "number": 1575,
+        "author": "anurdin01",
+        "updated_at": "2026-06-03T08:01:51Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1595",
+      "display_title": "Issue #1595: [Integration] Auth-aware shared header (logged-in nav variant)",
+      "main_description_html": "<h2>Epic 0 — Shared building blocks</h2>\n<p>Make the shared header auth-aware: marketing variant (Log in / Get started) when logged out; app variant (My Galleries / Tutorials / FAQ + avatar / user menu) when authenticated.</p>\n<h3>Scope</h3>\n<ul>\n<li>One shared header component, state-driven from existing app auth state.</li>\n<li>Used by wizard pages and all logged-in pages.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Header shows correct variant per auth state; reuses existing auth/session.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Logged out → header shows Log in / Get started.</li>\n<li>Log in → header shows My Galleries / Tutorials / FAQ + avatar/user menu.</li>\n<li>Log out → reverts to marketing variant.</li>\n<li>Both variants correct in light &amp; dark, desktop &amp; mobile.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-32612dce-bd77-4f7a-92a8-e7a97bccec73.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1595,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T08:06:40Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1598",
+      "display_title": "Issue #1598: [Slicing] Login page (/login) — markup & styles",
+      "main_description_html": "<h2>Epic A — Auth · Login (/login)</h2>\n<p>Slice the full-page Login design — also builds the shared two-column auth layout (brand/benefits panel + form card) reused by Signup.</p>\n<h3>Scope</h3>\n<ul>\n<li>Two-column layout; left brand panel (headline, 3 points, quote), right form card.</li>\n<li>Email, password with show/hide toggle, \"Keep me signed in\", \"Forgot password?\", Continue, divider, Google button, \"Sign up\" link.</li>\n<li>Light + dark; responsive (stacks on mobile). Markup only.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Matches the new Login design in both themes, all breakpoints.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Compare /login to Login.html on desktop &amp; mobile.</li>\n<li>Toggle password show/hide → input type switches; icon updates.</li>\n<li>Dark mode → panel, card, inputs styled correctly.</li>\n<li>Mobile → columns stack; no overflow.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<img width=\"1920\" height=\"1080\" alt=\"Image\" src=\"assets/image-19dca495-c2e0-44a8-a4fa-6eecb18a40f3.png\" />",
+      "metadata": {
+        "number": 1598,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T08:23:41Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1612",
+      "display_title": "Issue #1612: [Slicing] 404 page (/404) — markup & styles",
+      "main_description_html": "<h2>Epic C — 404 (/404)</h2>\n<p>Slice the 404 page.</p>\n<h3>Scope</h3>\n<ul>\n<li>Big \"404\", message, Back to home + Go back buttons, recovery chips (Templates, Exhibitions, Tutorials, Contact).</li>\n<li>Light + dark; responsive. Markup only.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Matches 404.html in both themes, all breakpoints.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Compare to 404.html.</li>\n<li>Dark mode + mobile correct.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<img width=\"1920\" height=\"1080\" alt=\"Image\" src=\"assets/image-493c0860-aa65-417d-88c4-821fa6166963.png\" />",
+      "metadata": {
+        "number": 1612,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T09:03:10Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1613",
+      "display_title": "Issue #1613: [Integration] 404 (/404) — go-back, recovery links, noindex",
+      "main_description_html": "<h2>Epic C — 404 (/404)</h2>\n<p>Wire 404 behavior.</p>\n<h3>Scope</h3>\n<ul>\n<li>History-aware \"Go back\" (history.back when available, else home).</li>\n<li>Recovery chips link to real routes; <code>noindex</code> meta.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Go back works; all links resolve to real routes; page is noindex.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Navigate to a bad URL → 404 renders.</li>\n<li>\"Go back\" with history → returns to previous page; without history → home.</li>\n<li>Click each recovery chip → correct route.</li>\n<li>Check meta robots = noindex.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-52263ed0-ba7f-489f-bfd7-bbd5af2bcec0.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1613,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T09:06:12Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1614",
+      "display_title": "Issue #1614: [Slicing] Terms page (/term-of-service) — markup & styles",
+      "main_description_html": "<h2>Epic C — Terms (/term-of-service)</h2>\n<p>Slice the Terms page — also builds the shared legal layout (sticky TOC, numbered sections, contact callout, back-to-top).</p>\n<h3>Scope</h3>\n<ul>\n<li>Legal hero (breadcrumb, effective date), sticky TOC, 8 numbered sections, callout, back-to-top.</li>\n<li>Light + dark; responsive (TOC collapses on mobile). Markup only.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Matches Terms.html in both themes, all breakpoints.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Compare to Terms.html on desktop &amp; mobile.</li>\n<li>Dark mode styling correct.</li>\n<li>Mobile → TOC behaves correctly (collapse/stack).</li>\n</ol>\n<h2>Demo by Developer</h2>\n<img width=\"1920\" height=\"1080\" alt=\"Image\" src=\"assets/image-732c6d49-00b0-4c77-b9a9-9b92a9c1e5b1.png\" />",
+      "metadata": {
+        "number": 1614,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T09:07:44Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1615",
+      "display_title": "Issue #1615: [Integration] Terms (/term-of-service) — content + TOC scroll-spy",
+      "main_description_html": "<h2>Epic C — Terms (/term-of-service)</h2>\n<p>Wire Terms content + TOC.</p>\n<h3>Scope</h3>\n<ul>\n<li>Source legal content from existing copy/i18n (not the prototype placeholder).</li>\n<li>Attach the SSR-safe scroll-spy directive; back-to-top + contact callout link.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Real Terms content renders; TOC scroll-spy + anchors work; translatable.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Scroll → TOC highlights current section; click → jumps to it.</li>\n<li>\"Back to top\" works; \"Contact us\" → /contact.</li>\n<li>Switch language → content translates (if localized).</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-03270bde-0ca0-440b-a8e3-286a7e2e22b5.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1615,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T09:09:10Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1600",
+      "display_title": "Issue #1600: [Slicing] Signup page (/signup) — markup & styles",
+      "main_description_html": "<h2>Epic A — Auth · Signup (/signup)</h2>\n<p>Slice the full-page Signup design (reuses the shared auth layout).</p>\n<h3>Scope</h3>\n<ul>\n<li>Two-column layout; form: first/last name, email, password (show/hide, min 8), Terms+Privacy consent checkbox, reCAPTCHA placeholder, Create account, Google, \"Log in\" link.</li>\n<li>Light + dark; responsive. Markup only.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Matches the new Signup design in both themes, all breakpoints.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Compare /signup to Signup.html on desktop &amp; mobile.</li>\n<li>Toggle password show/hide.</li>\n<li>Dark mode styling correct.</li>\n<li>Mobile → fields/columns stack correctly.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<img width=\"1920\" height=\"1080\" alt=\"Image\" src=\"assets/image-6b5613aa-5756-451a-9ac7-96c2eb624fe8.png\" />",
+      "metadata": {
+        "number": 1600,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T11:15:43Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1601",
+      "display_title": "Issue #1601: [Integration] Signup (/signup) — real registration, reCAPTCHA, Google",
+      "main_description_html": "<h2>Epic A — Auth · Signup (/signup)</h2>\n<p>Wire Signup to the real backend.</p>\n<h3>Scope</h3>\n<ul>\n<li>Real registration via existing GraphQL (replace simulated submit).</li>\n<li>Real reCAPTCHA (replace mock); required Terms+Privacy consent; real Google sign-up.</li>\n<li>On success → Welcome with real user context (name/email).</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Account is created; reCAPTCHA enforced; consent required; routes to Welcome.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Submit valid data + consent + captcha → account created → Welcome page.</li>\n<li>Skip consent → submit blocked.</li>\n<li>Skip/fail captcha → submit blocked with message.</li>\n<li>Password &lt; 8 chars → validation error.</li>\n<li>Duplicate email → backend error surfaced.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-1ff0a1d4-9cbb-4d2f-a03a-471f56540bdb.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1601,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T11:18:11Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1602",
+      "display_title": "Issue #1602: [Slicing] Welcome page (/welcome) — markup & styles",
+      "main_description_html": "<h2>Epic A — Auth · Welcome (/welcome)</h2>\n<p>Slice the Welcome / verify-email design.</p>\n<h3>Scope</h3>\n<ul>\n<li>Centered confirmation: mail icon, \"Welcome to Villume, {name}!\", target email, resend block (captcha + button + status).</li>\n<li>Light + dark; responsive. Markup only.</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Matches Welcome.html in both themes, all breakpoints.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Compare /welcome to Welcome.html.</li>\n<li>Dark mode styling correct.</li>\n<li>Mobile layout correct.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<img width=\"1920\" height=\"1080\" alt=\"Image\" src=\"assets/image-bd6ecc20-2f0e-4572-9068-e2445c1cdf75.png\" />",
+      "metadata": {
+        "number": 1602,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T11:18:58Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-villume-admin-1603",
+      "display_title": "Issue #1603: [Integration] Welcome (/welcome) — verify + resend cooldown",
+      "main_description_html": "<h2>Epic A — Auth · Welcome (/welcome)</h2>\n<p>Wire Welcome verification + resend.</p>\n<h3>Scope</h3>\n<ul>\n<li>Personalize name/email from real signup/user context (not URL params).</li>\n<li>Resend gated by reCAPTCHA with a 30s cooldown countdown; success status.</li>\n<li>Tie into existing verification flow (/verification → /verified).</li>\n</ul>\n<h3>Acceptance criteria</h3>\n<ul>\n<li>Correct user shown; resend sends a real email, enforces captcha + cooldown.</li>\n</ul>\n<h3>Testing scenario (QA)</h3>\n<ol>\n<li>Arrive after signup → correct name + email shown.</li>\n<li>Click Resend without captcha → blocked.</li>\n<li>Resend with captcha → email sent; button shows \"Resend in 30s\" countdown; re-enables after.</li>\n<li>Verify via emailed link → lands on verified state.</li>\n</ol>\n<h2>Demo by Developer</h2>\n<p><video controls src=\"assets/video-7c8fb5e5-f076-4eda-b4ef-166714be02ac.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1603,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T11:20:04Z"
+      }
+    }
+  ],
+  "docs": []
+}
