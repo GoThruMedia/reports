@@ -1,0 +1,188 @@
+{
+  "title": "Public Smoke",
+  "repository": "GoThruMedia/panorra",
+  "generated_at": "2026-06-05T22:20:43.199795700+00:00",
+  "issues": [
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2635",
+      "display_title": "Issue #2635: [Slicing] Profile New Layout",
+      "main_description_html": "<p>Responsive Profile — new design, rebuilt on the new TS/Zustand/NativeWind stack (replaces legacy <code>profile</code>). See docs/brainstorm/03-06-2026/brainstorming.md.</p>\n<h3>Header</h3>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\nback bar, avatar, name + <code>@handle</code>, settings gear (top-right)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\ninfo rows: location, website, birthday</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nstats row: <strong>Posts</strong> · <strong>Follower</strong> · <strong>Following</strong></li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nactions: <strong>Follow</strong> (filled) + <strong>Hire Photographer</strong> (outlined)</li>\n</ul>\n<h3>About / Badge tabs</h3>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\n<strong>About</strong> tab → bio text ( <a href=\"https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1122-36083&amp;t=kox4iG9msrpyxjGx-0\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1122-36083&amp;t=kox4iG9msrpyxjGx-0</a> )</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\n<strong>Badge</strong> tab → \"Top Contributor\" list (location + <strong>View</strong> button) ( <a href=\"https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1122-36156&amp;t=kox4iG9msrpyxjGx-0\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1122-36156&amp;t=kox4iG9msrpyxjGx-0</a> )</li>\n</ul>\n<h3>Content</h3>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\ncontent tabs: <strong>Post / Tagged / Bookmark</strong></li>\n<li><input disabled=\"\" type=\"checkbox\"/>\n<strong>Justified Grid</strong> layout selector (dropdown)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nthumbnail grid (FlashList / justified grid)</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>Open Profile → header shows avatar, name, @handle, location, website, birthday, and settings gear.</li>\n<li>Stats row shows Posts / Follower / Following counts.</li>\n<li><strong>Follow</strong> toggles state; <strong>Hire Photographer</strong> is tappable.</li>\n<li><strong>About</strong> tab is active by default → bio text renders.</li>\n<li>Switch to <strong>Badge</strong> tab → \"Top Contributor\" list renders, each row has a <strong>View</strong> button that navigates correctly.</li>\n<li>Switch content tabs <strong>Post / Tagged / Bookmark</strong> → each loads its own grid.</li>\n<li>Change <strong>Justified Grid</strong> selector → grid layout updates.</li>\n<li>Empty states (no posts/tagged/bookmark) show correctly; long grids scroll smoothly.</li>\n<li>Light + dark mode both readable; responsive on small + large screens.</li>\n</ol>\n<h2>Demo</h2>\n<img width=\"400\" alt=\"Image\" src=\"assets/image-34046666-7fa7-49cd-98b3-f0ec500bf006.jpg\" />\n<img width=\"400\" alt=\"Image\" src=\"assets/image-16ac1bf0-d9b0-4149-872e-319fd5a6e855.jpg\" />\n",
+      "metadata": {
+        "number": 2635,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T10:09:22Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2636",
+      "display_title": "Issue #2636: [Slicing] Settings Hub + Chip Tabs New Layout",
+      "main_description_html": "<p>General Settings hub shell — header \"General / Settings\" with a horizontal chip tab row, opened from Profile (gear). One screen; body swaps per chip. See docs/brainstorm/04-6-2026/brainstorming.md.</p>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\nchip tabs: Edit Profile · Edit Password · User Account · Blocked Users · Blocked Posts · Affiliate List</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nbody switch per active chip (single screen, not separate routes)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nSettingsHub + SettingsChipTabs components</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nhorizontal scroll for chips; active chip styled (dark)</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>From Profile, tap the gear → General Settings opens with the chip row.</li>\n<li>Tap each chip → the body below switches to that section; active chip is highlighted.</li>\n<li>Chip row scrolls horizontally if chips overflow.</li>\n<li>Back returns to Profile. Light + dark mode readable.</li>\n</ol>\n<h2>Demo</h2>\n<img width=\"400\" alt=\"Image\" src=\"assets/image-71809087-97c5-43bb-af9a-62da543a6852.jpg\" />\n<img width=\"400\" alt=\"Image\" src=\"assets/image-08b57291-d596-4c75-9d2f-27fec0caa136.jpg\" />\n<img width=\"400\" alt=\"Image\" src=\"assets/image-c119dfbc-4969-476d-b780-0d8fd3d8baa5.jpg\" />\n<img width=\"400\" alt=\"Image\" src=\"assets/image-9c338622-a3b0-44e9-965f-3f96fdcc35a5.jpg\" />\n<img width=\"400\" alt=\"Image\" src=\"assets/image-1c5abee6-4bb0-4af2-ad75-fcc26e96b7d9.jpg\" />\n<img width=\"400\" alt=\"Image\" src=\"assets/image-0306e1fb-e78c-430b-bc64-358c25126e7b.jpg\" />",
+      "metadata": {
+        "number": 2636,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T10:18:59Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2631",
+      "display_title": "Issue #2631: [Slicing] Follower & Following List New Layout",
+      "main_description_html": "<p>Responsive Follower &amp; Following — <strong>\"Connections\"</strong> bottom-sheet opened from Profile. Rebuilt on the new TS/Zustand/NativeWind stack (replaces legacy <code>follower</code>). See docs/brainstorm/plan.md (Phase 4).</p>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\ndesign followers ( <a href=\"https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1405-36787&amp;t=mHpZbAktahhvPmKL-0\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1405-36787&amp;t=mHpZbAktahhvPmKL-0</a> )</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\ndesign following ( <a href=\"https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1405-37130&amp;t=mHpZbAktahhvPmKL-0\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1405-37130&amp;t=mHpZbAktahhvPmKL-0</a> )</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\n\"Connections\" sheet with close (X) and <strong>search connections</strong> input</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\ntabs: <strong>Followers</strong> / <strong>Following</strong></li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nuser row: avatar, name, secondary name; action button — <strong>Follow</strong> (filled) / <strong>Following</strong> (outlined)</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>From a profile, open <strong>Connections</strong> → bottom-sheet appears with Followers/Following tabs.</li>\n<li><strong>Search connections</strong> → list filters by typed text.</li>\n<li>Switch tabs → Followers shows filled <strong>Follow</strong> buttons; Following shows outlined <strong>Following</strong> buttons.</li>\n<li>Tap <strong>Follow</strong> / <strong>Following</strong> → button state toggles (and count updates).</li>\n<li>Tap a user row → navigates to that user's profile.</li>\n<li>Empty tab / no search results → empty state shown.</li>\n<li>Close (X) → sheet dismisses; light + dark mode readable.</li>\n</ol>\n<h2>Demo</h2>\n<img width=\"400\" alt=\"Image\" src=\"assets/image-d37521b7-ea85-43d0-b515-642131eccb23.jpg\" />\n<img width=\"400\" alt=\"Image\" src=\"assets/image-b61d9179-94d9-43ba-b482-b4d49735ee87.jpg\" />",
+      "metadata": {
+        "number": 2631,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T10:28:50Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2641",
+      "display_title": "Issue #2641: [Slicing] Setting Blocked Users New Layout",
+      "main_description_html": "<p>Blocked Users — list body inside the Settings hub. Same pattern as Blocked Posts (no dedicated node this round). See docs/brainstorm/04-6-2026/brainstorming.md.</p>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\nlist rows: avatar, name, username, black Unblock</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nFlashList; loading / empty / error states</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>Settings → Blocked Users chip → list of blocked users loads.</li>\n<li>Each row shows avatar, name, username, Unblock.</li>\n<li>Tap Unblock → user removed from the list (optimistic).</li>\n<li>No blocked users → empty state shown.</li>\n<li>Light + dark mode readable.</li>\n</ol>\n<h2>Demo</h2>\n<img width=\"400\" alt=\"Image\" src=\"assets/image-456a175c-7828-4414-8ef0-1e49aabb45b1.jpg\" />",
+      "metadata": {
+        "number": 2641,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T10:38:14Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2638",
+      "display_title": "Issue #2638: [Slicing] Setting Edit Password New Layout",
+      "main_description_html": "<p>Edit Password — form body inside the Settings hub. See docs/brainstorm/04-6-2026/brainstorming.md.</p>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\ndesign edit password ( <a href=\"https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1166-19157&amp;t=0yNPSsjDHYbzW52c-0\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1166-19157&amp;t=0yNPSsjDHYbzW52c-0</a> )</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nfields: Old Password (eye), Confirm Password (eye) + strength meter (\"Very Strong\"), New Password (eye)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nreuse src/components/password-strength-metter</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nblack Save button</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>Settings → Edit Password chip → form renders.</li>\n<li>Eye toggles reveal/hide each password field.</li>\n<li>Type a new password → strength meter reacts (segments + label).</li>\n<li>Mismatched confirm / blank fields → validation; Save blocked.</li>\n<li>Valid input → Save → password changed (success feedback).</li>\n</ol>\n<h2>Demo</h2>\n<img width=\"400\" alt=\"Image\" src=\"assets/image-ea184f99-b567-46ea-9631-5e93dce8d875.jpg\" />",
+      "metadata": {
+        "number": 2638,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T10:41:42Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2637",
+      "display_title": "Issue #2637: [Slicing] Setting Edit Profile New Layout",
+      "main_description_html": "<p>Edit Profile — form body inside the Settings hub. See docs/brainstorm/04-6-2026/brainstorming.md.</p>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\ndesign edit profile ( <a href=\"https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1166-19132&amp;t=0yNPSsjDHYbzW52c-0\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1166-19132&amp;t=0yNPSsjDHYbzW52c-0</a> )</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nfields: Email, full Name, Username, Birthday (date picker), Gender (select), Country, Contact Info, About</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nblack Save button</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nNOTE: Figma shows Contact Info and About with placeholder \"Enter new password\" (likely a copy-paste error) — confirm intended copy</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>Settings → Edit Profile chip → form renders, prefilled with the user data.</li>\n<li>Birthday opens a date picker; Gender + Country open selects.</li>\n<li>Edit a field and tap Save → change persists (reopen shows new value).</li>\n<li>Invalid/empty required field → validation message; Save blocked.</li>\n<li>Light + dark mode readable; responsive on small + large screens.</li>\n</ol>\n<h2>Demo</h2>\n<img width=\"400\" alt=\"Image\" src=\"assets/image-325b51b9-4a26-40d7-aa2e-d476ad3afa3c.jpg\" />",
+      "metadata": {
+        "number": 2637,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T10:43:36Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2639",
+      "display_title": "Issue #2639: [Slicing] Setting User Account (Delete Account) New Layout",
+      "main_description_html": "<p>User Account (Delete Account) — body inside the Settings hub. See docs/brainstorm/04-6-2026/brainstorming.md.</p>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\ndesign user account ( <a href=\"https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1166-19191&amp;t=0yNPSsjDHYbzW52c-0\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1166-19191&amp;t=0yNPSsjDHYbzW52c-0</a> )</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\n\"Delete Account\" card: warning bullets + 14-day deactivation copy + \"you are about to delete account <username>\"</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nred Continue button</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nconfirm backend behavior (deactivate 14d vs immediate) + whether a second confirm follows Continue</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>Settings → User Account chip → Delete Account card renders with the policy copy and the current username.</li>\n<li>Tap Continue (red) → confirmation step (per final flow) → account deactivated.</li>\n<li>Cancel/back at confirm → no deletion.</li>\n<li>Copy is readable in light + dark mode.</li>\n</ol>\n<h2>Demo</h2>\n<img width=\"400\" alt=\"Image\" src=\"assets/image-580a111a-a9d8-40ff-8db4-4455d2b71178.jpg\" />",
+      "metadata": {
+        "number": 2639,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T10:44:41Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2640",
+      "display_title": "Issue #2640: [Slicing] Setting Blocked Posts New Layout",
+      "main_description_html": "<p>Blocked Posts — grid body inside the Settings hub. See docs/brainstorm/04-6-2026/brainstorming.md.</p>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\ndesign blocked posts ( <a href=\"https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1166-19213&amp;t=0yNPSsjDHYbzW52c-0\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1166-19213&amp;t=0yNPSsjDHYbzW52c-0</a> )</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\n2-column grid cards: thumbnail, author avatar + name, description, location, black Unblock</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nFlashList; loading / empty / error states</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>Settings → Blocked Posts chip → 2-col grid of blocked posts loads.</li>\n<li>Each card shows thumbnail, author, description, location, Unblock.</li>\n<li>Tap Unblock → post is removed from the grid (optimistic).</li>\n<li>No blocked posts → empty state shown.</li>\n<li>Long list scrolls smoothly; light + dark mode readable.</li>\n</ol>\n<h2>Demo</h2>\n<img width=\"400\" alt=\"Image\" src=\"assets/image-4385fbd2-ab33-496c-9104-b98c70a6501b.jpg\" />",
+      "metadata": {
+        "number": 2640,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T10:46:16Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2625",
+      "display_title": "Issue #2625: [Slicing] Affiliate List New Layout",
+      "main_description_html": "<p>Affiliate List — library of affiliate links, managed from <strong>Settings → General</strong> (chip tab beside <em>Blocked Users</em> / <em>Blocked Posts</em>). See docs/brainstorm/03-06-2026/brainstorming.md.</p>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\ndesign affiliate list ( <a href=\"https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1403-32315&amp;t=mHpZbAktahhvPmKL-0\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1403-32315&amp;t=mHpZbAktahhvPmKL-0</a> )</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nSettings → General chip tab: Blocked Users · Blocked Posts · <strong>Affiliate List</strong></li>\n<li><input disabled=\"\" type=\"checkbox\"/>\n\"Affiliate\" section header with <strong>+ Add</strong> button (top-right)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nFlashList of orange affiliate cards — 🎟 \"Tickets\" badge, <strong>title</strong>, description, black CTA button (<code>Get for-$X →</code>)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\n<strong>⋯ (ellipsis) menu</strong> at the top-right of each card → dropdown with <strong>Edit</strong> / <strong>Delete</strong></li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nempty state</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>Go to <strong>Settings → General</strong> → tap the <strong>Affiliate List</strong> chip → list renders.</li>\n<li><strong>With links:</strong> each orange card shows the Tickets badge, title, description, a black CTA button, and a <strong>⋯</strong> icon top-right.</li>\n<li><strong>No links:</strong> empty state is shown.</li>\n<li>Tap <strong>+ Add</strong> → Add Affiliate modal opens.</li>\n<li>Tap a card's <strong>⋯</strong> → dropdown shows <strong>Edit</strong> and <strong>Delete</strong>.</li>\n<li>Tap <strong>Edit</strong> → Edit Affiliate modal opens (see #2626); tap <strong>Delete</strong> → Delete confirm modal opens (see #2627).</li>\n<li>Tap outside the dropdown → it dismisses. Scroll a long list → smooth (FlashList); light + dark mode readable.</li>\n</ol>\n<h2>Demo</h2>\n<img width=\"400\" alt=\"Image\" src=\"assets/image-112dfcda-6337-4001-b226-6a35824fb877.png\" />",
+      "metadata": {
+        "number": 2625,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T10:55:17Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2626",
+      "display_title": "Issue #2626: [Slicing] Affiliate Add / Edit New Layout",
+      "main_description_html": "<p>Add / Edit Affiliate — shared <strong>modal form</strong>, opened on top of the Affiliate List page.</p>\n<p><strong>Access path:</strong> Settings → General → <strong>Affiliate List</strong> (see #2625). <strong>Add</strong> = \"+ Add\" button → modal. <strong>Edit</strong> = a card's <strong>⋯ (ellipsis) menu</strong> → <strong>Edit</strong> → modal. The dimmed List page stays behind the modal — not a separate route.</p>\n<p>See docs/brainstorm/03-06-2026/brainstorming.md.</p>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\ndesign add affiliate ( <a href=\"https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1403-33377&amp;t=mHpZbAktahhvPmKL-0\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1403-33377&amp;t=mHpZbAktahhvPmKL-0</a> )</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\ndesign edit affiliate ( <a href=\"https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1404-35408&amp;t=mHpZbAktahhvPmKL-0\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1404-35408&amp;t=mHpZbAktahhvPmKL-0</a> )</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nfields: <strong>Link URL</strong> (with dark ✓ validation icon), <strong>Title</strong>, <strong>Description</strong> (multi-line), <strong>Button CTA</strong></li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nAdd modal → Cancel / <strong>Add</strong>; Edit modal (prefilled) → Cancel / <strong>Save</strong></li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>From <strong>Settings → General → Affiliate List</strong>, tap <strong>+ Add</strong> → \"Add Affiliate\" modal opens over the dimmed list.</li>\n<li>Enter a <strong>Link URL</strong> → a dark ✓ icon appears for a valid URL; invalid URL → no check, Add blocked.</li>\n<li>Fill Title, Description, Button CTA → <strong>Add</strong> enabled; tap Add → card appears in the list.</li>\n<li>Tap <strong>Cancel</strong> → modal closes, nothing added.</li>\n<li>For Edit: tap a card's <strong>⋯</strong> → <strong>Edit</strong> → \"Edit Affiliate\" modal opens <strong>prefilled</strong>.</li>\n<li>Change a field → <strong>Save</strong> → list reflects the update.</li>\n</ol>\n<h2>Demo</h2>\n<img width=\"400\" alt=\"Image\" src=\"assets/image-52599b2e-8dcd-4ee3-a082-f1196dc52601.jpg\" />\n<img width=\"400\" alt=\"Image\" src=\"assets/image-b0c16a65-e9b1-4d63-a199-b07de11d96a2.jpg\" />\n<img width=\"400\" alt=\"Image\" src=\"assets/image-249dbb05-1ab9-4434-93c9-a40ebfed6053.jpg\" />",
+      "metadata": {
+        "number": 2626,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T11:02:39Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2627",
+      "display_title": "Issue #2627: [Slicing] Affiliate Delete New Layout",
+      "main_description_html": "<p>Delete Affiliate — confirmation <strong>modal</strong>, opened on top of the Affiliate List page.</p>\n<p><strong>Access path:</strong> Settings → General → <strong>Affiliate List</strong> (see #2625) → a card's <strong>⋯ (ellipsis) menu</strong> → <strong>Delete</strong> → confirm modal. The dimmed List page stays behind the modal — not a separate route.</p>\n<p>See docs/brainstorm/03-06-2026/brainstorming.md.</p>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\ndesign delete affiliate ( <a href=\"https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1404-36164&amp;t=mHpZbAktahhvPmKL-0\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1404-36164&amp;t=mHpZbAktahhvPmKL-0</a> )</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nmodal copy: \"Deleted affiliate will make all affiliated hotspot and banner posts hidden. Are you sure want to delete this affiliate?\"</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nCancel / <strong>Delete</strong> (red)</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>From <strong>Settings → General → Affiliate List</strong>, tap a card's <strong>⋯</strong> → <strong>Delete</strong> → \"Delete Affiliate\" modal appears over the dimmed list with the hidden-posts warning copy.</li>\n<li>Tap <strong>Delete</strong> (red) → modal closes and the affiliate is removed from the list.</li>\n<li>Tap <strong>Cancel</strong> → modal closes and the affiliate remains.</li>\n<li>After deleting, any posts where that affiliate was placed as a hotspot/banner are hidden (see integration #2630).</li>\n</ol>\n<h2>Demo</h2>\n<img width=\"400\" alt=\"Image\" src=\"assets/image-dae0bacf-5cc2-43a9-830e-09c6d160de7f.jpg\" />\n<img width=\"400\" alt=\"Image\" src=\"assets/image-aaa88b2f-d2ac-4cbb-b62e-d13a28e2d9da.jpg\" />",
+      "metadata": {
+        "number": 2627,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T11:03:36Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2642",
+      "display_title": "Issue #2642: [Integration] Settings — Edit Profile & Password",
+      "main_description_html": "<p>Wire Edit Profile + Edit Password data into the Settings hub. See docs/brainstorm/04-6-2026/brainstorming.md.</p>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\nsrc/api/settings.ts: updateProfile, changePassword</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nport legacy profile/profile.service, setting/account.service, setting/edit-password.service</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nsettingsStore wiring (prefill profile, validation, save)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nuse the app Axios client (token + error interceptors)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nmock-first via settings.mock.ts; swap behind status/error seam</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nloading / validating / error states</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>Edit Profile prefills from the API; Save persists and survives reload.</li>\n<li>Edit Password: wrong old password → API error surfaced; correct → success.</li>\n<li>Failed request → error state shown, no crash.</li>\n</ol>\n<h2>Demo</h2>\n<p><video controls src=\"assets/video-9ff63597-e647-4d42-841f-4f56ce7244d1.mp4\"></video></p>\n<img width=\"400\" alt=\"Image\" src=\"assets/image-ab8fa3f2-4acc-45ff-98b6-82146cc0d2d8.jpg\" />\n<img width=\"400\" alt=\"Image\" src=\"assets/image-3b456362-2404-4b15-b19c-cb07f6eee0b6.jpg\" />",
+      "metadata": {
+        "number": 2642,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T11:41:12Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2660",
+      "display_title": "Issue #2660: [Profile] Integration User Data",
+      "main_description_html": "<p>Wire the Profile <strong>user data</strong> into the new Profile layout (#2635). See docs/brainstorm/04-juni-2026/analyze-pages-new.md (Profile) + the Profile screenshots.</p>\n<blockquote>\n<p>⚠ \"Hire Photographer\" and the <strong>Badge / Top Contributor</strong> tab are new concepts — confirm their endpoints/DTO with backend. Ship UI on mock fixtures with a tracked TODO until confirmed; keep the store status/error seam so the swap is a one-file change.</p>\n</blockquote>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\nsrc/api/users.ts: <code>getProfile</code>, <code>getUserPosts</code> (post / tagged / bookmark), <code>getTopContributors</code> (Badge tab), <code>follow</code> / <code>unfollow</code></li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nport legacy <code>profile/profile.service</code>, <code>profile/user.service</code></li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nprofileStore wiring: header (avatar, name, @handle, location, website, birthday), stats (Posts / Follower / Following)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nAbout tab (bio) + Badge tab (Top Contributor list + View)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\ncontent tabs Post / Tagged / Bookmark → grids (cursor pagination)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nFollow / Hire Photographer actions (optimistic Follow)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nloading / empty / error states on header, tabs, and grids</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>Open Profile → header loads (avatar, name, @handle, location, website, birthday) and stats (Posts / Follower / Following).</li>\n<li>About tab shows the bio; Badge tab shows Top Contributor rows with a working <strong>View</strong>.</li>\n<li>Switch Post / Tagged / Bookmark → each grid loads its own data and paginates on scroll.</li>\n<li><strong>Follow</strong> toggles state and the follower count updates (optimistic); reverts on failure.</li>\n<li>Simulate a failed request → error state shown, app does not crash.</li>\n<li>Empty states (no posts / tagged / bookmark / badges) show correctly (not a spinner forever).</li>\n</ol>\n<h2>Demo</h2>\n<p><video controls src=\"assets/video-e83d75a0-98ec-4993-9c1c-b3c6b0dff35b.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 2660,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T11:47:33Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2661",
+      "display_title": "Issue #2661: [Profile] Integrate Posts",
+      "main_description_html": "<p>Wire the Profile <strong>Post</strong> tab into the new Profile layout (#2635) — the user's own panorama posts grid. See docs/brainstorm/04-juni-2026/analyze-pages-new.md (Profile) + the Profile screenshots. Depends on the profile shell from [Profile] Integration User Data (#2660).</p>\n<blockquote>\n<p>Ship UI on mock fixtures with a tracked TODO until the endpoint/DTO is confirmed; keep the store status/error seam so the swap is a one-file change.</p>\n</blockquote>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\nsrc/api/users.ts: <code>getUserPosts({ tab: 'post', cursor })</code></li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nport legacy <code>profile/profile.service</code> / <code>profile/user.service</code> (posts)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nprofileStore: <code>post</code> grid slice (items, cursor, hasMore, status)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nFlashList justified grid + cursor pagination</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\ntap a thumbnail → Post Detail</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nloading / empty / error states</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>Open Profile → <strong>Post</strong> tab is active → the user's posts grid loads.</li>\n<li>Scroll → next page loads (cursor pagination); no duplicates or blank rows.</li>\n<li>Tap a thumbnail → navigates to the correct Post Detail.</li>\n<li>User with no posts → empty state (not a spinner forever).</li>\n<li>Simulate a failed request → error state shown, app does not crash.</li>\n<li>60fps scroll; light + dark mode readable.</li>\n</ol>\n<h2>Demo</h2>\n<p><video controls src=\"assets/video-42c02e14-34c7-4496-aa66-a9b1be676c64.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 2661,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T11:49:19Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2662",
+      "display_title": "Issue #2662: [Profile] Integrate Tagged Post",
+      "main_description_html": "<p>Wire the Profile <strong>Tagged</strong> tab into the new Profile layout (#2635) — posts the user is tagged in. See docs/brainstorm/04-juni-2026/analyze-pages-new.md (Profile) + the Profile screenshots. Depends on the profile shell from [Profile] Integration User Data (#2660).</p>\n<blockquote>\n<p>⚠ Confirm the \"tagged posts\" endpoint/DTO with backend (tag relation may be new). Ship UI on mock fixtures with a tracked TODO until confirmed; keep the store status/error seam so the swap is a one-file change.</p>\n</blockquote>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\nsrc/api/users.ts: <code>getUserPosts({ tab: 'tagged', cursor })</code></li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nprofileStore: <code>tagged</code> grid slice (items, cursor, hasMore, status)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nFlashList justified grid + cursor pagination</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\ntap a thumbnail → Post Detail</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nloading / empty / error states</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>Open Profile → switch to the <strong>Tagged</strong> tab → tagged posts grid loads.</li>\n<li>Scroll → next page loads (cursor pagination); no duplicates or blank rows.</li>\n<li>Tap a thumbnail → navigates to the correct Post Detail.</li>\n<li>User with no tagged posts → empty state (not a spinner forever).</li>\n<li>Simulate a failed request → error state shown, app does not crash.</li>\n<li>60fps scroll; light + dark mode readable.</li>\n</ol>\n<h2>Demo</h2>\n<p><video controls src=\"assets/video-c26e15fe-4f11-45da-904e-401e083b72f3.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 2662,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T11:48:19Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2644",
+      "display_title": "Issue #2644: [Integration] Settings — Blocked Posts & Users",
+      "main_description_html": "<p>Wire Blocked Posts + Blocked Users lists into the Settings hub. See docs/brainstorm/04-6-2026/brainstorming.md.</p>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\nsrc/api/settings.ts: listBlockedPosts, unblockPost, listBlockedUsers, unblockUser</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nport legacy setting/block-post.service, setting/block-user.service</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\noptimistic Unblock; reconcile on response</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nmock-first via settings.mock.ts</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nloading / empty / error states</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>Blocked Posts/Users load from the API.</li>\n<li>Unblock removes the item optimistically; persists after reload.</li>\n<li>Failed unblock → item restored + error shown.</li>\n<li>Empty data → empty state (not infinite spinner).</li>\n</ol>\n<h2>Demo</h2>\n<p><video controls src=\"assets/video-cd0d2f23-1eb4-4ef2-9b74-53ecffae9a1a.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 2644,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T11:51:24Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2652",
+      "display_title": "Issue #2652: [Slicing] Sign In New Layout",
+      "main_description_html": "<p>Sign In — modal card over the map. New TS/Zustand/NativeWind stack (replaces legacy <code>login</code>). See docs/brainstorm/04-juni-2026/brainstorming-sign-in-sign-up.md.</p>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\ndesign sign in ( <a href=\"https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1166-20596&amp;t=YRvR1OXyTsJJDk4S-0\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.figma.com/design/RSNRjxqnnr1O24SjpeoPI3/New-PANORRA-360?node-id=1166-20596&amp;t=YRvR1OXyTsJJDk4S-0</a> )</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nAuthModalShell: card over map, close (X), header, footer links (Terms · Privacy · About · Help)</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nSocialAuthButtons: Login with Apple / Login with Google</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\n\"Or continue with\" divider</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nEmail/Username field</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nPassword field (eye toggle) + \"Forgot your password?\" link</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nLog In button + \"Create an account\" link (→ Sign Up)</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>Open Sign In → modal card renders over the map with social buttons + email/password.</li>\n<li>Password eye toggle reveals/hides the value.</li>\n<li>\"Forgot your password?\" → Reset Password flow.</li>\n<li>\"Create an account\" → switches to Sign Up.</li>\n<li>Close (X) → dismisses to the map (anonymous viewer).</li>\n<li>Footer links open Terms / Privacy / About / Help. Light + dark mode readable.</li>\n</ol>\n<h2>Demo</h2>\n<img width=\"400\" alt=\"Image\" src=\"assets/image-d654f986-f302-4f00-b0aa-7a533261adc3.jpg\" />",
+      "metadata": {
+        "number": 2652,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T12:00:33Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-2654",
+      "display_title": "Issue #2654: [Integration] Sign In",
+      "main_description_html": "<p>Wire Sign In auth. See docs/brainstorm/04-juni-2026/brainstorming-sign-in-sign-up.md.</p>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\n<code>src/api/auth.ts</code>: <code>login(identifier, password)</code>, <code>loginGoogle()</code>, <code>loginApple()</code></li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nport AES <code>decryptUserDetail</code> (PBKDF2 + AES-256) on the login response</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nwrite token + user → app-wide <code>authStore</code></li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nreuse <code>src/components/google-button</code> for Google; Apple via sign_in_with_apple</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\n401 / wrong creds → inline error; field validation</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nmock-first via auth.mock.ts; token via api/client.ts interceptors</li>\n</ul>\n<h2>Testing Scenario (for tester)</h2>\n<ol>\n<li>Email/username + password → Log In → logged-in state (token stored).</li>\n<li>Google and Apple paths reach the same logged-in state.</li>\n<li>Wrong credentials → inline error, no crash.</li>\n<li>App restart stays logged in (token persisted).</li>\n<li>AES decrypt verified against known RN test vectors.</li>\n</ol>\n<h2>Demo</h2>\n<p><video controls src=\"assets/video-bec59821-fed8-4edb-acf3-92c8dfd7bc01.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 2654,
+        "author": "anurdin01",
+        "updated_at": "2026-06-05T11:59:51Z"
+      }
+    }
+  ],
+  "docs": []
+}
