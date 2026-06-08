@@ -1,0 +1,58 @@
+{
+  "title": "Daily Report June 8, 2026 - GoThru 3D Floormap",
+  "repository": "GoThruMedia/gothru-3d-floormap",
+  "generated_at": "2026-06-08T10:34:52.359415900+00:00",
+  "issues": [
+    {
+      "anchor_id": "issue-gothrumedia-gothru-3d-floormap-57",
+      "display_title": "Issue #57: Create Wizard Step 1 — Set Location UI Layout",
+      "main_description_html": "<h2>Context</h2>\n<p>Step 1 of the Wizard: Create New 3D Floor Map File. The user picks the physical location of the building they want to map. This is the first screen a user sees on <code>/start</code>. It uses a split layout: a form card on the left and an interactive MapLibre map on the right.</p>\n<p>The current Figma frame (node-id=1-713) covers the <strong>happy path</strong> only. This task fills the missing design states.</p>\n<hr />\n<h2>Result</h2>\n<p>Option 1:</p>\n<img width=\"1920\" height=\"1225\" alt=\"Image\" src=\"assets/image-e15bc134-ada1-4b05-b1ac-017f64e0d693.png\" />\n<hr />\n<p>Option 2:</p>\n<img width=\"1920\" height=\"1111\" alt=\"Image\" src=\"assets/image-e69d0b7b-664b-4943-9d25-36f02f30da5f.png\" />\n<hr />\n<p>Option 3:</p>\n<img width=\"1920\" height=\"1297\" alt=\"Image\" src=\"assets/image-05d5525f-1cb6-47fe-9d24-02fbd9c58ccd.png\" />\n<hr />\n<p>Option 4:</p>\n<img width=\"1982\" height=\"868\" alt=\"Image\" src=\"assets/image-87cc71fb-8545-4047-bc17-30fd95223672.png\" />\n<hr />\n<p>Option 5:</p>\n<img width=\"1920\" height=\"1333\" alt=\"Image\" src=\"assets/image-d3328323-5e01-4f19-918a-05a8746b271c.png\" />\n<hr />\n<p>Option 6:</p>\n<img width=\"1920\" height=\"1333\" alt=\"Image\" src=\"assets/image-d2be65ef-b8c7-46ef-9307-f0b3b30ea58a.png\" />\n<hr />\n<p>Option 7:</p>\n<img width=\"1920\" height=\"917\" alt=\"Image\" src=\"assets/image-8739da6f-3dcb-4a31-803e-43c45f5ec4a3.png\" />\n<hr />\n",
+      "metadata": {
+        "number": 57,
+        "author": "anurdin01",
+        "updated_at": "2026-06-08T10:08:03Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-3d-floormap-58",
+      "display_title": "Issue #58: Create Wizard Step 2 — Upload Image UI Layout",
+      "main_description_html": "<h2>Context</h2>\n<p>Step 2 of the Wizard: the user uploads one or more Floor Plan images (PNG, JPEG, WebP). Each uploaded file becomes one Level in the 3D model. The existing Figma frame (node-id=1-839) covers the dropzone and the file list. This task fills missing states and clarifies interaction details.</p>\n<hr />\n<h2>Result</h2>\n<p>Option 1:</p>\n<img width=\"1920\" height=\"1285\" alt=\"Image\" src=\"assets/image-7538f2b3-da6c-4876-891e-b3ece23c0102.png\" />\n<img width=\"1920\" height=\"1285\" alt=\"Image\" src=\"assets/image-bca2f9bf-d85d-4c5e-b06c-8f217603179b.png\" />\n<hr />\n<p>Option 2:</p>\n<img width=\"1920\" height=\"948\" alt=\"Image\" src=\"assets/image-ef5fc15c-3013-4332-9763-f26712a49749.png\" />\n<img width=\"1920\" height=\"875\" alt=\"Image\" src=\"assets/image-05fd9d63-d4cf-4a56-9f55-8dbc9dbee17a.png\" />\n<hr />\n<p>Option 3:</p>\n<img width=\"1920\" height=\"1050\" alt=\"Image\" src=\"assets/image-37a6b1cb-c84f-4df3-a84c-ff7f05453ad0.png\" />\n<img width=\"1920\" height=\"960\" alt=\"Image\" src=\"assets/image-5b9c9a08-ccd7-4237-83d3-608a17e6c369.png\" />\n<hr />\n<p>Option 4:</p>\n<img width=\"1920\" height=\"868\" alt=\"Image\" src=\"assets/image-7f589db3-d887-4d6d-83f7-83232702ed5c.png\" />\n<img width=\"1920\" height=\"868\" alt=\"Image\" src=\"assets/image-3547f9e4-9dfe-4500-8bf4-081d3dc02baf.png\" />\n<hr />\n<p>Option 5:</p>\n<img width=\"1920\" height=\"926\" alt=\"Image\" src=\"assets/image-45fbe475-65be-4f60-a3bd-e0e00c019ddb.png\" />\n<img width=\"1920\" height=\"926\" alt=\"Image\" src=\"assets/image-20e67be9-bd39-4ef1-a39e-877d217fc5e7.png\" />\n<hr />\n<p>Option 6:</p>\n<img width=\"1920\" height=\"1020\" alt=\"Image\" src=\"assets/image-0c61d95c-c130-4b49-86be-9ab15d9a327b.png\" />\n<img width=\"1920\" height=\"958\" alt=\"Image\" src=\"assets/image-f1846f06-09a6-4949-a69f-3f8db61c29fa.png\" />\n<hr />\n<p>Option 7:</p>\n<img width=\"1920\" height=\"868\" alt=\"Image\" src=\"assets/image-eab5eb31-b429-40b0-b898-3908584a0240.png\" />\n<img width=\"1920\" height=\"868\" alt=\"Image\" src=\"assets/image-918d7ba4-7ff6-477a-a28c-dc30ce1b6e40.png\" />\n<hr />\n",
+      "metadata": {
+        "number": 58,
+        "author": "anurdin01",
+        "updated_at": "2026-06-08T10:08:07Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-3d-floormap-59",
+      "display_title": "Issue #59: Create Wizard Step 3 — Set Floor UI Layout",
+      "main_description_html": "<h2>Context</h2>\n<p>Step 3 of the Wizard: the user configures each Level (Floor) auto-created from their uploaded images. They can rename each Level, set wall height, add extra rows, remove rows, and reorder rows via drag-and-drop. The existing Figma frame (node-id=1-963) covers the default row state but is <strong>missing drag handles, error states, and the empty-list state</strong>. This task fills those gaps.</p>\n<hr />\n<h2>Result</h2>\n<p>Option 1:</p>\n<img width=\"1920\" height=\"1285\" alt=\"Image\" src=\"assets/image-f6d7e151-99ee-401d-9b94-6d7339848810.png\" />\n<hr />\n<p>Option 2:</p>\n<img width=\"1920\" height=\"868\" alt=\"Image\" src=\"assets/image-e899b1a8-f6b0-4ceb-a3a0-aafc212bccdc.png\" />\n<hr />\n<p>Option 3:</p>\n<img width=\"1920\" height=\"983\" alt=\"Image\" src=\"assets/image-0c16fa3a-993e-4a64-8f21-015af99a6035.png\" />\n<hr />\n<p>Option 4:</p>\n<img width=\"1920\" height=\"868\" alt=\"Image\" src=\"assets/image-203613b4-1c77-4852-9067-51af54c14024.png\" />\n<hr />\n<p>Option 5:</p>\n<img width=\"1920\" height=\"926\" alt=\"Image\" src=\"assets/image-fbb3e69c-51c4-4ded-9cd8-0a5f607ad3d4.png\" />\n<hr />\n<p>Option 6:</p>\n<img width=\"1920\" height=\"940\" alt=\"Image\" src=\"assets/image-74d99f16-9823-43f2-ad9b-794411008072.png\" />\n<hr />\n<p>Option 7:</p>\n<img width=\"1920\" height=\"868\" alt=\"Image\" src=\"assets/image-76e486e2-4aa3-4afd-9b47-1b23ba06a1aa.png\" />\n<hr />\n",
+      "metadata": {
+        "number": 59,
+        "author": "anurdin01",
+        "updated_at": "2026-06-08T10:08:27Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-3d-floormap-60",
+      "display_title": "Issue #60: Create Wizard Step 4 — Generate: Scan Wall & Area UI Layout",
+      "main_description_html": "<h2>Context</h2>\n<p>Step 4 of the Wizard: the AI processes each Level sequentially — first scanning wall polylines, then scanning area boundaries per uploaded Floor Plan image. The current Figma frame (node-id=1-1116) is a <strong>placeholder</strong>. This task is the most design-intensive step: it requires a full real-time progress UI with per-Level status rows, error and retry states, and the final Download / Open in Editor actions.</p>\n<hr />\n<h2>Result</h2>\n<p>Option 1:</p>\n<img width=\"1920\" height=\"1427\" alt=\"Image\" src=\"assets/image-e4759d13-966a-4771-8f4f-9b0e061b2e7e.png\" />\n<img width=\"1920\" height=\"1450\" alt=\"Image\" src=\"assets/image-e49d1fa7-3195-4256-8c73-ca4afd608b86.png\" />\n<hr />\n<p>Option 2:</p>\n<img width=\"1920\" height=\"868\" alt=\"Image\" src=\"assets/image-8757d418-4bab-495b-9346-8d957f20116a.png\" />\n<img width=\"1920\" height=\"975\" alt=\"Image\" src=\"assets/image-3a059d20-76f9-4a04-9124-331ba6bf6401.png\" />\n<hr />\n<p>Option 3:</p>\n<img width=\"1920\" height=\"948\" alt=\"Image\" src=\"assets/image-7580bdc9-4c66-4729-895e-2de470ab6814.png\" />\n<img width=\"1920\" height=\"1028\" alt=\"Image\" src=\"assets/image-1af1797a-d44d-4eaa-a730-80d3a312c8fc.png\" />\n<hr />\n<p>Option 4:</p>\n<img width=\"1920\" height=\"868\" alt=\"Image\" src=\"assets/image-a76825bc-c175-403a-9008-aea3e917a72d.png\" />\n<img width=\"1920\" height=\"868\" alt=\"Image\" src=\"assets/image-e936c993-eeff-49c4-9f1e-9a58619940c3.png\" />\n<hr />\n<p>Option 5:</p>\n<img width=\"1920\" height=\"1057\" alt=\"Image\" src=\"assets/image-7bf1be8b-aa76-4889-a65c-3cde3262aa50.png\" />\n<img width=\"1920\" height=\"1057\" alt=\"Image\" src=\"assets/image-5634ef13-4a95-417a-a17a-ea50905a961e.png\" />\n<hr />\n<p>Option 6:</p>\n<img width=\"1920\" height=\"1178\" alt=\"Image\" src=\"assets/image-658f6c42-a9ec-4179-bc83-2ffc5db14551.png\" />\n<img width=\"1920\" height=\"868\" alt=\"Image\" src=\"assets/image-31a31147-acd8-46e2-a2ce-3ebe9f682e54.png\" />\n<hr />\n<p>Option 7:</p>\n<img width=\"1920\" height=\"957\" alt=\"Image\" src=\"assets/image-e74b899f-55b3-4a52-819b-758bc01ee773.png\" />\n<img width=\"1920\" height=\"868\" alt=\"Image\" src=\"assets/image-cdf76397-40a0-4606-96c7-3a25ebc046fb.png\" />\n<hr />\n",
+      "metadata": {
+        "number": 60,
+        "author": "anurdin01",
+        "updated_at": "2026-06-08T10:08:18Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-3d-floormap-67",
+      "display_title": "Issue #67: Update Wizard Create New File Layout",
+      "main_description_html": "<h2>Context</h2>\n<p>Step 1 of the Wizard: Create New 3D Floor Map File. The user picks the physical location of the building they want to map. This is the first screen a user sees on /start. It uses a split layout: a form card on the left and an interactive MapLibre map on the right.</p>\n<p>Step 2 of the Wizard: the user uploads one or more Floor Plan images (PNG, JPEG, WebP). Each uploaded file becomes one Level in the 3D model. The existing Figma frame (node-id=1-839) covers the dropzone and the file list. This task fills missing states and clarifies interaction details.</p>\n<p>Step 3 of the Wizard: the user configures each Level (Floor) auto-created from their uploaded images. They can rename each Level, set wall height, add extra rows, remove rows, and reorder rows via drag-and-drop. The existing Figma frame (node-id=1-963) covers the default row state but is missing drag handles, error states, and the empty-list state. This task fills those gaps.</p>\n<p>Step 4 of the Wizard: the AI processes each Level sequentially — first scanning wall polylines, then scanning area boundaries per uploaded Floor Plan image. The current Figma frame (node-id=1-1116) is a placeholder. This task is the most design-intensive step: it requires a full real-time progress UI with per-Level status rows, error and retry states, and the final Download / Open in Editor actions.</p>\n<hr />\n<h2>Result</h2>\n<p>The result at setup.html</p>\n<p><a href=\"https://github.com/user-attachments/files/28702429/gothru-3d.zip\" target=\"_blank\" rel=\"noopener noreferrer\">gothru-3d.zip</a></p>\n",
+      "metadata": {
+        "number": 67,
+        "author": "anurdin01",
+        "updated_at": "2026-06-08T10:07:59Z"
+      }
+    }
+  ],
+  "docs": []
+}
