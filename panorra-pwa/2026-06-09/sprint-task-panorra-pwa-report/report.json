@@ -1,0 +1,28 @@
+{
+  "title": "[Sprint Task] Panorra PWA Report",
+  "repository": "GoThruMedia/panorra-pwa",
+  "generated_at": "2026-06-09T11:05:55.037761900+00:00",
+  "issues": [
+    {
+      "anchor_id": "issue-gothrumedia-panorra-pwa-2674",
+      "display_title": "Issue #2674: Integrate API User Detail (Support)",
+      "main_description_html": "<p>Route : {{base_url}}/support/user-detail/:username\nHeader :</p>\n<ul>\n<li>Authorization (support)</li>\n<li>ec (default: false)</li>\n</ul>\n<img width=\"838\" height=\"472\" alt=\"Image\" src=\"assets/image-b2104f00-ac7c-4d70-8916-f1e3ce10e9ae.png\" />\n<p>🧪 QA Tester Results — 🐞Bug</p>\n<p>📎 Evidence — <em>🐞[Authentication] Login with support account returns 400 Bad Request error</em></p>\n<p><video controls src=\"assets/video-9684f3a8-987a-4509-8ea8-2b53c1419918.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 2674,
+        "author": "anurdin01",
+        "updated_at": "2026-06-09T07:32:49Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-panorra-pwa-908",
+      "display_title": "Issue #908: Handle expired user",
+      "main_description_html": "<p>QA Tester Summary — Handle Expired User</p>\n<h3>Scenario 1: Invalid/Expired Token Validation</h3>\n<p>Objective\nVerify that the application properly handles invalid or expired authentication tokens.</p>\n<p>Test Steps</p>\n<ol>\n<li>Login with a valid account.</li>\n<li>Open browser DevTools.</li>\n<li>Navigate to Application → Local Storage / Session Storage.</li>\n<li>Modify or remove the authentication token.</li>\n<li>Refresh the page or perform an action that triggers an API request.</li>\n</ol>\n<p>Expected Result</p>\n<ul>\n<li>The application detects the invalid/expired token.</li>\n<li>The user is logged out automatically or redirected to the login page.</li>\n<li>A session expired message is displayed (if applicable).</li>\n<li>No blank page, infinite loading, or unexpected errors occur.</li>\n</ul>\n<p><video controls src=\"assets/video-3fb72c16-2094-4283-a495-53ff3843de43.mp4\"></video></p>\n<h3>Scenario 2: Session Timeout Validation</h3>\n<p>Objective\nVerify that the application properly handles user session expiration due to inactivity.</p>\n<p>Test Steps</p>\n<ol>\n<li>Login with a valid account.</li>\n<li>Keep the session idle until the configured timeout period is reached.</li>\n<li>Perform an action such as:</li>\n</ol>\n<ul>\n<li>Refreshing the page</li>\n<li>Opening a profile page</li>\n<li>Creating/editing content</li>\n<li>Uploading a file</li>\n</ul>\n<ol start=\"4\">\n<li>Observe the application behavior.</li>\n</ol>\n<p>Expected Result</p>\n<ul>\n<li>The application detects that the session has expired.</li>\n<li>The user is prompted to log in again or redirected to the login page.</li>\n<li>Any protected action is blocked until re-authentication is completed.</li>\n<li>No application crash, blank screen, or infinite loading occurs.</li>\n</ul>\n<p>Additional Validation</p>\n<ul>\n<li>Verify that unsaved user data is handled appropriately according to the application requirements.</li>\n<li>Verify that all protected routes remain inaccessible after session expiration until the user logs in again.</li>\n</ul>\n<p><video controls src=\"assets/video-266606c9-6d2c-4f89-805b-ff75968da92b.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 908,
+        "author": "anurdin01",
+        "updated_at": "2026-06-09T08:48:32Z"
+      }
+    }
+  ],
+  "docs": []
+}
