@@ -1,0 +1,18 @@
+{
+  "title": "Public Smoke",
+  "repository": "GoThruMedia/gothru-photographer-v2",
+  "generated_at": "2026-06-11T15:13:37.928590600+00:00",
+  "issues": [
+    {
+      "anchor_id": "issue-gothrumedia-gothru-photographer-v2-6",
+      "display_title": "Issue #6: Fix Issue Unable to Select Google reCAPTCHA",
+      "main_description_html": "<h3>Description</h3>\n<p>A bug was found where the user is <strong>unable to select / interact with the Google reCAPTCHA</strong> widget.</p>\n<p><strong>Bug video:</strong> <a href=\"https://drive.google.com/file/d/1d7nQdWiDZeEYhp5XUoUPm2SetOh2dBLx/view?usp=drive_link\" target=\"_blank\" rel=\"noopener noreferrer\">https://drive.google.com/file/d/1d7nQdWiDZeEYhp5XUoUPm2SetOh2dBLx/view?usp=drive_link</a></p>\n",
+      "metadata": {
+        "number": 6,
+        "author": "anurdin01",
+        "updated_at": "2026-06-11T04:58:10Z"
+      }
+    }
+  ],
+  "docs": []
+}
