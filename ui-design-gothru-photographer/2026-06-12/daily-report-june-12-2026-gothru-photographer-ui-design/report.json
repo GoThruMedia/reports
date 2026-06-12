@@ -1,0 +1,28 @@
+{
+  "title": "Daily Report June 12, 2026 - GoThru Photographer UI Design",
+  "repository": "GoThruMedia/gothru-photographer-v2",
+  "generated_at": "2026-06-12T04:02:15.059805400+00:00",
+  "issues": [
+    {
+      "anchor_id": "issue-gothrumedia-gothru-photographer-v2-5",
+      "display_title": "Issue #5: Create Share Photographer Profile and Review using LinkedIn",
+      "main_description_html": "<img width=\"1578\" height=\"65\" alt=\"Image\" src=\"assets/image-7831762f-efcc-4762-9c91-67c4faf7309a.png\" />\n<p>Repo: <a href=\"https://github.com/GoThruMedia/gothru-photographer-v2/tree/202606110953-share_photographer_profile_and_review_link\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-photographer-v2/tree/202606110953-share_photographer_profile_and_review_link</a></p>\n<p>Branch: 202606110953-share_photographer_profile_and_review_link</p>\n<p>Docs: .claude\\product-docs\\202606110953-share_photographer_profile_and_review_link-001</p>\n<hr />\n<h2>Context</h2>\n<p>Adding a one-tap Share button (Copy link + Share to LinkedIn) to photographer profile and review pages converts high-intent page views into referral traffic and LinkedIn brand impressions — with zero new back-end infrastructure.</p>\n<hr />\n<h2>RESULT</h2>\n<img width=\"1320\" height=\"949\" alt=\"Image\" src=\"assets/image-e9fef132-93bb-48f6-8345-fdde046ecc71.png\" />\n<p><video controls src=\"assets/video-41363b5d-3eae-470c-9394-395e91f49199.mp4\"></video></p>\n<img width=\"1919\" height=\"912\" alt=\"Image\" src=\"assets/image-b627ccba-82cd-49d2-8ad4-1cd0f5ca08d1.png\" />\n<p><video controls src=\"assets/video-f6f4926a-bfa6-4915-9a37-6771db238cdc.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 5,
+        "author": "anurdin01",
+        "updated_at": "2026-06-12T02:26:48Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-photographer-v2-7",
+      "display_title": "Issue #7: Create Layout of Share Review Link and Add Review using LinkedIn",
+      "main_description_html": "<img width=\"1582\" height=\"66\" alt=\"Image\" src=\"assets/image-c1dfc45e-b898-473e-9755-3135fb8fac1c.png\" />\n<p>branch: product-docs</p>\n<h2>Docs</h2>\n<p>.claude\\product-docs\\202611061616-share_review_link\n.claude\\product-docs\\202606121430-Add_Review_Using_LinkedIn_or_Verified_Email</p>\n<hr />\n<h2>Context:</h2>\n<p>Add Share Review Link:\nAdd a third option — <strong>\"Copy review link\"</strong> — to the existing <code>ShareButton</code> popover. When a photographer shares this link and a client clicks it, the client lands directly on a standalone review form page at <code>/photographer/[slug]/review</code>, ready to fill in and submit.</p>\n<p>Review using LinkedIn:\nReplace the current direct form (<code>PhotographerDirectReview</code>) with the same two-option UI the modal uses — LinkedIn CTA (primary) + email verification (secondary). The photographer profile card stays at the top.</p>\n<hr />\n<h2>Result:</h2>\n<p><video controls src=\"assets/video-7013d5cb-8ba4-4d81-b5da-a8cdd00d098c.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 7,
+        "author": "anurdin01",
+        "updated_at": "2026-06-12T03:44:31Z"
+      }
+    }
+  ],
+  "docs": []
+}
