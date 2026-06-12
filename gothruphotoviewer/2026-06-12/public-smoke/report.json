@@ -1,0 +1,18 @@
+{
+  "title": "Public Smoke",
+  "repository": "GoThruMedia/GoThruPhotoViewer",
+  "generated_at": "2026-06-12T10:43:59.901035500+00:00",
+  "issues": [
+    {
+      "anchor_id": "issue-gothrumedia-gothruphotoviewer-1",
+      "display_title": "Issue #1: Redesign GoThru Photo Viewer App based on Maptrails App",
+      "main_description_html": "<p>Repo: <a href=\"https://github.com/GoThruMedia/GoThruPhotoViewer\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/GoThruPhotoViewer</a></p>\n<h2>Branch: 202606101444-redesign_app</h2>\n<h2>Context</h2>\n<p>Full visual and interaction overhaul inspired by Maptrails (native iOS hiking app — see design.md). The design principle is \"content is hero, chrome steps back\": the panorama/map/camera fills the screen; UI controls appear when needed and recede when not.</p>\n<h2>RESULT</h2>\n<p><video controls src=\"assets/video-5beea63d-02c8-47fc-b5db-6dc587ffac3d.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1,
+        "author": "anurdin01",
+        "updated_at": "2026-06-12T10:42:12Z"
+      }
+    }
+  ],
+  "docs": []
+}
