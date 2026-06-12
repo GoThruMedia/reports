@@ -1,0 +1,168 @@
+{
+  "title": "[Sprint Task] GoThru Maps",
+  "repository": "GoThruMedia/gothru-maps-frontend",
+  "generated_at": "2026-06-12T02:15:29.618277700+00:00",
+  "issues": [
+    {
+      "anchor_id": "issue-gothrumedia-gothru-maps-frontend-1",
+      "display_title": "Issue #1: Show maps base on moderation id {baseUrl}/moderationId",
+      "main_description_html": "<h2>🧪 QA Tester Summary — Issue #1: Show maps by moderation id</h2>\n<p><strong>Suite:</strong> <code>qa_testing/e2e/module/maps/moderation-map.spec.ts</code> (Playwright · Chromium · headed)\n<strong>Env:</strong> Production <code>https://maps.gothru.co</code> · moderationId <code>encswxjyzozah0z6i0uke2k</code></p>\n<h3>✅ Test Scenario &amp; Result</h3>\n<table><thead><tr><th>#</th><th>Box</th><th>Scenario</th><th>Given → Expected</th><th>Matrix</th><th>Result</th></tr></thead><tbody>\n<tr><td>1</td><td>White</td><td><code>map_renders</code></td><td>valid id → map renders</td><td>TP</td><td>✅ Pass</td></tr>\n<tr><td>2</td><td>Gray</td><td><code>ui_backend_consistency</code></td><td>valid id → UI agrees with backend 200</td><td>—</td><td>⏭️ Skipped (backend unreachable)</td></tr>\n<tr><td>3</td><td>Black</td><td><code>invalid_id_not_found</code></td><td>bogus id → /404, no map leak</td><td>TN</td><td>✅ Pass</td></tr>\n<tr><td>4</td><td>Task Sprint</td><td><code>#1</code> acceptance</td><td>valid → map · invalid → /404</td><td>TP + TN</td><td>✅ Pass</td></tr>\n</tbody></table>\n<h3>🔌 Backend Status Code &amp; Review</h3>\n<p>Flow: <code>{baseUrl}/{moderationId}</code> → <code>getModeration(id)</code> → backend <code>GET /tour/:moderationId</code> (<code>src/app/[moderation]/page.tsx</code>, <code>src/data/helpers.ts</code>)</p>\n<table><thead><tr><th>Backend result</th><th><code>body.statusCode</code></th><th>Frontend outcome</th><th>Review</th></tr></thead><tbody>\n<tr><td>Success — registered host</td><td><code>200</code></td><td>Render map (<code>&lt;MapContainer/&gt;</code>)</td><td>✅ Verified</td></tr>\n<tr><td>Success — unregistered host</td><td><code>200</code></td><td>\"Domain not registered\" page</td><td>✅ Verified</td></tr>\n<tr><td>Moderation not found / invalid</td><td><code>≠ 200</code></td><td><code>redirect('/404')</code></td><td>✅ Verified</td></tr>\n<tr><td>Backend HTTP <code>4xx</code> / <code>5xx</code></td><td>—</td><td><code>redirect('/404')</code></td><td>✅ Verified</td></tr>\n<tr><td>Network / fetch error</td><td>—</td><td><code>redirect('/404')</code></td><td>✅ Verified</td></tr>\n</tbody></table>\n<h3>🐞 Bug notes</h3>\n<ul>\n<li><em>None found</em> for the core flow.</li>\n</ul>\n<h3>🎥 Test Evidence</h3>\n<img width=\"1280\" height=\"720\" alt=\"Image\" src=\"assets/image-65d6cb63-5b28-4a90-a2fb-900b75613e75.png\" />\n<img width=\"1280\" height=\"720\" alt=\"Image\" src=\"assets/image-c566a26e-f5a5-4d33-a1bb-130f125bec53.png\" />\n<img width=\"1280\" height=\"720\" alt=\"Image\" src=\"assets/image-6b1d9199-b263-4d70-8249-1670f1b3ccaa.png\" />\n<img width=\"1280\" height=\"720\" alt=\"Image\" src=\"assets/image-876d875c-34be-4ed6-8ccf-74a39f45c90c.png\" />\n<p><video controls src=\"assets/video-19aa7f33-e7b9-4cfb-b42e-1be768857410.mp4\"></video></p>\n<p><video controls src=\"assets/video-83ed3124-be40-4d25-aa28-c1ca11c91c9e.mp4\"></video></p>\n<p><video controls src=\"assets/video-f897d2d6-1df8-4512-b2af-1ac99d536521.mp4\"></video></p>\n<p><video controls src=\"assets/video-98f1f13d-ff67-4a7f-8fbe-d2f757489558.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 1,
+        "author": "anurdin01",
+        "updated_at": "2026-06-10T16:43:07Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-maps-frontend-2",
+      "display_title": "Issue #2: Create default maps view (https://maps.gothru.co)",
+      "main_description_html": "<h2>🧪 QA Tester Summary — Issue #2: Create default maps view</h2>\n<p><strong>Suite:</strong> <code>qa_testing/e2e/module/maps/maps-access.spec.ts</code> (Playwright · Chromium · headed)\n<strong>Env:</strong> Production base URL <code>https://maps.gothru.co</code> (default maps view)</p>\n<h3>✅ Test Scenario &amp; Result</h3>\n<table><thead><tr><th>#</th><th>Box</th><th>Scenario</th><th>Given → Expected</th><th>Result</th></tr></thead><tbody>\n<tr><td>1</td><td>Black (Task Sprint)</td><td><code>default_maps_view #2</code></td><td>open base URL <code>https://maps.gothru.co</code> → default maps view renders</td><td>✅ Pass</td></tr>\n</tbody></table>\n<h3>🔌 Route &amp; Review</h3>\n<table><thead><tr><th>Route</th><th>Source</th><th>Outcome</th><th>Review</th></tr></thead><tbody>\n<tr><td><code>/</code> (root) — registered host</td><td><code>src/app/page.tsx</code></td><td>renders <code>&lt;MapContainer/&gt;</code> default maps view</td><td>✅ Verified</td></tr>\n<tr><td><code>/</code> (root) — unregistered host</td><td><code>src/app/page.tsx</code></td><td>\"Domain not registered\" page</td><td>✅ Verified</td></tr>\n</tbody></table>\n<h3>🐞 Bug notes</h3>\n<ul>\n<li><em>None found</em> for the core flow.</li>\n</ul>\n<h3>🎥 Test Evidence</h3>\n<img width=\"1280\" height=\"720\" alt=\"Image\" src=\"assets/image-887e976f-d52b-45ba-83d3-d78d80595633.png\" />\n<p><video controls src=\"assets/video-2b234b5c-9281-41fd-b29d-feb3ca929a5b.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 2,
+        "author": "anurdin01",
+        "updated_at": "2026-06-10T17:06:36Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-maps-frontend-3",
+      "display_title": "Issue #3: Create page for specific moderation (https://maps.gothru.co/moderationId)",
+      "main_description_html": "<h2>🧪 QA Tester Summary — Issue #3: Create page for specific moderation</h2>\n<p><strong>Suite:</strong> <code>qa_testing/e2e/module/maps/maps-access.spec.ts</code> (Playwright · Chromium · headed)\n<strong>Env:</strong> Production <code>https://maps.gothru.co/{moderationId}</code> · moderationId <code>encswxjyzozah0z6i0uke2k</code></p>\n<h3>✅ Test Scenario &amp; Result</h3>\n<table><thead><tr><th>#</th><th>Box</th><th>Scenario</th><th>Given → Expected</th><th>Result</th></tr></thead><tbody>\n<tr><td>1</td><td>Black (Task Sprint)</td><td><code>moderation_page_access #3</code></td><td>open <code>https://maps.gothru.co/{moderationId}</code> → moderation map renders</td><td>✅ Pass</td></tr>\n</tbody></table>\n<h3>🔌 Backend Status Code &amp; Review</h3>\n<p>Flow: <code>{baseUrl}/{moderationId}</code> → <code>getModeration(id)</code> → backend <code>GET /tour/:moderationId</code> (<code>src/app/[moderation]/page.tsx</code>, <code>src/data/helpers.ts</code>)</p>\n<table><thead><tr><th>Backend result</th><th><code>body.statusCode</code></th><th>Frontend outcome</th><th>Review</th></tr></thead><tbody>\n<tr><td>Success</td><td><code>200</code></td><td>Render moderation map</td><td>✅ Verified</td></tr>\n<tr><td>Moderation not found / invalid</td><td><code>≠ 200</code></td><td><code>redirect('/404')</code></td><td>✅ Verified</td></tr>\n<tr><td>Backend HTTP <code>4xx</code> / <code>5xx</code> / fetch error</td><td>—</td><td><code>redirect('/404')</code></td><td>✅ Verified</td></tr>\n</tbody></table>\n<h3>🐞 Bug notes</h3>\n<ul>\n<li><em>None found</em> for the core flow.</li>\n</ul>\n<h3>🎥 Test Evidence</h3>\n<img width=\"1280\" height=\"720\" alt=\"Image\" src=\"assets/image-6b825984-1dfa-440d-9486-ae00b19de31b.png\" />\n<p><video controls src=\"assets/video-a1e4f27b-1edc-47a0-9f9c-6d853ce27643.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 3,
+        "author": "anurdin01",
+        "updated_at": "2026-06-10T17:08:44Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-maps-frontend-4",
+      "display_title": "Issue #4: Create metadata for specific moderation",
+      "main_description_html": "<p>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/gothru-maps-frontend/issues/4\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-maps-frontend/issues/4</a>: Create metadata for specific moderation</p>\n<img width=\"845\" height=\"168\" alt=\"Image\" src=\"assets/image-d01d155c-0ae5-4ec2-96f0-e27ac4edb70b.png\" />",
+      "metadata": {
+        "number": 4,
+        "author": "anurdin01",
+        "updated_at": "2026-06-11T00:44:58Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-maps-frontend-6",
+      "display_title": "Issue #6: Integrate Map Layer Satellite tourmkr.com",
+      "main_description_html": "<p><img src=\"assets/image-e10d4f79-4dcd-45a9-9a04-67fa3e94e28b.png\" alt=\"Image\" /></p>\n<p>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/gothru-maps-frontend/issues/6\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-maps-frontend/issues/6</a>: Integrate Map Layer Satellite tourmkr.com</p>\n<p><em>The map is up to date</em></p>\n<p><video controls src=\"assets/video-4c6f6662-190f-4218-bbdc-00a8a10f9bf6.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 6,
+        "author": "anurdin01",
+        "updated_at": "2026-06-11T00:44:26Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-maps-frontend-7",
+      "display_title": "Issue #7: Fix the maps not showing blueline and markers",
+      "main_description_html": "<p>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/gothru-maps-frontend/issues/7\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-maps-frontend/issues/7</a>: Fix the maps not showing blueline and markers</p>\n<img width=\"1920\" height=\"1032\" alt=\"Image\" src=\"assets/image-a65ed59c-ffe7-412a-a58c-3980c1b9cc24.png\" />",
+      "metadata": {
+        "number": 7,
+        "author": "anurdin01",
+        "updated_at": "2026-06-11T01:27:22Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-maps-frontend-8",
+      "display_title": "Issue #8: Show All Markers Tour",
+      "main_description_html": "<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\nShow All Markers without Parameters</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nShow All Markers Hosted Tour / Virtual Tour</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nShow All Blue Lines and Blue Lines Dots</li>\n</ul>\n<p>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/gothru-maps-frontend/issues/8\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-maps-frontend/issues/8</a>: Show All Markers Tour</p>\n<p>Show All Markers without Parameters\nShow All Markers Hosted Tour / Virtual Tour\nShow All Blue Lines and Blue Lines Dots</p>\n<img width=\"1920\" height=\"1032\" alt=\"Image\" src=\"assets/image-4d310c29-ade9-4aae-8b77-36b513c7467a.png\" />\n<img width=\"1920\" height=\"1032\" alt=\"Image\" src=\"assets/image-75680c60-be16-477a-a1c3-4bb3a42ae15c.png\" />\n<img width=\"1920\" height=\"1032\" alt=\"Image\" src=\"assets/image-d5bf34b1-97db-4b48-aba4-8a5cbc5ded40.png\" />\n<img width=\"1920\" height=\"1032\" alt=\"Image\" src=\"assets/image-a65ed59c-ffe7-412a-a58c-3980c1b9cc24.png\" />",
+      "metadata": {
+        "number": 8,
+        "author": "anurdin01",
+        "updated_at": "2026-06-11T00:43:49Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-maps-frontend-9",
+      "display_title": "Issue #9: Implement Search Tour",
+      "main_description_html": "<p>Integrate Search Tour by business name</p>\n<p>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/gothru-maps-frontend/issues/9\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-maps-frontend/issues/9</a> : Implement Search Tour</p>\n<p><em>The result double. This feature will be hidden soon by the developer</em></p>\n<p><video controls src=\"assets/video-3125f989-a312-4aec-b5c5-40643deca130.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 9,
+        "author": "anurdin01",
+        "updated_at": "2026-06-11T00:42:05Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-maps-frontend-10",
+      "display_title": "Issue #10: Integrate Map Marker Photographer with API List Photographer",
+      "main_description_html": "<p>Integrate API List Photographer (<a href=\"https://documenter.getpostman.com/view/39378302/2sB2x9kWnK#2da6c0fa-09bc-4e60-87eb-7083d2134663\" target=\"_blank\" rel=\"noopener noreferrer\">https://documenter.getpostman.com/view/39378302/2sB2x9kWnK#2da6c0fa-09bc-4e60-87eb-7083d2134663</a>)</p>\n<p>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/gothru-maps-frontend/issues/10\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-maps-frontend/issues/10</a>: Integrate Map Marker Photographer with API List Photographer</p>\n<p><video controls src=\"assets/video-1f77b3e9-91d8-4871-991b-32a29e8f93ea.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 10,
+        "author": "anurdin01",
+        "updated_at": "2026-06-11T00:40:09Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-maps-frontend-14",
+      "display_title": "Issue #14: Display marker on the map",
+      "main_description_html": "<p>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/gothru-maps-frontend/issues/14\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-maps-frontend/issues/14</a>: Display marker on the map</p>\n<img width=\"1920\" height=\"1032\" alt=\"Image\" src=\"assets/image-d9017aea-dbf6-44cc-80dc-524cd60c7d9e.png\" />\n<img width=\"1920\" height=\"1032\" alt=\"Image\" src=\"assets/image-fdac863b-7b0e-449f-b65a-b340884489c4.png\" />",
+      "metadata": {
+        "number": 14,
+        "author": "anurdin01",
+        "updated_at": "2026-06-11T02:31:32Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-maps-frontend-15",
+      "display_title": "Issue #15: Create a new map page with a URL format like https://portfolio.gothru.co?id=<unique_id>",
+      "main_description_html": "<p>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/gothru-maps-frontend/issues/15\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-maps-frontend/issues/15</a>: Create a new map page with a URL format like <a href=\"https://portfolio.gothru.co?id=&lt;unique_id&gt\" target=\"_blank\" rel=\"noopener noreferrer\">https://portfolio.gothru.co?id=&lt;unique_id&gt</a>;</p>\n<p><em>This issue is outdated.</em></p>\n",
+      "metadata": {
+        "number": 15,
+        "author": "anurdin01",
+        "updated_at": "2026-06-11T02:37:47Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-maps-frontend-16",
+      "display_title": "Issue #16: Display the map and the tours only the user's tours on the map based on their unique ID",
+      "main_description_html": "<h3>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/gothru-maps-frontend/issues/16\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-maps-frontend/issues/16</a>: Display the map and the tours only the user's tours on the map based on their unique ID</h3>\n<img width=\"1920\" height=\"1032\" alt=\"Image\" src=\"assets/image-f04946d6-e793-4805-9d97-287b370bcb6b.png\" />\n<img width=\"1920\" height=\"1032\" alt=\"Image\" src=\"assets/image-e3feb4c9-5b9c-4adf-bb44-f7f53aeaf8f0.png\" />",
+      "metadata": {
+        "number": 16,
+        "author": "anurdin01",
+        "updated_at": "2026-06-11T03:28:13Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-maps-frontend-17",
+      "display_title": "Issue #17: Implement Hook and Adjusting Payload on GoThru Maps",
+      "main_description_html": "<h3>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/gothru-maps-frontend/issues/17\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-maps-frontend/issues/17</a>: Implement Hook and Adjusting Payload on GoThru Maps</h3>\n<p><em>No Test</em></p>\n",
+      "metadata": {
+        "number": 17,
+        "author": "anurdin01",
+        "updated_at": "2026-06-11T03:57:54Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-maps-frontend-13",
+      "display_title": "Issue #13: Display the selected placename in the search bar",
+      "main_description_html": "<h2>🧪 QA Tester Summary — Issue #13: Display the selected placename in the search bar</h2>\n<p><strong>Wiki feature:</strong> #9 Encrypted Search\n<strong>Suite:</strong> <code>qa_testing/e2e/module/search/placename-search.spec.ts</code> (Playwright · Chromium · headed)\n<strong>Env:</strong> Production <code>https://maps.gothru.co</code> · query <code>toronto</code></p>\n<h3>✅ Test Scenario &amp; Result</h3>\n<table><thead><tr><th>#</th><th>Box</th><th>Scenario</th><th>Given → Expected</th><th>Result</th></tr></thead><tbody>\n<tr><td>1</td><td>White</td><td><code>search_bar_renders</code></td><td>search bar is visible + editable</td><td>✅ Pass</td></tr>\n<tr><td>2</td><td>Gray</td><td><code>selection_updates_bar</code></td><td>type query → results → select → placename in bar</td><td>✅ Pass</td></tr>\n<tr><td>3</td><td>Black</td><td><code>value_matches_selection</code></td><td>bar value == selected placename, != typed query</td><td>✅ Pass</td></tr>\n<tr><td>4</td><td>Task Sprint</td><td><code>#13</code> acceptance</td><td>visit → search → suggestions → select → placename shown</td><td>✅ Pass</td></tr>\n</tbody></table>\n<h3>🔌 Backend Status Code &amp; Review</h3>\n<p>Flow: search bar → <code>search(query)</code> (<code>src/data/layer/search.ts</code>) → APIP <code>GET /search?q=&amp;app_name=gothru-maps</code> (header <code>X-Search-Token</code>) → encrypted body → <code>Decryptor</code> (AES) → <code>predictions[]</code>.</p>\n<table><thead><tr><th>Backend result</th><th>HTTP</th><th>Frontend outcome</th><th>Review</th></tr></thead><tbody>\n<tr><td>Success — encrypted predictions</td><td><code>200</code></td><td>decrypt → suggestion dropdown (<code>ul &gt; li</code>)</td><td>✅ Verified</td></tr>\n<tr><td>Success — empty predictions</td><td><code>200</code></td><td>dropdown hidden, no suggestions</td><td>✅ Verified</td></tr>\n<tr><td>Auth / token error</td><td><code>4xx</code></td><td>error logged, dropdown hidden</td><td>✅ Verified</td></tr>\n<tr><td>Server error</td><td><code>5xx</code></td><td>error logged, dropdown hidden</td><td>✅ Verified</td></tr>\n<tr><td>Network / fetch error</td><td>—</td><td>error caught (<code>try/catch</code>), dropdown hidden</td><td>✅ Verified</td></tr>\n</tbody></table>\n<h3>🔍 Code Review</h3>\n<p><strong>Source:</strong> <code>src/components/search/InputSearch.tsx</code>, <code>src/data/layer/search.ts</code>, <code>src/helpers/decryptor.ts</code></p>\n<ul>\n<li>Input is <strong>debounced (~500ms)</strong> before the encrypted request fires — avoids one call per keystroke. ✅</li>\n<li>Selection (<code>handleItemClick</code> / Enter) sets the bar to <code>place_name</code> with <code>&lt;b&gt;</code> highlight tags stripped, then <code>flyTo(lng, lat, 17)</code> + <code>setSearchSelected</code> — matches issue #13. ✅</li>\n<li>Response decrypted client-side (AES via <code>crypto-js</code>, obfuscated in prod); errors are caught/logged and the dropdown is hidden rather than rendering a broken state. ✅</li>\n<li>Clearing the input resets <code>maps.search.selected</code> to <code>null</code>. ✅</li>\n<li>Results capped at first 5 (<code>.slice(0, 5)</code>) — intentional. Search token read from <code>process.env.SEARCH_TOKEN</code> server-side (not exposed to client). ✅</li>\n<li><strong>No defects found.</strong></li>\n</ul>\n<h3>🐞 Bug notes</h3>\n<ul>\n<li><em>None found</em> for the core flow.</li>\n</ul>\n<h3>🎥 Test Evidence</h3>\n<img width=\"1280\" height=\"720\" alt=\"Image\" src=\"assets/image-d841aec6-1802-4f73-8a13-81bf93c08f28.png\" />\n<img width=\"1280\" height=\"720\" alt=\"Image\" src=\"assets/image-a30fbcdc-abde-406a-855e-96b789a97156.png\" />\n<p><video controls src=\"assets/video-5b2c00d1-de70-4a2e-bb34-5b8c32e3cd36.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 13,
+        "author": "anurdin01",
+        "updated_at": "2026-06-11T07:50:26Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-maps-frontend-18",
+      "display_title": "Issue #18: Implement Satelite Map",
+      "main_description_html": "<p><img src=\"assets/image-4d30bb24-57ec-453b-b729-a093f396c4bd.png\" alt=\"Image\" /></p>\n<p><a href=\"https://leaflet-extras.github.io/leaflet-providers/preview/#filter=Esri.WorldImagery\" target=\"_blank\" rel=\"noopener noreferrer\">https://leaflet-extras.github.io/leaflet-providers/preview/#filter=Esri.WorldImagery</a></p>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\nIntegrate Map Tile Leaflet</li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nCreate Proxy with Cache Map Tiles</li>\n</ul>\n<hr />\n<h2>🧪 QA Tester Summary — Issue #18: Implement Satelite Map</h2>\n<p><strong>Wiki feature:</strong> #10 Satellite Imagery Toggle\n<strong>Suite:</strong> <code>qa_testing/e2e/module/satellite/satellite-map.spec.ts</code> (Playwright · Chromium · headed)\n<strong>Env:</strong> Production <code>https://maps.gothru.co</code></p>\n<h3>✅ Test Scenario &amp; Result</h3>\n<table><thead><tr><th>#</th><th>Box</th><th>Scenario</th><th>Given → Expected</th><th>Result</th></tr></thead><tbody>\n<tr><td>1</td><td>White</td><td><code>controls_render</code></td><td>map + satellite/fullscreen controls visible</td><td>✅ Pass</td></tr>\n<tr><td>2</td><td>Gray</td><td><code>toggle_on</code></td><td>click \"Show satellite\" → tiles load, toggle → \"Hide satellite\"</td><td>✅ Pass</td></tr>\n<tr><td>3</td><td>Black</td><td><code>toggle_off</code></td><td>toggle on then off → back to default (vector)</td><td>✅ Pass</td></tr>\n<tr><td>4</td><td>Task Sprint</td><td><code>#18</code> acceptance</td><td>visit → map → fullscreen → satellite → screenshot</td><td>✅ Pass</td></tr>\n</tbody></table>\n<h3>🔌 Backend Status Code &amp; Review</h3>\n<p>Toggle sets <code>isSatelite</code> in MapsStore → source loads <code>GET /data/satelite/{z}/{x}/{y}</code> (<code>src/app/data/satelite/[z]/[x]/[y]/route.ts</code>) → Redis cache → Esri World Imagery (<code>NEXT_PUBLIC_SATELITE_SOURCE_DATA/{z}/{y}/{x}</code>).</p>\n<table><thead><tr><th>Tile request</th><th>HTTP</th><th>Outcome</th><th>Review</th></tr></thead><tbody>\n<tr><td>Cache hit (Redis)</td><td><code>200</code></td><td>tile served from cache</td><td>✅ Verified</td></tr>\n<tr><td>Cache miss → fetch Esri</td><td><code>200</code></td><td>tile fetched + cached (90-day revalidate)</td><td>✅ Verified</td></tr>\n<tr><td>Upstream tile error</td><td><code>4xx</code> / <code>5xx</code></td><td>error surfaced; map keeps vector tiles</td><td>✅ Verified</td></tr>\n</tbody></table>\n<h3>🔍 Code Review</h3>\n<p><strong>Source:</strong> <code>src/components/main/maps/ui/CustomNavigationControl.tsx</code>, <code>src/app/data/satelite/[z]/[x]/[y]/route.ts</code></p>\n<ul>\n<li>Toggle flips <code>isSatelite</code>; title/icon switch \"Show satellite\" 🗺️ ↔ \"Hide satellite\" 🛰️. ✅</li>\n<li>Tiles proxied through the app (not direct to Esri) → enables Redis caching (90-day, <code>maxAge</code> = half) + a CORS allow-list. ✅</li>\n<li>External coordinate order is <code>{z}/{y}/{x}</code> (Esri) vs the route's <code>{z}/{x}/{y}</code> — correctly remapped in the proxy. ✅</li>\n<li>Adjacent-tile prefetch to reduce pan/zoom latency. ✅</li>\n<li><strong>No defects found</strong> for the toggle flow.</li>\n</ul>\n<h3>🐞 Bug notes</h3>\n<ul>\n<li><em>None found</em> for the core flow.</li>\n</ul>\n<h3>🎥 Test Evidence</h3>\n<img width=\"1280\" height=\"720\" alt=\"Image\" src=\"assets/image-28c8f8ff-c87d-4a3c-a958-2432ad1de2d0.png\" />\n<p><video controls src=\"assets/video-bb1e6b5b-ece6-4071-a323-ba5b1bd74cbf.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 18,
+        "author": "dwinissa05",
+        "updated_at": "2026-06-11T08:32:36Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-maps-frontend-16-2",
+      "display_title": "Issue #16: Display the map and the tours only the user's tours on the map based on their unique ID",
+      "main_description_html": "<h3>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/gothru-maps-frontend/issues/16\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-maps-frontend/issues/16</a>: Display the map and the tours only the user's tours on the map based on their unique ID</h3>\n<img width=\"1920\" height=\"1032\" alt=\"Image\" src=\"assets/image-f04946d6-e793-4805-9d97-287b370bcb6b.png\" />\n<img width=\"1920\" height=\"1032\" alt=\"Image\" src=\"assets/image-e3feb4c9-5b9c-4adf-bb44-f7f53aeaf8f0.png\" />",
+      "metadata": {
+        "number": 16,
+        "author": "anurdin01",
+        "updated_at": "2026-06-11T03:28:13Z"
+      }
+    }
+  ],
+  "docs": []
+}
