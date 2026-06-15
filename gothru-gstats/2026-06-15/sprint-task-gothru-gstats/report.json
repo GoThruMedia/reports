@@ -1,0 +1,18 @@
+{
+  "title": "[Sprint Task] GoThru Gstats",
+  "repository": "GoThruMedia/gstats",
+  "generated_at": "2026-06-15T06:14:01.696326400+00:00",
+  "issues": [
+    {
+      "anchor_id": "issue-gothrumedia-gstats-6",
+      "display_title": "Issue #6: Fix Issue on Stats Image Does Not Appear",
+      "main_description_html": "<blockquote>\n<p>When the user clicks on stats there is an image that does not appear</p>\n<p><video controls src=\"assets/video-3d156e6f-e807-4b02-bca0-e782043ea9d2.webm\"></video></p>\n</blockquote>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\" checked=\"\"/>\nSolved</li>\n</ul>\n<p><em>Based on the investigation, the blank portfolio thumbnail issue originates from Google's thumbnail generation service and is not caused by the GoThru application.</em></p>\n<p><video controls src=\"assets/video-74ad7412-7bd3-4e12-b886-a913330fb31a.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 6,
+        "author": "anurdin01",
+        "updated_at": "2026-06-15T03:21:09Z"
+      }
+    }
+  ],
+  "docs": []
+}
