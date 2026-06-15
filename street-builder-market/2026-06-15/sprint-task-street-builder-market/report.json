@@ -1,0 +1,28 @@
+{
+  "title": "[Sprint Task] Street Builder Market",
+  "repository": "GoThruMedia/street-builder-market",
+  "generated_at": "2026-06-15T06:44:48.095935+00:00",
+  "issues": [
+    {
+      "anchor_id": "issue-gothrumedia-street-builder-market-2",
+      "display_title": "Issue #2: Add Dropdown Menu for Download Mac Version",
+      "main_description_html": "<ul>\n<li><input disabled=\"\" type=\"checkbox\"/>\nARM64: <a href=\"https://github.com/GoThruMedia/gothru-street-builder/releases/download/1.2.12.1/GoThru-Street-Builder-arm64-v1.2.12.pkg\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-street-builder/releases/download/1.2.12.1/GoThru-Street-Builder-arm64-v1.2.12.pkg</a></li>\n<li><input disabled=\"\" type=\"checkbox\"/>\nX86-64: <a href=\"https://github.com/GoThruMedia/gothru-street-builder/releases/download/1.2.12.1/GoThru-Street-Builder-x86_64-v1.2.12.pkg\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-street-builder/releases/download/1.2.12.1/GoThru-Street-Builder-x86_64-v1.2.12.pkg</a></li>\n</ul>\n<p>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/street-builder-market/issues/2\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/street-builder-market/issues/2</a>: Add Dropdown Menu for Download Mac Version</p>\n<p><video controls src=\"assets/video-5c40dfaa-737d-46bd-bcb7-69e7894630f4.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 2,
+        "author": "anurdin01",
+        "updated_at": "2026-06-15T06:03:08Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-street-builder-market-3",
+      "display_title": "Issue #3: Update Download Link Windows Version",
+      "main_description_html": "<p>WIndows: <a href=\"https://github.com/GoThruMedia/gothru-street-builder/releases/download/1.2.12.1/Gothru-Street-Builder-Setup-v1.2.12.exe\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-street-builder/releases/download/1.2.12.1/Gothru-Street-Builder-Setup-v1.2.12.exe</a></p>\n<p>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/street-builder-market/issues/3\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/street-builder-market/issues/3</a>: Update Download Link Windows Version</p>\n<p><video controls src=\"assets/video-9f449826-70c7-4824-84ab-e5eea09f4108.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 3,
+        "author": "anurdin01",
+        "updated_at": "2026-06-15T06:04:00Z"
+      }
+    }
+  ],
+  "docs": []
+}
