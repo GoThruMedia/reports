@@ -1,0 +1,38 @@
+{
+  "title": "[Sprint Task] GoThru Photographer",
+  "repository": "GoThruMedia/gothru-photographer-new",
+  "generated_at": "2026-06-15T08:58:25.766673100+00:00",
+  "issues": [
+    {
+      "anchor_id": "issue-gothrumedia-gothru-photographer-new-165",
+      "display_title": "Issue #165: Implement Slug Checking",
+      "main_description_html": "<h3>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/gothru-photographer-new/issues/165\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-photographer-new/issues/165</a>: Implement Slug Checking</h3>\n<p><video controls src=\"assets/video-60902830-0a99-459e-8454-24d7bea74fbf.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 165,
+        "author": "anurdin01",
+        "updated_at": "2026-06-15T08:06:04Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-photographer-new-159",
+      "display_title": "Issue #159: Handle When User Hasn't Set Main Location",
+      "main_description_html": "<img width=\"499\" height=\"246\" alt=\"Image\" src=\"assets/image-235f6aba-e8c6-44c3-bf00-c873e5f9116f.png\" />\n<img width=\"634\" height=\"362\" alt=\"Image\" src=\"assets/image-892db400-5941-4e85-9262-96a546bd3feb.png\" />\n<h3>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/gothru-photographer-new/issues/159\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-photographer-new/issues/159</a>: Handle When User Hasn't Set Main Location</h3>\n<blockquote>\n<p><em>🐞[Photographer] Name is inconsistent between list and detail view</em></p>\n<p><video controls src=\"assets/video-fe78771e-f414-4b95-842f-1272b8b7988b.mp4\"></video></p>\n</blockquote>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\" checked=\"\"/>\nSolved</li>\n</ul>\n<p><video controls src=\"assets/video-6ea3adc8-4a95-4ccf-979a-4447161e678d.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 159,
+        "author": "anurdin01",
+        "updated_at": "2026-06-15T08:01:47Z"
+      }
+    },
+    {
+      "anchor_id": "issue-gothrumedia-gothru-photographer-new-162",
+      "display_title": "Issue #162: Add Load More Button on About Section",
+      "main_description_html": "<img width=\"1600\" height=\"828\" alt=\"Image\" src=\"assets/image-f72d4f8e-3e29-453f-9dc5-cbb0b22354aa.png\" />\n<h3>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/gothru-photographer-new/issues/162\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/gothru-photographer-new/issues/162</a>: Add Load More Button on About Section</h3>\n<blockquote>\n<p><em>🐞[Profile] About section does not update immediately after changes and requires page refresh</em></p>\n<p><video controls src=\"assets/video-1128874c-b251-40d9-a6ee-ee1032563c6f.mp4\"></video></p>\n</blockquote>\n<ul>\n<li><input disabled=\"\" type=\"checkbox\" checked=\"\"/>\nSolved</li>\n</ul>\n<p><video controls src=\"assets/video-f1f6a15a-8fb9-4104-a64e-23b762cd8cbb.mp4\"></video></p>\n",
+      "metadata": {
+        "number": 162,
+        "author": "anurdin01",
+        "updated_at": "2026-06-15T07:48:25Z"
+      }
+    }
+  ],
+  "docs": []
+}
