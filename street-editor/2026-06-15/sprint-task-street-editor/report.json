@@ -1,0 +1,18 @@
+{
+  "title": "[Sprint Task] Street Editor",
+  "repository": "GoThruMedia/street-editor",
+  "generated_at": "2026-06-15T07:06:38.331746200+00:00",
+  "issues": [
+    {
+      "anchor_id": "issue-gothrumedia-street-editor-899",
+      "display_title": "Issue #899: Handle Issue Can't Upload Tour",
+      "main_description_html": "<img width=\"450\" height=\"522\" alt=\"Image\" src=\"assets/image-cec38a41-c674-4e0d-9707-e5b3abea3919.png\" />\n<p>user_id: 397</p>\n<p>🧪 QA Tester Summary — Issue <a href=\"https://github.com/GoThruMedia/street-editor/issues/899\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/GoThruMedia/street-editor/issues/899</a>: Handle Issue Can't Upload Tour</p>\n<p><video controls src=\"assets/video-1b7368aa-9cd3-40fb-a788-0afe234a8de1.mp4\"></video></p>\n<img width=\"1920\" height=\"1032\" alt=\"Image\" src=\"assets/image-add6f935-509f-4fbf-9c2d-169317a25a78.png\" />",
+      "metadata": {
+        "number": 899,
+        "author": "anurdin01",
+        "updated_at": "2026-06-15T06:58:09Z"
+      }
+    }
+  ],
+  "docs": []
+}
